@@ -54,13 +54,27 @@
 	font-weight: 600;
 }
 
+.tool-logo-box {
+	display: grid;
+	width: 34px;
+	height: 34px;
+	flex: 0 0 34px;
+	place-items: center;
+	background: var(--white);
+	border: 1px solid var(--accent-border);
+	border-radius: 7px;
+	box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+.tool-logo-box[hidden] {
+	display: none;
+}
+
 .tool-logo {
 	display: block;
-	width: 30px;
+	width: 28px;
 	height: 24px;
-	flex: 0 0 30px;
 	object-fit: contain;
-	filter: brightness(0) invert(1);
 }
 
 .tools-marquee:hover .marquee,

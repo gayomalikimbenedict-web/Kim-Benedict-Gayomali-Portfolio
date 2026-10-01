@@ -25,12 +25,14 @@ const ToolsMarquee: React.FC = () => {
                                 return (
                                     <div className="tool" key={tool.name}>
                                         {tool.logo && (
-                                            <img
-                                                className="tool-logo"
-                                                src={tool.logo}
-                                                alt={`${tool.name} logo`}
-                                                onError={(event) => { event.currentTarget.hidden = true; }}
-                                            />
+                                            <span className="tool-logo-box">
+                                                <img
+                                                    className="tool-logo"
+                                                    src={tool.logo}
+                                                    alt={`${tool.name} logo`}
+                                                    onError={(event) => { event.currentTarget.parentElement?.setAttribute('hidden', 'true'); }}
+                                                />
+                                            </span>
                                         )}
                                         <span>{tool.name}</span>
                                     </div>
