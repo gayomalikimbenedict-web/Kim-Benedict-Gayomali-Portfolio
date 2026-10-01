@@ -1,0 +1,93 @@
+.tools-marquee {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin: 1.5rem auto;
+	padding: 0.9rem 0;
+	overflow: hidden;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	box-shadow: var(--surface-shadow);
+	white-space: nowrap;
+}
+
+.tools-marquee::before,
+.tools-marquee::after {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	bottom: 0;
+	width: 48px;
+	content: '';
+	pointer-events: none;
+}
+
+.tools-marquee::before {
+	left: 0;
+	background: linear-gradient(90deg, var(--navy), transparent);
+}
+
+.tools-marquee::after {
+	right: 0;
+	background: linear-gradient(270deg, var(--navy), transparent);
+}
+
+.marquee {
+	display: flex;
+	width: max-content;
+	align-items: center;
+	animation: tools-scroll 30s linear infinite;
+}
+
+.tool {
+	display: inline-flex;
+	min-width: 150px;
+	min-height: 54px;
+	align-items: center;
+	justify-content: center;
+	gap: 0.7rem;
+	padding: 0 1.25rem;
+	color: var(--text);
+	border-right: 1px solid var(--border);
+	font-size: 0.95rem;
+	font-weight: 600;
+}
+
+.tool-logo {
+	display: block;
+	width: 30px;
+	height: 24px;
+	flex: 0 0 30px;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
+}
+
+.tools-marquee:hover .marquee,
+.tools-marquee:focus-within .marquee {
+	animation-play-state: paused;
+}
+
+@keyframes tools-scroll {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+	.tools-marquee {
+		margin: 1rem 1rem;
+		border-radius: 12px;
+	}
+
+	.tool {
+		min-width: 132px;
+		min-height: 48px;
+		padding: 0 0.9rem;
+		font-size: 0.9rem;
+	}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.marquee { animation: none; }
+}

@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --navy: #0B132B;
+    --white: #FFFFFF;
+    --text: #C9D1E6;
+    --accent: #6FD3E0;
+    --surface: rgba(255, 255, 255, 0.06);
+    --surface-raised: rgba(255, 255, 255, 0.09);
+    --surface-hover: rgba(255, 255, 255, 0.12);
+    --border: rgba(255, 255, 255, 0.12);
+    --border-strong: rgba(255, 255, 255, 0.2);
+    --white-muted: rgba(255, 255, 255, 0.72);
+    --accent-soft: rgba(111, 211, 224, 0.12);
+    --accent-border: rgba(111, 211, 224, 0.34);
+    --accent-glow: rgba(111, 211, 224, 0.2);
+    --surface-shadow: 0 10px 28px rgba(255, 255, 255, 0.035);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text);
+    background: var(--navy);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    color: var(--text);
+    background: var(--navy);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--white);
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+nav {
+    padding: 0;
+    background: transparent;
+}
+
+::selection {
+    color: var(--navy);
+    background: var(--accent);
+}

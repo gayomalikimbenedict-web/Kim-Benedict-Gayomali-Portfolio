@@ -1,0 +1,114 @@
+.contact-container {
+	display: grid;
+	grid-template-columns: minmax(0, 1.4fr) minmax(230px, 0.8fr);
+	gap: clamp(2rem, 5vw, 4rem);
+	max-width: 980px;
+	margin: 2rem auto;
+	padding: clamp(1.5rem, 4vw, 3rem);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 20px;
+	box-shadow: var(--surface-shadow);
+}
+
+.contact-container > h2,
+.contact-container > p {
+	grid-column: 1 / -1;
+	margin: 0;
+}
+
+.contact-container > h2 {
+	margin-bottom: -1.5rem;
+	color: var(--white);
+	font-size: clamp(1.75rem, 3vw, 2.35rem);
+	line-height: 1.2;
+}
+
+.contact-form {
+	display: grid;
+	align-content: start;
+	gap: 0.65rem;
+}
+
+.contact-form label {
+	margin-top: 0.45rem;
+	color: var(--text);
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.85rem 1rem;
+	color: var(--text);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 10px;
+	font: inherit;
+}
+
+.contact-form textarea {
+	min-height: 150px;
+	resize: vertical;
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+	outline: 3px solid var(--accent-border);
+	border-color: var(--accent-border);
+}
+
+.contact-form button {
+	justify-self: start;
+	min-height: 48px;
+	margin-top: 0.75rem;
+	padding: 0.7rem 1.25rem;
+	color: var(--navy);
+	background: var(--accent);
+	border: 0;
+	border-radius: 10px;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+	transition: transform 160ms ease, background-color 160ms ease;
+}
+
+.contact-form button:hover {
+	background: var(--accent);
+	transform: translateY(-2px);
+}
+
+.contact-info {
+	align-self: start;
+	padding: 1.4rem;
+	background: var(--surface);
+	border-left: 4px solid var(--border);
+	border-radius: 0 12px 12px 0;
+}
+
+.contact-info h3 {
+	margin: 0 0 1rem;
+	color: var(--white);
+	font-size: 1.1rem;
+}
+
+.contact-info p {
+	margin: 0.5rem 0;
+	overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+	.contact-container {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		margin: 1.25rem 1rem;
+		padding: 1.4rem;
+		border-radius: 14px;
+	}
+
+	.contact-container > h2 {
+		margin-bottom: -1rem;
+	}
+}

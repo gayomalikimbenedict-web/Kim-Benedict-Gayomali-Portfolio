@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns:xlink="http://w3.org" xmlns="http://www.w3.org/2000/svg" id="ghl-logo" viewBox="0 0 500 500" width="100%" height="100%">
+        <!-- Background Wrapper (Optional/Transparent Base) -->
+        <rect width="100%" height="100%" fill="none"/>
+        
+        <!-- Left Arrow (Yellow/Orange Variant) -->
+        <g id="left-arrow">
+          <!-- Shadow Facet -->
+          <path d="M 160 55 L 75 140 L 125 140 L 125 445 L 160 445 Z" fill="#e6a100"/>
+          <!-- Light Facet -->
+          <path d="M 160 55 L 245 140 L 195 140 L 195 445 L 160 445 Z" fill="#ffc018"/>
+        </g>
+        
+        <!-- Right Arrow (Green Variant) -->
+        <g id="right-arrow">
+          <!-- Shadow Facet -->
+          <path d="M 340 55 L 255 140 L 305 140 L 305 445 L 340 445 Z" fill="#29b329"/>
+          <!-- Light Facet -->
+          <path d="M 340 55 L 425 140 L 375 140 L 375 445 L 340 445 Z" fill="#3cd63c"/>
+        </g>
+        
+        <!-- Center Arrow (GHL Brand Blue Variants) -->
+        <g id="center-arrow">
+          <!-- Shadow Facet -->
+          <path d="M 250 175 L 175 250 L 215 250 L 215 445 L 250 445 Z" fill="#1070cc"/>
+          <!-- Light Facet -->
+          <path d="M 250 175 L 325 250 L 285 250 L 285 445 L 250 445 Z" fill="#1890ff"/>
+        </g>
+      </svg>

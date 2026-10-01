@@ -1,0 +1,33 @@
+{
+  "name": "kim-benedict-gayomali-portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio of Kim Benedict Gayomali, showcasing AI Automation, GHL CRM Building, and Web Development skills.",
+  "main": "src/main.tsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "lucide-react": "^1.49.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.4",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.2"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "vite",
+    "typescript"
+  ],
+  "author": "Kim Benedict Gayomali",
+  "license": "MIT"
+}

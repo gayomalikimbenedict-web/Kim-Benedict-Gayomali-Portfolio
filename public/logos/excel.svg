@@ -1,0 +1,42 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" id="excel-logo" viewBox="0 0 500 500" width="100%" height="100%">
+        <defs>
+          <!-- Production-grade drop shadow filter to offset foreground block cleanly -->
+          <filter id="excelShadow" x="-20%" y="-20%" width="150%" height="150%">
+            <feDropShadow dx="4" dy="10" stdDeviation="12" flood-color="#000000" flood-opacity="0.28"/>
+          </filter>
+        </defs>
+
+        <!-- Base Transparent Viewport Canvas -->
+        <rect width="500" height="500" fill="none"/>
+
+        <!-- LAYER 1: Background Grid Matrix Window Panel -->
+        <g id="background-grid-window">
+          <!-- ClipPath to enforce identical corner rounding rules across horizontal segmented panes -->
+          <clipPath id="windowClip">
+            <rect x="200" y="80" width="220" height="340" rx="16"/>
+          </clipPath>
+
+          <g clip-path="url(#windowClip)">
+            <!-- Top Segment Row -->
+            <rect x="200" y="80" width="220" height="85" fill="#21A366"/>
+            <!-- Upper Middle Segment Row -->
+            <rect x="200" y="165" width="220" height="85" fill="#189053"/>
+            <!-- Lower Middle Segment Row -->
+            <rect x="200" y="250" width="220" height="85" fill="#107C41"/>
+            <!-- Bottom Segment Row -->
+            <rect x="200" y="335" width="220" height="85" fill="#0D6334"/>
+            
+            <!-- Left Side Shadow/Overlay Overlay Facet for 3D Window Depth -->
+            <rect x="200" y="80" width="110" height="340" fill="#ffffff" opacity="0.08"/>
+          </g>
+        </g>
+
+        <!-- LAYER 2: Prominent Left-Shifted Foreground Tile Block Element -->
+        <rect x="80" y="160" width="180" height="180" rx="18" fill="#107C41" filter="url(#excelShadow)"/>
+
+        <!-- LAYER 3: Iconic Geometrically Centered White 'X' -->
+        <g id="brand-letter-mark">
+          <path d="M 126 200 &#10;                   L 155 200 &#10;                   L 170 236 &#10;                   L 185 200 &#10;                   L 214 200 &#10;                   L 186 250 &#10;                   L 216 300 &#10;                   L 187 300 &#10;                   L 170 262 &#10;                   L 153 300 &#10;                   L 124 300 &#10;                   L 154 250 Z" fill="#FFFFFF"/>
+        </g>
+      </svg>
