@@ -433,8 +433,8 @@ a:hover {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-template-areas:
-        'projects projects about builds'
-        'credentials services testimonials testimonials';
+        'projects projects about roles'
+        'credentials services results testimonials';
     align-items: stretch;
     gap: 12px;
 }
@@ -500,9 +500,10 @@ a:hover {
 /* Bento card placement and contents */
 #projects.projects-card { grid-area: projects; }
 .bento-grid > .about-section { grid-area: about; }
-.bento-grid > .ai-builds-card { grid-area: builds; }
+.bento-grid > .roles-card { grid-area: roles; }
 .bento-grid > .credentials-card { grid-area: credentials; }
 .bento-grid > .services-section { grid-area: services; }
+.bento-grid > .results-card { grid-area: results; }
 .bento-grid > .testimonials-card { grid-area: testimonials; }
 
 #projects.projects-card {
@@ -608,23 +609,17 @@ a:hover {
 
 .project-item h3 {
     margin: 0 0 3px;
-    overflow: hidden;
     color: var(--white);
     font-size: 0.87rem;
     font-weight: 750;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.35;
 }
 
 .project-item p {
-    display: -webkit-box;
     margin: 0 0 3px;
-    overflow: hidden;
     color: var(--text);
     font-size: 0.72rem;
     line-height: 1.4;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
 }
 
 .project-item a {
@@ -637,6 +632,26 @@ a:hover {
     font-size: 0.72rem;
     font-weight: 700;
     text-decoration: none;
+}
+
+.project-link-placeholder {
+    display: inline-block;
+    margin-top: 2px;
+    color: var(--accent);
+    font-size: 0.69rem;
+    font-weight: 700;
+}
+
+.contact-details {
+    display: grid;
+    gap: 3px;
+    margin-top: 14px;
+}
+
+.contact-details p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.78rem;
 }
 
 .bento-grid .about-section {
@@ -673,18 +688,19 @@ a:hover {
 .about-section > p {
     margin: 0 0 10px;
     color: var(--text);
-    font-size: 0.82rem;
-    line-height: 1.65;
+    font-size: 0.75rem;
+    line-height: 1.55;
 }
 
-.about-section > p:last-child {
-    margin-bottom: 0;
-}
-
-.ai-builds-card,
+.roles-card,
 .credentials-card,
-.services-section {
+.services-section,
+.results-card {
     padding: 16px;
+}
+
+.roles-card .role-list {
+    margin-top: 1rem;
 }
 
 .services-section {
@@ -754,6 +770,76 @@ a:hover {
     color: var(--text);
     font-size: 0.7rem;
     line-height: 1.45;
+}
+
+.results-list {
+    display: grid;
+    gap: 0.55rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.results-list li {
+    padding: 0.55rem 0.65rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    font-size: 0.75rem;
+    line-height: 1.45;
+}
+
+.credential-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.credential-item {
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.credential-item h3 {
+    margin: 0 0 4px;
+    color: var(--white);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+.credential-item p,
+.credential-item time {
+    display: block;
+    margin: 0;
+    color: var(--text);
+    font-size: 0.67rem;
+    line-height: 1.45;
+}
+
+.testimonial-list {
+    margin-top: 12px;
+}
+
+.testimonial-placeholder {
+    margin: 0;
+}
+
+.testimonial-placeholder footer {
+    display: grid;
+    gap: 6px;
+}
+
+.testimonial-tag {
+    justify-self: start;
+    padding: 3px 8px;
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 700;
 }
 
 /* Tools marquee */
@@ -983,9 +1069,9 @@ a:hover {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         grid-template-areas:
             'projects projects'
-            'about builds'
+            'about roles'
             'credentials services'
-            'testimonials testimonials';
+            'results testimonials';
     }
 
     .project-item {
@@ -1133,9 +1219,10 @@ a:hover {
         grid-template-areas:
             'projects'
             'about'
-            'builds'
+            'roles'
             'credentials'
             'services'
+            'results'
             'testimonials';
         gap: 10px;
     }
@@ -1143,9 +1230,10 @@ a:hover {
     .bento-card,
     #projects.projects-card,
     .bento-grid .about-section,
-    .ai-builds-card,
+    .roles-card,
     .credentials-card,
-    .services-section {
+    .services-section,
+    .results-card {
         padding: 14px;
         border-radius: 15px;
     }
@@ -1154,7 +1242,7 @@ a:hover {
         grid-template-columns: 104px minmax(0, 1fr);
     }
 
-    .testimonial-card {
+    .testimonials-card {
         grid-template-columns: 1fr;
     }
 

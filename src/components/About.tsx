@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserRound } from 'lucide-react';
+import { portfolioData } from '../data/portfolio';
 import './About.css';
 
 const About: React.FC = () => {
@@ -9,19 +10,14 @@ const About: React.FC = () => {
                 <span className="card-icon"><UserRound size={18} /></span>
                 <div>
                     <h2>About</h2>
-                    <p>A little about how I work.</p>
+                    <p>{portfolioData.profile.studioLine}</p>
                 </div>
             </div>
             <div className="about-portrait-row">
-                <img className="about-avatar" src="/images/avatar.png" alt="Kim Benedict Gayomali" />
-                <span>AI Automation Specialist<br />GHL CRM Builder · Web Developer</span>
+                <img className="about-avatar" src="/images/avatar.png" alt={portfolioData.profile.name} />
+                <span>{portfolioData.roles.join(' · ')}</span>
             </div>
-            <p>
-                I'm an AI Automation Specialist, GHL CRM Builder, and Web Developer. I help coaches, agencies, and small businesses replace manual follow-ups and messy spreadsheets with systems that work around the clock.
-            </p>
-            <p>
-                I believe good automation should be simple to understand. I build clearly, document everything, and make sure your team feels confident using what I hand over.
-            </p>
+            <p>{portfolioData.about}</p>
         </section>
     );
 };

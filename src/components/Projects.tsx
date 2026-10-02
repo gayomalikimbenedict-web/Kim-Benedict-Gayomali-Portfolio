@@ -25,9 +25,14 @@ const Projects: React.FC = () => {
                         <div className="project-copy">
                             <h3>{project.title}</h3>
                             <p>{project.description}</p>
-                            <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title}`}>
-                                View project <ArrowUpRight size={15} />
-                            </a>
+                            {project.link && project.link !== 'GUMROAD_URL_TODO' && (
+                                <a href={project.link} target="_blank" rel="noopener noreferrer" aria-label={project.linkLabel}>
+                                    {project.linkLabel} <ArrowUpRight size={15} />
+                                </a>
+                            )}
+                            {project.link === 'GUMROAD_URL_TODO' && (
+                                <span className="project-link-placeholder">Gumroad URL to be added</span>
+                            )}
                         </div>
                     </div>
                 ))}

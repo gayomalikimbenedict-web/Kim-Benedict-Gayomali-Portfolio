@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import {
-    BadgeCheck,
     Bot,
     BriefcaseBusiness,
     FolderKanban,
@@ -11,6 +10,7 @@ import {
     UserRound,
     Wrench,
 } from 'lucide-react';
+import { portfolioData } from '../data/portfolio';
 import './Navigation.css';
 
 const navigationItems = [
@@ -38,10 +38,9 @@ const Navigation: React.FC = () => {
                     <span className="avatar-fallback" aria-hidden="true">KB</span>
                 </div>
                 <div className="profile-name-row">
-                    <span className="profile-name">Kim Benedict Gayomali</span>
-                    <BadgeCheck className="verified-badge" size={18} fill="currentColor" aria-label="Verified" />
+                    <span className="profile-name">{portfolioData.profile.name}</span>
                 </div>
-                <span className="profile-handle">Sechurplets Studio</span>
+                <span className="profile-handle">{portfolioData.profile.studioLine}</span>
                 <div className="social-links" aria-label="Social links">
                     <a href="#projects" aria-label="Facebook profile"><span className="social-letter" aria-hidden="true">f</span></a>
                     <a href="#about" aria-label="LinkedIn profile"><span className="social-letter social-letter--in" aria-hidden="true">in</span></a>

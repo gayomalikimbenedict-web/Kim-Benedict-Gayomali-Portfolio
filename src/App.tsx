@@ -8,6 +8,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import ToolsMarquee from './components/ToolsMarquee';
 import PortfolioHighlights from './components/PortfolioHighlights';
+import { portfolioData } from './data/portfolio';
 import './styles/global.css';
 import './App.css';
 
@@ -62,7 +63,7 @@ const App: React.FC = () => {
             <Services />
           </div>
           <Contact />
-          <footer className="site-footer">© {new Date().getFullYear()} Kim Benedict Gayomali</footer>
+          <footer className="site-footer">© {new Date().getFullYear()} {portfolioData.profile.name}</footer>
         </main>
       </div>
     </Router>

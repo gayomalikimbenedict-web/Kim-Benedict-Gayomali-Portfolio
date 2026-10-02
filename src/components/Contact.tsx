@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUpRight, Send } from 'lucide-react';
+import { portfolioData } from '../data/portfolio';
 import './Contact.css';
 
 const Contact: React.FC = () => {
@@ -16,6 +17,11 @@ const Contact: React.FC = () => {
                 <a className="contact-direct-link" href="#contact-form">
                     Jump to the project form <ArrowUpRight size={16} />
                 </a>
+                <div className="contact-details" aria-label="Contact placeholders">
+                    <p>Email: {portfolioData.contact.email}</p>
+                    <p>LinkedIn: {portfolioData.contact.linkedin}</p>
+                    <p>Facebook: {portfolioData.contact.facebook}</p>
+                </div>
             </div>
             <form className="contact-form" id="contact-form" onSubmit={handleSubmit}>
                 <label htmlFor="name">Your name</label>
