@@ -4,14 +4,12 @@ import {
     BadgeCheck,
     Bot,
     BriefcaseBusiness,
-    Code2,
     FolderKanban,
     Home,
     Mail,
     Quote,
     UserRound,
     Wrench,
-    Network,
 } from 'lucide-react';
 import './Navigation.css';
 
@@ -40,13 +38,13 @@ const Navigation: React.FC = () => {
                     <span className="avatar-fallback" aria-hidden="true">KB</span>
                 </div>
                 <div className="profile-name-row">
-                    <span className="profile-name">Kim Benedict<br />Gayomali</span>
+                    <span className="profile-name">Kim Benedict Gayomali</span>
                     <BadgeCheck className="verified-badge" size={18} fill="currentColor" aria-label="Verified" />
                 </div>
-                <span className="profile-handle">AI Automation Specialist</span>
+                <span className="profile-handle">Sechurplets Studio</span>
                 <div className="social-links" aria-label="Social links">
-                    <a href="#projects" aria-label="Browse code projects"><Code2 size={18} /></a>
-                    <a href="#about" aria-label="Professional background"><Network size={18} /></a>
+                    <a href="#projects" aria-label="Facebook profile"><span className="social-letter" aria-hidden="true">f</span></a>
+                    <a href="#about" aria-label="LinkedIn profile"><span className="social-letter social-letter--in" aria-hidden="true">in</span></a>
                     <a href="#contact" aria-label="Contact Kim"><Mail size={18} /></a>
                 </div>
             </div>

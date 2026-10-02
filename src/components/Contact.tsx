@@ -3,6 +3,10 @@ import { ArrowUpRight, Send } from 'lucide-react';
 import './Contact.css';
 
 const Contact: React.FC = () => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
+
     return (
         <section className="contact-container" id="contact">
             <div className="contact-intro">
@@ -13,7 +17,7 @@ const Contact: React.FC = () => {
                     Jump to the project form <ArrowUpRight size={16} />
                 </a>
             </div>
-            <form className="contact-form" id="contact-form">
+            <form className="contact-form" id="contact-form" onSubmit={handleSubmit}>
                 <label htmlFor="name">Your name</label>
                 <input type="text" id="name" name="name" required />
 

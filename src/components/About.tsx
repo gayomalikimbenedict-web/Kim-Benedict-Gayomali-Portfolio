@@ -17,10 +17,10 @@ const About: React.FC = () => {
                 <span>AI Automation Specialist<br />GHL CRM Builder · Web Developer</span>
             </div>
             <p>
-                I’m Kim Benedict Gayomali, an AI Automation Specialist, GHL CRM Builder, and Web Developer. I create efficient, thoughtful systems that help teams spend less time on repetitive work.
+                I'm an AI Automation Specialist, GHL CRM Builder, and Web Developer. I help coaches, agencies, and small businesses replace manual follow-ups and messy spreadsheets with systems that work around the clock.
             </p>
             <p>
-                My approach is collaborative and detail-oriented, with clear communication from the first idea through delivery.
+                I believe good automation should be simple to understand. I build clearly, document everything, and make sure your team feels confident using what I hand over.
             </p>
         </section>
     );

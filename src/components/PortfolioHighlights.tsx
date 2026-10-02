@@ -48,12 +48,12 @@ const PortfolioHighlights: React.FC = () => (
                         <p>Good work should speak for itself.</p>
                     </div>
                 </div>
-                <p className="testimonial-note">Client feedback will be featured here as projects are published.</p>
+                <p className="testimonial-note">System-first thinking paired with clear communication and practical execution.</p>
             </div>
             <div className="testimonial-placeholder">
                 <span className="quote-mark">“</span>
-                <p>Thoughtful systems. Clear communication. Work that keeps working.</p>
-                <span className="placeholder-caption">The standard I bring to every project</span>
+                <p>Thoughtful systems. Clear communication. Work that keeps working long after launch.</p>
+                <span className="placeholder-caption">The standard I bring to every engagement</span>
             </div>
         </section>
     </>
