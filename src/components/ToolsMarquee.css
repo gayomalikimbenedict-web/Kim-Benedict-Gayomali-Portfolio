@@ -56,25 +56,30 @@
 
 .tool-logo-box {
 	display: grid;
-	width: 34px;
-	height: 34px;
-	flex: 0 0 34px;
+	width: 32px;
+	height: 32px;
+	flex: 0 0 32px;
 	place-items: center;
+	padding: 4px;
 	background: var(--white);
-	border: 1px solid var(--accent-border);
-	border-radius: 7px;
-	box-shadow: 0 2px 8px var(--accent-glow);
-}
-
-.tool-logo-box[hidden] {
-	display: none;
+	border-radius: 8px;
 }
 
 .tool-logo {
 	display: block;
-	width: 28px;
+	width: 24px;
 	height: 24px;
 	object-fit: contain;
+}
+
+.tool-brand-icon,
+.tool-generic-icon {
+	width: 24px;
+	height: 24px;
+}
+
+.tool-generic-icon {
+	color: var(--accent);
 }
 
 .tools-marquee:hover .marquee,

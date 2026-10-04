@@ -1,3 +1,62 @@
+export type GenericToolIconName =
+  | "calendar"
+  | "code"
+  | "message"
+  | "sparkles"
+  | "table"
+  | "workflow";
+
+export type BrandToolIconName =
+  | "google-calendar"
+  | "apps-script"
+  | "gemini"
+  | "microsoft-teams";
+
+export type PortfolioToolIcon =
+  | { type: "asset"; src: string; fallback: GenericToolIconName }
+  | { type: "brand"; name: BrandToolIconName; color: string }
+  | { type: "generic"; name: GenericToolIconName };
+
+export type PortfolioTool = {
+  name: string;
+  icon: PortfolioToolIcon;
+};
+
+const tools: PortfolioTool[] = [
+  {
+    name: "Google Calendar",
+    icon: { type: "brand", name: "google-calendar", color: "#4285F4" },
+  },
+  {
+    name: "Apps Script",
+    icon: { type: "brand", name: "apps-script", color: "#34A853" },
+  },
+  {
+    name: "Gemini",
+    icon: { type: "brand", name: "gemini", color: "#8E75B2" },
+  },
+  {
+    name: "MS Teams",
+    icon: { type: "brand", name: "microsoft-teams", color: "#6264A7" },
+  },
+  {
+    name: "SeaTalk",
+    icon: { type: "generic", name: "message" },
+  },
+  {
+    name: "Excel",
+    icon: { type: "asset", src: "/logos/excel.svg", fallback: "table" },
+  },
+  {
+    name: "Google Sheets",
+    icon: { type: "asset", src: "/logos/sheets.svg", fallback: "table" },
+  },
+  {
+    name: "GoHighLevel",
+    icon: { type: "asset", src: "/logos/ghl.svg", fallback: "workflow" },
+  },
+];
+
 export const portfolioData = {
   profile: {
     name: "Kim Benedict Gayomali",
@@ -47,16 +106,7 @@ export const portfolioData = {
     "Landing pages",
     "GHL scheduling and CRM setup (in practice)",
   ],
-  tools: [
-    "Excel",
-    "Google Sheets",
-    "Apps Script",
-    "Gemini",
-    "MS Teams",
-    "SeaTalk",
-    "GoHighLevel",
-    "Google Calendar",
-  ],
+  tools,
   credentials: [
     {
       title: "Excel and Copilot Fundamentals",

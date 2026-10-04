@@ -67,7 +67,7 @@ const App: React.FC = () => {
               <p>Everyday tools for reporting, automation, and connected workflows.</p>
             </header>
             <ul className="tools-list">
-              {portfolioData.tools.map((tool) => <li key={tool}>{tool}</li>)}
+              {portfolioData.tools.map((tool) => <li key={tool.name}>{tool.name}</li>)}
             </ul>
           </section>
           <Credentials />
