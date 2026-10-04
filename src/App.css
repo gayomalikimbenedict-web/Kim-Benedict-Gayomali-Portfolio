@@ -1420,6 +1420,30 @@ a:hover {
     flex: 1 1 auto;
 }
 
+.bento-card,
+.project-item,
+.services-section li,
+.tools-list li,
+.credential-item,
+.results-list li,
+.role-list li,
+.testimonial-placeholder,
+.build-tags span {
+    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.bento-card:hover,
+.project-item:hover,
+.services-section li:hover,
+.tools-list li:hover,
+.credential-item:hover,
+.results-list li:hover,
+.role-list li:hover,
+.testimonial-placeholder:hover,
+.build-tags span:hover {
+    transform: translateY(-2px);
+}
+
 .projects-card .section-header,
 .services-section .section-header,
 .tools-section .section-header,
