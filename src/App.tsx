@@ -7,7 +7,7 @@ import Services from './components/Services';
 import About from './components/About';
 import Contact from './components/Contact';
 import ToolsMarquee from './components/ToolsMarquee';
-import PortfolioHighlights from './components/PortfolioHighlights';
+import { Credentials, Results, Roles, Testimonials } from './components/PortfolioHighlights';
 import { portfolioData } from './data/portfolio';
 import './styles/global.css';
 import './App.css';
@@ -54,14 +54,27 @@ const App: React.FC = () => {
       <div className="portfolio-shell">
         <Navigation />
         <main className="portfolio-main">
-          <Hero />
-          <ToolsMarquee />
-          <div className="bento-grid">
-            <Projects />
-            <About />
-            <PortfolioHighlights />
-            <Services />
-          </div>
+          <section className="page-section home-section" id="home" aria-labelledby="home-title">
+            <Hero />
+            <ToolsMarquee />
+          </section>
+          <Projects />
+          <Services />
+          <section className="page-section tools-section" id="tools" aria-labelledby="tools-title">
+            <header className="section-header">
+              <span className="section-kicker">TOOLS</span>
+              <h2 id="tools-title">Tools I work with</h2>
+              <p>Everyday tools for reporting, automation, and connected workflows.</p>
+            </header>
+            <ul className="tools-list">
+              {portfolioData.tools.map((tool) => <li key={tool}>{tool}</li>)}
+            </ul>
+          </section>
+          <Credentials />
+          <Results />
+          <Testimonials />
+          <About />
+          <Roles />
           <Contact />
           <footer className="site-footer">© {new Date().getFullYear()} {portfolioData.profile.name}</footer>
         </main>

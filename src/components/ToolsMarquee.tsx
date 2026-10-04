@@ -4,7 +4,7 @@ import './ToolsMarquee.css';
 
 const ToolsMarquee: React.FC = () => {
     return (
-        <section className="tools-marquee" id="tools" aria-label="Daily tools">
+        <div className="tools-marquee" aria-label="Daily tools">
             <div className="tools-heading">
                 <span>DAILY DRIVERS</span>
                 <strong>Tools I work with</strong>
@@ -22,7 +22,7 @@ const ToolsMarquee: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 

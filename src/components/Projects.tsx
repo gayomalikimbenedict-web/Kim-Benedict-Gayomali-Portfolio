@@ -1,18 +1,16 @@
 import React from 'react';
-import { ArrowUpRight, FolderOpen } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { portfolioData } from '../data/portfolio';
 import './Projects.css';
 
 const Projects: React.FC = () => {
     return (
-        <section id="projects" className="bento-card projects-card">
-            <div className="card-heading">
-                <span className="card-icon"><FolderOpen size={18} /></span>
-                <div>
-                    <h2>Projects</h2>
-                    <p>Workflows, systems, and web experiences.</p>
-                </div>
-            </div>
+        <section id="projects" className="page-section projects-card" aria-labelledby="projects-title">
+            <header className="section-header">
+                <span className="section-kicker">PROJECTS</span>
+                <h2 id="projects-title">Projects</h2>
+                <p>Workflows, systems, and web experiences.</p>
+            </header>
             <div className="projects-list">
                 {portfolioData.projects.map((project) => (
                     <div key={project.id} className="project-item">

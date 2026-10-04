@@ -9,10 +9,10 @@ const Contact: React.FC = () => {
     };
 
     return (
-        <section className="contact-container" id="contact">
+        <section className="contact-container page-section" id="contact" aria-labelledby="contact-title">
             <div className="contact-intro">
                 <span className="section-kicker">HAVE A PROJECT IN MIND?</span>
-                <h2>Let’s make it work better.</h2>
+            <h2 id="contact-title">Let’s make it work better.</h2>
                 <p>Tell me what you’re building, what’s slowing you down, or where you’d like to go next.</p>
                 <a className="contact-direct-link" href="#contact-form">
                     Jump to the project form <ArrowUpRight size={16} />
