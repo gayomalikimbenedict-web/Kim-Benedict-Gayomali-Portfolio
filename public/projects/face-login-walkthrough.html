@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Face Login walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08121f; --panel:#0e1f38; --card:#13294a; --line:#23406a;
+  --text:#e9f2fb; --muted:#8fa6c0; --teal:#5ed4de; --amber:#f0c36a;
+  --green:#79dba0; --red:#ff9a8f; --lav:#a9b9ff; --ink:#06202a;
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.5;padding:40px 20px 56px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto}
+header{margin-bottom:28px;max-width:640px}
+h1{font-size:clamp(30px,4.4vw,46px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+header p{color:var(--muted);margin-top:10px;font-size:16px}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:28px;align-items:start}
+@media(max-width:880px){.layout{grid-template-columns:1fr}}
+
+.rail ol{list-style:none;border-left:2px solid var(--line)}
+.rail li{position:relative}
+.rail li button{display:block;width:100%;text-align:left;padding:10px 12px 10px 18px;color:var(--muted);font-weight:600;font-size:15px;transition:color .2s}
+.rail li button:hover{color:var(--text)}
+.rail li::before{content:"";position:absolute;left:-2px;top:8px;bottom:8px;width:2px;background:var(--teal);transform:scaleY(0);transform-origin:top;transition:transform .35s}
+.rail li.done::before{transform:scaleY(1);opacity:.35}
+.rail li.active::before{transform:scaleY(1);opacity:1}
+.rail li.active button{color:var(--text)}
+.rail .note{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}
+.rail .note>span{overflow:hidden;font-weight:400;font-size:14px;color:var(--muted);line-height:1.55}
+.rail li.active .note{grid-template-rows:1fr}
+.rail li.active .note>span{padding-top:4px}
+.controls{display:flex;gap:10px;margin:20px 0 0 20px}
+.btn{padding:8px 14px;border:1px solid var(--line);border-radius:8px;font-weight:600;font-size:14px;transition:border-color .2s,background .2s}
+.btn:hover{border-color:var(--teal);background:rgba(94,212,222,.08)}
+.btn.primary{background:var(--teal);color:var(--ink);border-color:var(--teal)}
+.btn.primary:hover{background:#7ae0e9}
+
+.frame{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.chrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:#0a182c;border-bottom:1px solid var(--line)}
+.chrome i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.chrome span{margin-left:10px;font-size:12px;color:var(--muted);background:var(--bg);padding:3px 12px;border-radius:6px}
+.body{position:relative;height:540px;overflow:hidden;display:grid;place-items:center}
+
+/* login card */
+.card{width:min(380px,92%);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card[hidden]{display:none}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--panel);border-radius:10px;padding:4px;margin-bottom:12px}
+.tab{height:30px;border-radius:7px;font-size:13px;font-weight:600;color:var(--muted);transition:background .25s,color .25s}
+.tab[aria-selected=true]{background:var(--teal);color:var(--ink)}
+.field{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:0 12px;height:40px;margin-bottom:12px;font-size:14px;display:flex;align-items:center;transition:border-color .2s,box-shadow .2s}
+.field small{color:var(--muted);width:78px;font-size:12px;flex:none}
+.field.focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(94,212,222,.18)}
+.field.focus .val::after{content:"";display:inline-block;width:1px;height:15px;background:var(--teal);margin-left:1px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.cam{position:relative;height:220px;border-radius:12px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#10294b,#091628);border:1px solid var(--line);margin-bottom:10px}
+.cam.shake{animation:shake .4s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.cam svg{position:absolute;inset:0;width:100%;height:100%}
+#ring ellipse{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:6 6;transition:stroke .3s}
+#ring.ok ellipse{stroke:var(--teal);stroke-dasharray:none}
+#ring.good ellipse{stroke:var(--green);stroke-dasharray:none}
+#ring.bad ellipse{stroke:var(--red);stroke-dasharray:none}
+
+.person{opacity:0;transition:opacity .6s}
+.person.on{opacity:1}
+.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 5s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(1.5deg)}}
+.feat{transform:translateX(calc(var(--yaw,0)*1px));transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.eye{transform-box:fill-box;transform-origin:center;animation:eyeblink 4.2s infinite}
+#pB .eye{animation-delay:1.4s}
+@keyframes eyeblink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+.pupil{animation:look 7s ease-in-out infinite}
+@keyframes look{0%,100%{transform:translateX(0)}30%{transform:translateX(2.6px)}65%{transform:translateX(-2.6px)}}
+.mouth{transform-box:fill-box;transform-origin:center;animation:talk 6s ease-in-out infinite}
+@keyframes talk{0%,100%{transform:scaleX(1) translateY(0)}50%{transform:scaleX(1.07) translateY(.8px)}}
+.skin{stroke-width:2}
+#pA .skin{fill:#23497b;stroke:#3a74b8}
+#pA .hair{fill:#0a1a30;stroke:#3a74b8;stroke-width:1.5}
+#pA .body-s{fill:#17345c;stroke:#2f5f98;stroke-width:2}
+#pB .skin{fill:#473c80;stroke:#8277d6}
+#pB .hair{fill:#1f1a45;stroke:#8277d6;stroke-width:1.5}
+#pB .body-s{fill:#2c2557;stroke:#6b60b8;stroke-width:2}
+.eyeball{fill:#e9f2fb}
+.pupilc{fill:#08121f}
+.stroke{fill:none;stroke:#a9c4e6;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+#pB .stroke{stroke:#c6bfff}
+.glass{fill:none;stroke:#c6bfff;stroke-width:2}
+#meshWrap{transform:translateX(calc(var(--yaw,0)*.7px));transition:transform .7s cubic-bezier(.4,0,.2,1),opacity .8s;opacity:0}
+#meshWrap.on{opacity:1}
+#meshWrap line{stroke:var(--teal);stroke-width:.7;opacity:.6}
+#meshWrap circle{fill:var(--teal)}
+#scan{fill:var(--teal);opacity:0}
+#scan.on{opacity:.9;animation:scan .7s ease-in-out infinite alternate}
+@keyframes scan{from{transform:translateY(46px)}to{transform:translateY(190px)}}
+
+.verdict{position:absolute;left:50%;bottom:12px;transform:translate(-50%,16px);opacity:0;padding:6px 16px;border-radius:99px;font-weight:700;font-size:14px;white-space:nowrap;transition:transform .3s cubic-bezier(.3,1.4,.5,1),opacity .25s;pointer-events:none}
+.verdict.show{transform:translate(-50%,0);opacity:1}
+.verdict.denied{background:var(--red);color:#3a0f0a}
+.verdict.granted{background:var(--green);color:#06281a}
+
+.status{display:flex;align-items:center;gap:8px;min-height:22px;font-size:13px;color:var(--muted);margin-bottom:8px}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;transition:background .3s}
+.status.ok{color:var(--green)}.status.ok::before{background:var(--green)}
+.status.bad{color:var(--red)}.status.bad::before{background:var(--red)}
+.status.info::before{background:var(--teal)}
+.chips{display:flex;gap:6px;height:28px;margin-bottom:12px;opacity:0;transition:opacity .3s}
+.chips.on{opacity:1}
+.chip{flex:1;display:grid;place-items:center;font-size:12px;font-weight:600;color:var(--muted);border:1px solid var(--line);border-radius:99px;transition:background .3s,color .3s,border-color .3s}
+.chip.done{background:rgba(94,212,222,.18);color:var(--teal);border-color:rgba(94,212,222,.6)}
+.go{width:100%;background:var(--teal);color:var(--ink);font-weight:700;border-radius:8px;height:40px;font-size:14px;transition:transform .12s,opacity .3s}
+.go.press{transform:scale(.97)}
+
+/* dashboard */
+.dash{width:min(700px,94%);height:490px;background:var(--card);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden;animation:fade .45s}
+.dash[hidden]{display:none}
+@keyframes fade{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.dtop{display:flex;align-items:center;gap:12px;padding:0 16px;height:46px;border-bottom:1px solid var(--line);flex:none;background:rgba(10,24,44,.5)}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px}
+.brand b{width:20px;height:20px;border-radius:6px;background:var(--teal);display:block;position:relative}
+.brand b::after{content:"";position:absolute;inset:6px;border-radius:2px;background:var(--card)}
+.who{margin-left:auto;font-size:12px;color:var(--green);display:flex;align-items:center;gap:6px}
+.who::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+.mini{border:1px solid var(--line);border-radius:7px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--muted)}
+.dbody{padding:14px 16px;flex:1;min-height:0;overflow:hidden}
+.dbody h3{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.tile span{display:block;font-size:12px;color:var(--muted)}
+.tile strong{font-size:22px;font-weight:800;line-height:1.2;font-variant-numeric:tabular-nums}
+.tile.bad strong{color:var(--red)}
+.tile.good strong{color:var(--green)}
+.cols{display:grid;grid-template-columns:.85fr 1.3fr;gap:12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;height:262px;overflow:hidden}
+.panel h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.item{display:grid;align-items:center;min-height:34px;padding:4px 0;border-bottom:1px solid rgba(35,64,106,.6);font-size:13px;transition:opacity .4s,transform .4s,background .25s}
+.item.pre{opacity:0;transform:translateY(8px)}
+.act{grid-template-columns:44px 1fr}
+.act small{color:var(--muted);font-size:12px}
+.act .t{color:var(--muted);font-size:12px}
+.act .x{font-weight:600}
+.act .x.bad{color:var(--red)}
+.act .x.good{color:var(--green)}
+.rec{grid-template-columns:1fr auto 52px;gap:8px;border-radius:6px;padding:2px 6px;min-height:30px}
+.rec .n{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rec .d{color:var(--muted);font-size:12px;text-align:right}
+.rec.open{background:rgba(94,212,222,.12)}
+.tag{font-size:11px;font-weight:600;padding:1px 8px;border-radius:99px;border:1px solid;justify-self:start}
+.tg-Draft{color:var(--amber);border-color:rgba(240,195,106,.5)}
+.tg-Shared{color:var(--teal);border-color:rgba(94,212,222,.5)}
+.tg-Review{color:var(--lav);border-color:rgba(169,185,255,.5)}
+.tg-Done{color:var(--green);border-color:rgba(121,219,160,.5)}
+.detail{margin-top:6px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:11.5px;background:rgba(8,18,31,.5);display:none}
+.detail.on{display:block;animation:fade .3s}
+.detail h5{font-size:12px;font-weight:700;margin-bottom:4px}
+.detail div{display:grid;grid-template-columns:1.1fr .9fr 1.1fr;gap:6px;padding:2px 0;color:var(--muted);white-space:nowrap}
+.detail div b{color:var(--text);font-weight:600}
+.fine2{font-size:11px;color:var(--muted);margin-top:8px}
+@media(max-width:600px){
+  .cols{grid-template-columns:1fr}
+  .cols .panel:first-child{display:none}
+  .tiles .tile:nth-child(n+3){display:none}
+  .tiles{grid-template-columns:1fr 1fr}
+  .who span{display:none}
+}
+
+.cursor{position:absolute;left:0;top:0;width:22px;height:22px;pointer-events:none;z-index:9;opacity:0;transition:transform .6s cubic-bezier(.4,0,.2,1),opacity .2s;filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.cursor.on{opacity:1}
+.cursor svg{display:block}
+.cursor::before{content:"";position:absolute;left:-9px;top:-9px;width:22px;height:22px;border-radius:50%;border:2px solid var(--teal);opacity:0}
+.cursor.click::before{animation:rip .45s ease-out}
+@keyframes rip{from{opacity:.9;transform:scale(.3)}to{opacity:0;transform:scale(1.6)}}
+
+.summary{position:absolute;inset:0;background:rgba(8,18,31,.9);display:grid;place-items:center;z-index:10;padding:16px;overflow:auto}
+.summary[hidden]{display:none}
+.sum-card{width:min(560px,100%);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.sum-card h2{font-size:22px;font-weight:800;letter-spacing:-.01em}
+.sum-card>p{color:var(--muted);font-size:14px;margin-top:4px}
+.sum-nums{display:flex;gap:26px;margin:18px 0}
+.sum-nums strong{display:block;font-size:30px;font-weight:800;color:var(--teal);line-height:1.1}
+.sum-nums span{font-size:12px;color:var(--muted)}
+.sum-card ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;font-size:13px;margin-bottom:20px}
+.sum-card li{padding-left:16px;position:relative}
+.sum-card li::before{content:"";position:absolute;left:0;top:7px;width:7px;height:7px;border-radius:2px;background:var(--teal)}
+@media(max-width:600px){.sum-card ul{grid-template-columns:1fr}.sum-nums{gap:16px}}
+.fine{font-size:12px;color:var(--muted);margin-top:14px}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Face Login</h1>
+    <p>A webcam login built with Flask. Watch one enrollment, one refused face, one successful login and the protected area behind it.</p>
+  </header>
+
+  <div class="layout">
+    <nav class="rail" aria-label="Walkthrough steps">
+      <ol id="steps"></ol>
+      <div class="controls">
+        <button class="btn primary" id="play" type="button">Pause</button>
+        <button class="btn" id="replay" type="button">Replay</button>
+      </div>
+    </nav>
+
+    <div class="frame" role="img" aria-label="Animated demo of the Face Login app: detecting a face, enrolling three poses, a different face being denied, the right face being granted access, and the protected dashboard with demo data. The faces are drawings, not real camera footage.">
+      <div class="chrome"><i></i><i></i><i></i><span>face-login</span></div>
+      <div class="body" id="body">
+
+        <div class="card" id="loginCard">
+          <div class="tabs" role="tablist">
+            <button class="tab" id="tabLogin" role="tab" aria-selected="true" tabindex="-1">Login</button>
+            <button class="tab" id="tabReg" role="tab" aria-selected="false" tabindex="-1">Register</button>
+          </div>
+          <div class="field" id="uField"><small>Username</small><span class="val" id="uVal"></span></div>
+
+          <div class="cam" id="cam">
+            <svg id="faceSvg" viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <!-- face A: the enrolled user -->
+              <g class="person on" id="pA"><g class="sway">
+                <path class="body-s" d="M18 244c4-40 38-56 82-56s78 16 82 56z"/>
+                <rect class="skin" x="86" y="170" width="28" height="28" rx="8"/>
+                <ellipse class="skin" cx="100" cy="120" rx="60" ry="78"/>
+                <path class="hair" d="M42 118C32 62 62 30 102 30s68 34 58 88c-6-28-28-46-58-46s-52 16-60 46z"/>
+                <g class="feat">
+                  <g class="eye"><ellipse class="eyeball" cx="76" cy="108" rx="9" ry="5.5"/><circle class="pupil pupilc" cx="76" cy="108" r="2.8"/></g>
+                  <g class="eye"><ellipse class="eyeball" cx="124" cy="108" rx="9" ry="5.5"/><circle class="pupil pupilc" cx="124" cy="108" r="2.8"/></g>
+                  <path class="stroke" d="M64 95q12-8 24-2M112 93q12-6 24 2"/>
+                  <path class="stroke" d="M100 112v22q-7 5-12 2"/>
+                  <path class="stroke mouth" d="M82 156q18 12 36 0"/>
+                </g>
+              </g></g>
+              <!-- face B: someone else -->
+              <g class="person" id="pB"><g class="sway">
+                <path class="body-s" d="M14 244c4-42 40-58 86-58s82 16 86 58z"/>
+                <rect class="skin" x="88" y="170" width="24" height="28" rx="8"/>
+                <ellipse class="skin" cx="100" cy="122" rx="54" ry="76"/>
+                <path class="hair" d="M40 160C26 80 52 30 102 28s76 46 60 132c-4-44-10-70-26-86-16 12-56 12-72 0-16 16-22 42-24 86z"/>
+                <g class="feat">
+                  <g class="eye"><ellipse class="eyeball" cx="78" cy="112" rx="8" ry="6.5"/><circle class="pupil pupilc" cx="78" cy="112" r="3"/></g>
+                  <g class="eye"><ellipse class="eyeball" cx="122" cy="112" rx="8" ry="6.5"/><circle class="pupil pupilc" cx="122" cy="112" r="3"/></g>
+                  <circle class="glass" cx="78" cy="112" r="15"/><circle class="glass" cx="122" cy="112" r="15"/><path class="glass" d="M93 110q7-4 14 0"/>
+                  <path class="stroke" d="M66 93q12-6 24 0M110 93q12-6 24 0"/>
+                  <path class="stroke" d="M100 116v20q6 6 12 2"/>
+                  <path class="stroke mouth" d="M86 158q14 6 28 0"/>
+                </g>
+              </g></g>
+              <g id="meshWrap"></g>
+              <g id="ring"><ellipse cx="100" cy="120" rx="80" ry="102"/></g>
+              <rect id="scan" x="38" y="0" width="124" height="3" rx="1.5"/>
+            </svg>
+            <div class="verdict" id="verdict" role="status"></div>
+          </div>
+
+          <div class="status" id="status">Position your face in the circle</div>
+          <div class="chips" id="chips">
+            <span class="chip">Straight</span><span class="chip">Left</span><span class="chip">Right</span><span class="chip">Still</span>
+          </div>
+          <button class="go" id="goBtn" type="button" tabindex="-1">Log in</button>
+        </div>
+
+        <section class="dash" id="dash" hidden>
+          <div class="dtop">
+            <div class="brand"><b></b>Face Login</div>
+            <div class="who"><span>demo.user, signed in with face</span></div>
+            <button class="mini" type="button" tabindex="-1">Log out</button>
+          </div>
+          <div class="dbody">
+            <h3>Welcome back, Demo User</h3>
+            <div class="tiles">
+              <div class="tile"><span>Face templates enrolled</span><strong id="t0">0</strong></div>
+              <div class="tile bad"><span>Failed attempts today</span><strong id="t1">0</strong></div>
+              <div class="tile good"><span>Session</span><strong id="t2">Active</strong></div>
+            </div>
+            <div class="cols">
+              <div class="panel"><h4>Recent sign-in activity</h4><div id="act"></div></div>
+              <div class="panel"><h4>Saved records</h4><div id="recs"></div>
+                <div class="detail" id="detail">
+                  <h5>Client contact sheet</h5>
+                  <div><b>Maria Dela Rosa</b><span>Account lead</span><span>+63 900 000 0001</span></div>
+                  <div><b>Jun Alvarez</b><span>Billing</span><span>+63 900 000 0002</span></div>
+                  <div><b>Lea Mercado</b><span>Support</span><span>+63 900 000 0003</span></div>
+                </div>
+              </div>
+            </div>
+            <p class="fine2">Demo data. All names, numbers and records are made up.</p>
+          </div>
+        </section>
+
+        <div class="cursor" id="cur" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 2l14 8-6 1.8L8.4 18z" fill="#fff" stroke="#06202a" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+
+        <section class="summary" id="summary" hidden>
+          <div class="sum-card">
+            <h2>Username plus face, checked on the server</h2>
+            <p>The camera image goes to the Flask backend, which does the matching.</p>
+            <div class="sum-nums">
+              <div><strong>3</strong><span>enrollment poses</span></div>
+              <div><strong>10</strong><span>frames in the stillness check</span></div>
+              <div><strong>1</strong><span>user compared per login</span></div>
+            </div>
+            <ul>
+              <li>Only the typed user's face is compared</li>
+              <li>Same failure message for unknown users</li>
+              <li>Account lock after a couple of failed attempts, unlocked by an admin script</li>
+              <li>CSRF protection and rate limiting</li>
+              <li>Security headers</li>
+              <li>Parameterized SQL only</li>
+              <li>Camera frames stay in memory</li>
+            </ul>
+            <button class="btn primary" id="replay2" type="button">Replay the walkthrough</button>
+            <p class="fine">Flask, face_recognition, OpenCV, SQLite. The face mesh runs in the browser with MediaPipe. Faces and data in this demo are drawings and made-up examples.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s){return document.querySelector(s)};
+var $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var body=$("#body"), cur=$("#cur"), svg=$("#faceSvg"), ring=$("#ring"), go=$("#goBtn");
+
+/* ---------- mesh ---------- */
+(function(){
+  var pts=[],idx={},r,c,x,y,h="";
+  for(r=0;r<9;r++){
+    for(c=0;c<7;c++){
+      x=56+c*15+Math.sin(r*3+c)*1.8; y=62+r*14+Math.cos(c*2+r)*1.8;
+      var dx=(x-100)/54, dy=(y-120)/72;
+      if(dx*dx+dy*dy<=1){idx[r+","+c]=pts.length; pts.push([x,y]);}
+    }
+  }
+  function ln(a,b){if(a==null||b==null)return;h+='<line x1="'+pts[a][0].toFixed(1)+'" y1="'+pts[a][1].toFixed(1)+'" x2="'+pts[b][0].toFixed(1)+'" y2="'+pts[b][1].toFixed(1)+'"/>'}
+  for(r=0;r<9;r++)for(c=0;c<7;c++){
+    var a=idx[r+","+c]; if(a==null)continue;
+    ln(a,idx[r+","+(c+1)]); ln(a,idx[(r+1)+","+c]); ln(a,idx[(r+1)+","+(c+1)]);
+  }
+  pts.forEach(function(p){h+='<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="1.4"/>'});
+  $("#meshWrap").innerHTML=h;
+})();
+
+/* ---------- timing ---------- */
+var token=0, paused=false, playing=false;
+function Stop(){}
+function wait(ms){
+  var my=token;
+  if(reduce) ms=0;
+  return new Promise(function(res,rej){
+    var elapsed=0,last=performance.now();
+    (function tick(){
+      if(my!==token){rej(new Stop());return}
+      var now=performance.now();
+      if(!paused) elapsed+=now-last;
+      last=now;
+      if(elapsed>=ms) res(); else setTimeout(tick,30);
+    })();
+  });
+}
+async function type(el,text,d){
+  for(var i=0;i<text.length;i++){el.textContent+=text[i]; await wait(d)}
+}
+function point(el,fx,fy){
+  var f=body.getBoundingClientRect(), r=el.getBoundingClientRect();
+  fx=fx==null?.5:fx; fy=fy==null?.55:fy;
+  cur.style.transform="translate("+(r.left-f.left+r.width*fx)+"px,"+(r.top-f.top+r.height*fy)+"px)";
+  cur.classList.add("on");
+  return wait(620);
+}
+function click(){cur.classList.remove("click"); void cur.offsetWidth; cur.classList.add("click")}
+function press(b){b.classList.add("press"); return wait(150).then(function(){b.classList.remove("press")})}
+
+/* ---------- ui helpers ---------- */
+function setStatus(t,k){var s=$("#status"); s.textContent=t; s.className="status"+(k?" "+k:"")}
+function setRing(k){ring.setAttribute("class",k||"")}
+function setYaw(v){svg.style.setProperty("--yaw",v)}
+function setFace(w){$("#pA").classList.toggle("on",w==="A"); $("#pB").classList.toggle("on",w==="B")}
+function setMesh(on){$("#meshWrap").classList.toggle("on",on)}
+function setScan(on){$("#scan").classList.toggle("on",on)}
+function setVerdict(k){
+  var v=$("#verdict");
+  v.className="verdict"+(k?" show "+k:"");
+  if(k) v.textContent=k==="denied"?"Access denied":"Access granted";
+}
+function shake(){var c=$("#cam"); c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake")}
+function setTab(t){
+  $("#tabLogin").setAttribute("aria-selected",t==="login");
+  $("#tabReg").setAttribute("aria-selected",t==="reg");
+  $("#chips").classList.toggle("on",t==="reg");
+  go.textContent=t==="reg"?"Start enrollment":"Log in";
+}
+function chips(n){$$(".chip").forEach(function(c,i){c.classList.toggle("done",i<n)})}
+function field(t,focus){$("#uVal").textContent=t; $("#uField").classList.toggle("focus",!!focus)}
+function setView(v){$("#loginCard").hidden=v!=="login"; $("#dash").hidden=v!=="dash"}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function count(el,to){
+  if(reduce||to===0){el.textContent=to;return}
+  var t0=performance.now();
+  (function f(now){
+    var p=Math.min(1,(now-t0)/700);
+    el.textContent=Math.round(to*p);
+    if(p<1) requestAnimationFrame(f);
+  })(t0);
+}
+
+/* ---------- dashboard data (made up) ---------- */
+var ACT=[
+  {t:"09:42",x:"Login succeeded",d:"Face verified",k:"good"},
+  {t:"09:41",x:"Login failed",d:"Face not matched",k:"bad"},
+  {t:"09:36",x:"Enrollment complete",d:"3 poses, stillness passed",k:""}
+];
+var RECS=[
+  {n:"Quarterly plan",g:"Draft",d:"Oct 02"},
+  {n:"Client contact sheet",g:"Shared",d:"Oct 05"},
+  {n:"Vendor invoices",g:"Review",d:"Oct 08"},
+  {n:"Onboarding checklist",g:"Done",d:"Oct 09"}
+];
+function renderDash(full){
+  var pre=full?"":" pre";
+  $("#act").innerHTML=ACT.map(function(a){
+    return '<div class="item act'+pre+'"><span class="t">'+a.t+'</span><span><span class="x '+a.k+'">'+esc(a.x)+'</span><br><small>'+esc(a.d)+'</small></span></div>';
+  }).join("");
+  $("#recs").innerHTML=RECS.map(function(r,i){
+    return '<div class="item rec'+pre+'" data-i="'+i+'"><span class="n">'+esc(r.n)+'</span><span class="tag tg-'+r.g+'">'+r.g+'</span><span class="d">'+r.d+'</span></div>';
+  }).join("");
+  $("#t0").textContent=full?3:0; $("#t1").textContent=full?1:0;
+  $("#detail").classList.remove("on");
+}
+function openRec(i,on){
+  $$("#recs .rec").forEach(function(r,k){r.classList.toggle("open",on&&k===i)});
+  $("#detail").classList.toggle("on",on);
+}
+
+/* ---------- state at the START of each scene ---------- */
+function setup(n){
+  setScan(false); setVerdict(null); $("#cam").classList.remove("shake");
+  $("#summary").hidden=true; cur.classList.remove("on");
+  go.classList.remove("press"); setYaw(0);
+  setView(n>=6?"dash":"login");
+  if(n<=0){setTab("login"); field(""); setFace("A"); setMesh(false); setRing(""); chips(0); setStatus("Position your face in the circle"); return}
+  if(n===1){setTab("login"); field("demo.user"); setFace("A"); setMesh(false); setRing(""); chips(0); setStatus("Position your face in the circle"); return}
+  if(n===2){setTab("login"); field("demo.user"); setFace("A"); setMesh(true); setRing("ok"); chips(0); setStatus("Face mesh on","info"); return}
+  if(n===3){setTab("reg"); field("demo.user"); setFace("A"); setMesh(true); setRing("ok"); chips(4); setStatus("Enrollment complete","ok"); return}
+  if(n===4){setTab("login"); field("demo.user"); setFace("B"); setMesh(true); setRing("bad"); chips(0); setStatus("Login failed. Try again.","bad"); setVerdict("denied"); return}
+  if(n===5){setTab("login"); field("demo.user"); setFace("A"); setMesh(true); setRing("good"); chips(0); setStatus("Face verified. Access granted.","ok"); setVerdict("granted"); go.textContent="Signed in"; return}
+  renderDash(true); openRec(1,true);
+  $("#summary").hidden=false;
+}
+
+/* ---------- scenes ---------- */
+var STEPS=[
+ {t:"Open the app",n:"A username field, a live camera preview and a guide circle. Login and Register share one screen."},
+ {t:"Face detected",n:"After two seconds of a steady face, a mesh appears. It hides again if the face is lost."},
+ {t:"Enroll your face",n:"Three poses, straight, left and right, then a stillness check over 10 frames."},
+ {t:"A different face",n:"Someone else tries this username. Their face does not match, so access is denied with a generic message."},
+ {t:"Try again",n:"The right face is compared only with that user's stored face. It matches and access is granted."},
+ {t:"Inside the dashboard",n:"The protected area opens with the user's records and sign-in activity. All data here is made up."},
+ {t:"What is under the hood",n:"The stack, the checks, and what stays on the server."}
+];
+
+var SCENES=[
+ async function(){
+  setup(0);
+  await wait(1600);
+  await point($("#uField"),.3); click(); field("",true);
+  await type($("#uVal"),"demo.user",90);
+  await wait(300); field("demo.user",false);
+  cur.classList.remove("on");
+  await wait(700);
+ },
+ async function(){
+  setup(1);
+  setRing("ok"); setStatus("Face detected. Hold still.","info");
+  await wait(2000);
+  setMesh(true); setStatus("Face mesh on","info");
+  await wait(1500);
+ },
+ async function(){
+  setup(2);
+  await point($("#tabReg")); click(); setTab("reg"); setRing(""); setStatus("Ready to enroll");
+  await wait(600);
+  await point(go); click(); await press(go);
+  var poses=[["Look straight",0],["Turn left",-18],["Turn right",18]];
+  for(var i=0;i<poses.length;i++){
+    setRing(""); setStatus(poses[i][0],"info"); setYaw(poses[i][1]);
+    await wait(1100);
+    setRing("ok"); chips(i+1); await wait(450);
+  }
+  setRing(""); setYaw(0); setStatus("Hold still","info");
+  await wait(1200);
+  setRing("good"); chips(4); setStatus("Enrollment complete","ok");
+  await wait(1500);
+ },
+ async function(){
+  setup(3);
+  await point($("#tabLogin")); click(); setTab("login"); chips(0); setRing(""); setMesh(false);
+  setStatus("Position your face in the circle");
+  await wait(500);
+  setFace("B");
+  await wait(1100);
+  setRing("ok"); setMesh(true); setStatus("Face mesh on","info");
+  await wait(900);
+  await point(go); click(); await press(go);
+  setStatus("Checking","info"); setScan(true);
+  await wait(1500);
+  setScan(false); setRing("bad"); setVerdict("denied"); shake();
+  setStatus("Login failed. Try again.","bad");
+  cur.classList.remove("on");
+  await wait(2200);
+ },
+ async function(){
+  setup(4);
+  await wait(500);
+  setVerdict(null); setRing(""); setMesh(false); setStatus("Try again");
+  setFace("A");
+  await wait(1100);
+  setRing("ok"); setMesh(true); setStatus("Face mesh on","info");
+  await wait(900);
+  await point(go); click(); await press(go);
+  setStatus("Checking","info"); setScan(true);
+  await wait(1500);
+  setScan(false); setRing("good"); setVerdict("granted");
+  setStatus("Face verified. Access granted.","ok"); go.textContent="Signed in";
+  cur.classList.remove("on");
+  await wait(1800);
+ },
+ async function(){
+  setup(5);
+  await wait(300);
+  setView("dash"); renderDash(false);
+  await wait(500);
+  count($("#t0"),3); count($("#t1"),1);
+  var a=$$("#act .item");
+  for(var i=0;i<a.length;i++){a[i].classList.remove("pre"); await wait(260)}
+  var r=$$("#recs .item");
+  for(var j=0;j<r.length;j++){r[j].classList.remove("pre"); await wait(200)}
+  await wait(600);
+  await point(r[1],.35); click(); openRec(1,true);
+  await wait(3200);
+  cur.classList.remove("on");
+ },
+ async function(){
+  setup(6);
+  await wait(100);
+ }
+];
+
+/* ---------- player ---------- */
+function buildRail(){
+  $("#steps").innerHTML=STEPS.map(function(s,i){
+    return '<li data-i="'+i+'"><button type="button"><span>'+s.t+'</span><span class="note"><span>'+s.n+'</span></span></button></li>';
+  }).join("");
+  $$("#steps li button").forEach(function(b,i){
+    b.addEventListener("click",function(){play(i,!reduce)});
+  });
+}
+function mark(i){
+  $$("#steps li").forEach(function(li,k){
+    li.classList.toggle("active",k===i);
+    li.classList.toggle("done",k<i);
+  });
+}
+function label(){
+  var b=$("#play");
+  if(!playing) b.textContent="Replay"; else b.textContent=paused?"Resume":"Pause";
+}
+async function play(i,auto){
+  token++; paused=false; playing=true;
+  mark(i); label();
+  var my=token;
+  try{
+    await SCENES[i]();
+    if(my!==token) return;
+    if(auto && i<SCENES.length-1){
+      await wait(700);
+      return play(i+1,true);
+    }
+    playing=false; label();
+  }catch(e){
+    if(!(e instanceof Stop)) throw e;
+  }
+}
+$("#play").addEventListener("click",function(){
+  if(!playing){play(0,true);return}
+  paused=!paused; label();
+});
+$("#replay").addEventListener("click",function(){play(0,true)});
+$("#replay2").addEventListener("click",function(){play(0,true)});
+
+buildRail();
+setup(0); mark(0);
+if(reduce){playing=false; label()}
+else{
+  var started=false;
+  var begin=function(){if(!started){started=true;play(0,true)}};
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(en,ob){
+      if(en[0].isIntersecting){ob.disconnect();begin()}
+    },{threshold:.15}).observe($(".frame"));
+  }else{begin()}
+}
+})();
+</script>
+</body>
+</html>
