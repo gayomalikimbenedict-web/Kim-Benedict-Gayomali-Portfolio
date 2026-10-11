@@ -74,6 +74,13 @@ const projects: PortfolioProject[] = [
       "Animated walkthrough of a lead manager for a single admin: sign in, search leads, change statuses in bulk, and review the audit log. Runs on sample data.",
     demoUrl: "/projects/sechurplets-crm.html",
   },
+  {
+    id: 2,
+    title: "Face Login walkthrough",
+    description:
+      "Animated walkthrough of a webcam login built with Flask: face detection, three-pose enrollment, a refused face, a successful login, and the protected dashboard. Runs on made-up demo data.",
+    demoUrl: "/projects/face-login-walkthrough.html",
+  },
 ];
 
 export const portfolioData = {
