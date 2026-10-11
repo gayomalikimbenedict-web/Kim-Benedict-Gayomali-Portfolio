@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html{color-scheme:dark}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Sechurplets CRM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one centered column. Intro on top, then a browser-framed stage that replays the CRM opening, then a caption bar with step chips and controls. */
+:root {
+  color-scheme: dark;
+  --ground: #0a1320;
+  --navy: #101c2b;
+  --panel: #172638;
+  --raised: #1b2d40;
+  --teal: #5ed4de;
+  --ink: #f3f7fb;
+  --muted: #91a2b5;
+  --line: rgba(179, 201, 220, 0.14);
+  --danger: #ffaaa7;
+  --st-new: #5ed4de;
+  --st-contacted: #9db8ff;
+  --st-qualified: #7fe0a6;
+  --st-lost: #aab8c6;
+  --font-ui: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(94, 212, 222, 0.10), transparent 45%),
+    var(--ground);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  padding-inline: 16px;
+  padding-block: 40px 56px;
+  line-height: 1.5;
+}
+
+.wrap { width: min(100%, 1040px); margin-inline: auto; display: grid; gap: 28px; }
+
+.intro { display: grid; gap: 10px; max-width: 62ch; }
+.eyebrow {
+  margin: 0; font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; color: var(--teal);
+}
+h1 {
+  margin: 0; font-size: clamp(34px, 6vw, 54px); font-weight: 800;
+  letter-spacing: -0.045em; line-height: 1.05; text-wrap: balance;
+}
+.accent { color: var(--teal); }
+.lede { margin: 0; color: var(--muted); font-size: 16px; text-wrap: pretty; }
+
+.player { display: grid; gap: 14px; min-width: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px;
+  border: 1px solid var(--line); border-radius: 999px; background: transparent;
+  color: var(--muted); font: 600 13px/1 var(--font-ui); cursor: pointer;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.chip:hover { color: var(--ink); border-color: rgba(179, 201, 220, 0.3); }
+.chip[aria-current="step"] { background: rgba(94, 212, 222, 0.12); border-color: var(--teal); color: var(--teal); }
+.chip .n { font-family: var(--font-mono); font-size: 11px; opacity: 0.8; }
+
+button:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
+
+/* Stage */
+.stage {
+  position: relative; border: 1px solid var(--line); border-radius: 18px; overflow: hidden;
+  background: var(--navy); box-shadow: 0 30px 80px rgba(2, 8, 16, 0.5);
+}
+.chrome {
+  display: flex; align-items: center; gap: 7px; height: 40px; padding-inline: 14px;
+  background: #0d1826; border-bottom: 1px solid var(--line);
+}
+.chrome .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(179, 201, 220, 0.22); }
+.chrome .url {
+  flex: 1; min-width: 0; max-width: 340px; margin-inline: 10px auto; padding: 4px 12px;
+  border-radius: 8px; background: rgba(179, 201, 220, 0.07); color: var(--muted);
+  font: 500 11px/1.4 var(--font-mono); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.chrome .sample {
+  font: 500 10px/1 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  white-space: nowrap;
+}
+
+.screen { position: relative; height: 584px; overflow: hidden; }
+.v { position: absolute; inset: 0; }
+
+/* Mock app: brand */
+.m-brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 750; font-size: 15px; letter-spacing: -0.04em; white-space: nowrap; }
+.m-mark { width: 26px; height: 26px; }
+
+/* Mock app: login */
+.v-login { display: grid; place-items: center; padding: 16px; }
+.login-card {
+  width: min(100%, 360px); padding: 28px; border: 1px solid var(--line); border-radius: 20px;
+  background: rgba(23, 38, 56, 0.92); display: grid; gap: 12px;
+}
+.login-card h2 { margin: 0 0 6px; font-size: 30px; letter-spacing: -0.05em; }
+.lbl { font-size: 12px; font-weight: 650; color: #dbe5ed; }
+.m-input, .m-select {
+  display: flex; align-items: center; min-height: 40px; padding: 0 12px; border: 1px solid rgba(179, 201, 220, 0.18);
+  border-radius: 10px; background: #111f2e; font-size: 13px; white-space: nowrap; overflow: hidden;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.m-input.focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(94, 212, 222, 0.14); }
+.m-input .caret { width: 1px; height: 16px; margin-left: 1px; background: var(--teal); opacity: 0; }
+.m-input.focus .caret { opacity: 1; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.m-select { justify-content: space-between; gap: 8px; }
+.m-select::after { content: ""; width: 6px; height: 6px; border-right: 1.5px solid var(--muted); border-bottom: 1.5px solid var(--muted); transform: rotate(45deg) translateY(-2px); flex: none; }
+.m-select.focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(94, 212, 222, 0.14); }
+
+.m-btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 13px;
+  border: 1px solid var(--line); border-radius: 10px; background: var(--raised); color: #eaf3f7;
+  font-size: 12px; font-weight: 700; white-space: nowrap; transition: background-color 160ms ease, opacity 160ms ease;
+}
+.m-btn.primary { background: var(--teal); border-color: transparent; color: #10232e; }
+.m-btn.off { opacity: 0.5; }
+.m-btn.hot { box-shadow: 0 0 0 3px rgba(94, 212, 222, 0.28); }
+.login-card .m-btn { min-height: 42px; margin-top: 4px; font-size: 13px; }
+.login-msg { margin: 0; min-height: 16px; font-size: 12px; color: var(--muted); }
+
+/* Mock app: top bar + body */
+.m-top {
+  position: absolute; inset: 0 0 auto 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; height: 52px; padding-inline: 18px; background: rgba(23, 38, 56, 0.9); border-bottom: 1px solid var(--line);
+}
+.m-actions { display: flex; align-items: center; gap: 8px; }
+.m-body { position: absolute; inset: 52px 0 0 0; padding: 16px 18px 0; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 0; }
+
+.m-head { display: flex; align-items: center; gap: 12px; height: 36px; margin-bottom: 8px; }
+.m-head h2 { margin: 0; font-size: 16px; letter-spacing: -0.03em; white-space: nowrap; }
+.m-head .spacer { flex: 1; }
+.m-pagesel { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+
+.cb { position: relative; flex: none; width: 16px; height: 16px; border: 1.5px solid rgba(179, 201, 220, 0.4); border-radius: 4px; background: #111f2e; transition: background-color 140ms ease, border-color 140ms ease; }
+.cb.on { background: var(--teal); border-color: var(--teal); }
+.cb.on::after { content: ""; position: absolute; left: 4px; top: 1px; width: 4px; height: 8px; border-right: 2px solid #10232e; border-bottom: 2px solid #10232e; transform: rotate(45deg); }
+.cb.locked { opacity: 0.55; }
+
+.slot-bulk { height: 50px; }
+.slot-banner { height: 42px; }
+.bulk, .banner {
+  display: flex; align-items: center; gap: 10px; padding: 0 12px; border: 1px solid var(--line); border-radius: 12px; background: rgba(17, 31, 46, 0.7);
+  animation: pop 260ms ease both;
+}
+.bulk { height: 42px; }
+.banner { height: 36px; margin-top: 0; font-size: 12px; color: var(--muted); }
+.bulk .count { margin-right: auto; color: var(--teal); font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.bulk .m-select { min-height: 30px; width: 150px; font-size: 12px; }
+.bulk .m-btn { min-height: 30px; }
+.banner span:first-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.banner .m-btn { min-height: 26px; padding-inline: 10px; font-size: 11.5px; color: var(--teal); border-color: rgba(94, 212, 222, 0.4); background: rgba(94, 212, 222, 0.08); }
+@keyframes pop { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+.m-filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 220px); gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.m-field { display: grid; gap: 5px; min-width: 0; }
+.m-filters .m-input, .m-filters .m-select { min-height: 36px; font-size: 12.5px; }
+.m-msg { margin: 0; height: 24px; display: flex; align-items: center; color: var(--muted); font-size: 12px; }
+.m-msg.ok { color: var(--teal); font-weight: 600; }
+
+table { width: 100%; border-collapse: collapse; text-align: left; table-layout: fixed; }
+th { padding: 8px 8px 8px 0; color: #8ea2b6; font-size: 9.5px; font-weight: 750; letter-spacing: 0.11em; text-transform: uppercase; white-space: nowrap; }
+td { height: 41px; padding: 0 8px 0 0; border-top: 1px solid var(--line); color: #dce6ee; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+td.c-name { color: var(--ink); font-weight: 700; }
+.name-wrap { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.name-wrap span { overflow: hidden; text-overflow: ellipsis; }
+.c-name { width: 24%; } .c-email { width: 25%; } .c-phone { width: 15%; } .c-source { width: 10%; }
+.c-status { width: 12%; } .c-consent { width: 8%; } .c-created { width: 12%; }
+td.c-email, td.c-phone { color: var(--muted); }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 650; transition: color 200ms ease; }
+.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.s-new { color: var(--st-new); } .s-contacted { color: var(--st-contacted); }
+.s-qualified { color: var(--st-qualified); } .s-lost { color: var(--st-lost); }
+.consent { display: inline-flex; min-width: 36px; height: 22px; align-items: center; justify-content: center; border-radius: 999px; font-size: 10.5px; font-weight: 750; }
+.consent.yes { background: rgba(94, 212, 222, 0.12); color: var(--teal); }
+.consent.no { background: rgba(145, 162, 181, 0.12); color: #aab8c6; }
+tr.row-in { animation: pop 300ms ease both; }
+tr.sel td { background: rgba(94, 212, 222, 0.06); }
+.empty { padding: 36px 0; text-align: center; color: var(--muted); font-size: 12.5px; }
+
+.pager { display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding-top: 10px; color: var(--muted); font-size: 11.5px; }
+.pager .m-btn { min-height: 28px; font-size: 11px; padding-inline: 10px; }
+
+/* Audit */
+.audit-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.audit-head h2 { margin: 0; font-size: 16px; letter-spacing: -0.03em; }
+.audit-note { margin: 0 0 12px; color: var(--muted); font-size: 12px; }
+.a-when { width: 24%; } .a-action { width: 20%; } .a-lead { width: 14%; } .a-change { width: 28%; } .a-by { width: 14%; }
+tbody#audit-rows td { height: 44px; }
+
+/* Dialog + summary */
+.overlay { position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; padding: 16px; background: rgba(3, 9, 16, 0.72); backdrop-filter: blur(3px); animation: fade 240ms ease both; }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.dialog { width: min(100%, 380px); padding: 24px; border: 1px solid rgba(179, 201, 220, 0.18); border-radius: 20px; background: var(--panel); display: grid; gap: 18px; }
+.dialog h3 { margin: 0; font-size: 20px; line-height: 1.3; letter-spacing: -0.04em; }
+.dialog .m-actions { justify-content: flex-end; }
+
+.summary { width: min(100%, 720px); padding: 26px; border: 1px solid rgba(179, 201, 220, 0.18); border-radius: 22px; background: var(--panel); display: grid; gap: 18px; }
+.summary h3 { margin: 0; font-size: 26px; letter-spacing: -0.05em; }
+.summary .sub { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; margin: 0; padding: 0; list-style: none; }
+.facts li { display: grid; gap: 3px; padding-top: 12px; border-top: 1px solid var(--line); min-width: 0; }
+.facts b { font-size: 13px; letter-spacing: -0.02em; }
+.facts span { color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+/* Cursor */
+.cursor { position: absolute; left: 0; top: 0; z-index: 9; width: 22px; height: 22px; pointer-events: none; opacity: 0; transition: transform 650ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease; }
+.cursor.on { opacity: 1; }
+.cursor svg { display: block; transition: transform 120ms ease; transform-origin: 3px 2px; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45)); }
+.cursor.press svg { transform: scale(0.82); }
+
+/* Caption bar */
+.bar { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.caption { flex: 1 1 340px; min-width: 0; display: grid; gap: 4px; min-height: 66px; }
+.cap-step { margin: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); }
+.cap-title { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.035em; }
+.cap-text { margin: 0; color: var(--muted); font-size: 14px; max-width: 64ch; text-wrap: pretty; }
+.controls { display: flex; gap: 8px; }
+.ctl {
+  min-height: 40px; padding: 0 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--raised);
+  color: var(--ink); font: 700 13px/1 var(--font-ui); cursor: pointer; transition: background-color 160ms ease;
+}
+.ctl:hover { background: #243a50; }
+.ctl.primary { background: var(--teal); border-color: transparent; color: #10232e; }
+.ctl.primary:hover { background: #78e0e7; }
+
+.foot { margin: 0; color: var(--muted); font-size: 12px; }
+
+@media (max-width: 720px) {
+  .c-email, .c-phone, .c-created { display: none; }
+  .c-name { width: 44%; } .c-source { width: 20%; } .c-status { width: 22%; } .c-consent { width: 14%; }
+  .a-when { width: 30%; } .a-action { width: 24%; } .a-lead { width: 14%; } .a-change { width: 32%; } .a-by { display: none; }
+  .m-pagesel .long { display: none; }
+  .m-head .m-btn { display: none; }
+  .bulk .m-select { width: 118px; }
+  .banner { font-size: 11px; }
+  .chrome .sample { display: none; }
+}
+@media (max-width: 480px) {
+  .c-source, .c-consent { display: none; }
+  .c-name { width: 62%; } .c-status { width: 38%; }
+  .a-lead { display: none; } .a-when { width: 34%; } .a-action { width: 30%; } .a-change { width: 36%; }
+  .m-filters { grid-template-columns: 1fr; gap: 8px; }
+  .m-filters .m-field:first-child .lbl { display: none; }
+  .m-top { padding-inline: 12px; }
+  .m-body { padding-inline: 12px; }
+  .facts { grid-template-columns: 1fr; gap: 8px; }
+  .summary { padding: 18px; gap: 12px; }
+  .summary h3 { font-size: 21px; }
+  .screen { height: 640px; }
+  .slot-banner { height: 64px; }
+  .banner { height: auto; min-height: 36px; flex-wrap: wrap; padding: 6px 12px; row-gap: 6px; }
+  .bulk .m-btn:last-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .cursor { display: none; }
+}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <header class="intro">
+    <p class="eyebrow">PROJECT WALKTHROUGH</p>
+    <h1>Sechurplets <span class="accent">CRM</span></h1>
+    <p class="lede">A lead manager for a single admin. Sign in, find a lead, change hundreds of statuses in one go, and check every change in an audit trail. Everything below runs on sample data.</p>
+  </header>
+
+  <section class="player" aria-label="Animated walkthrough of Sechurplets CRM">
+    <div class="chips" id="chips"></div>
+
+    <div class="stage" id="stage">
+      <div class="chrome" aria-hidden="true">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">crm.example.com</span>
+        <span class="sample">Sample data</span>
+      </div>
+
+      <div class="screen" id="screen" aria-hidden="true">
+        <header class="m-top" id="m-top" hidden>
+          <span class="m-brand">
+            <svg class="m-mark" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#5ed4de" stroke-width="3"/><circle cx="16" cy="16" r="5.5" fill="#5ed4de"/></svg>
+            <span>Sechurplets<span class="accent"> CRM</span></span>
+          </span>
+          <span class="m-actions"><span class="m-btn" id="btn-audit">Audit log</span><span class="m-btn">Sign out</span></span>
+        </header>
+
+        <section class="v v-login" id="v-login">
+          <div class="login-card">
+            <span class="m-brand">
+              <svg class="m-mark" viewBox="0 0 32 32"><circle cx="16" cy="16" r="13" fill="none" stroke="#5ed4de" stroke-width="3"/><circle cx="16" cy="16" r="5.5" fill="#5ed4de"/></svg>
+              <span>Sechurplets<span class="accent"> CRM</span></span>
+            </span>
+            <div>
+              <p class="eyebrow" style="margin-bottom:6px">LEAD MANAGEMENT</p>
+              <h2>Sign in</h2>
+            </div>
+            <span class="lbl">Username</span>
+            <div class="m-input" id="f-user"><span class="fv"></span><i class="caret"></i></div>
+            <span class="lbl">Password</span>
+            <div class="m-input" id="f-pass"><span class="fv"></span><i class="caret"></i></div>
+            <p class="login-msg" id="login-msg"></p>
+            <span class="m-btn primary" id="btn-signin">Sign in</span>
+          </div>
+        </section>
+
+        <section class="v v-dash" id="v-dash" hidden>
+          <div class="m-body">
+            <div class="m-head">
+              <h2>All leads</h2>
+              <span class="m-pagesel"><i class="cb" id="cb-all"></i><span>Select all<span class="long"> on this page</span></span></span>
+              <span class="spacer"></span>
+              <span class="m-btn">Export CSV</span><span class="m-btn">Import CSV</span><span class="m-btn primary">New lead</span>
+            </div>
+            <div class="slot-bulk">
+              <div class="bulk" id="bulk" hidden>
+                <span class="count" id="bulk-count"></span>
+                <div class="m-select" id="bulk-select"><span>Choose status</span></div>
+                <span class="m-btn primary off" id="bulk-apply">Apply</span>
+                <span class="m-btn">Clear</span>
+              </div>
+            </div>
+            <div class="slot-banner">
+              <div class="banner" id="banner" hidden>
+                <span id="banner-msg"></span>
+                <span class="m-btn" id="banner-btn" hidden></span>
+              </div>
+            </div>
+            <div class="m-filters">
+              <div class="m-field"><span class="lbl">Search leads</span>
+                <div class="m-input" id="f-search"><span class="fv"></span><i class="caret"></i></div></div>
+              <div class="m-field"><span class="lbl">Filter by status</span>
+                <div class="m-select" id="f-status"><span>All statuses</span></div></div>
+            </div>
+            <p class="m-msg" id="m-msg"></p>
+            <table>
+              <thead><tr>
+                <th class="c-name">Name</th><th class="c-email">Email</th><th class="c-phone">Phone</th>
+                <th class="c-source">Source</th><th class="c-status">Status</th><th class="c-consent">Consent</th><th class="c-created">Created</th>
+              </tr></thead>
+              <tbody id="rows"></tbody>
+            </table>
+            <div class="pager"><span class="m-btn off">Previous</span><span id="page-label">Page 1</span><span class="m-btn" id="next-btn">Next</span></div>
+          </div>
+        </section>
+
+        <section class="v v-audit" id="v-audit" hidden>
+          <div class="m-body">
+            <div class="audit-head"><h2>Audit events</h2><span class="m-btn">Back to leads</span></div>
+            <p class="audit-note">Read-only record of changes. It never shows names, emails or phone numbers.</p>
+            <table>
+              <thead><tr>
+                <th class="a-when">When</th><th class="a-action">Action</th><th class="a-lead">Lead</th><th class="a-change">Status change</th><th class="a-by">By</th>
+              </tr></thead>
+              <tbody id="audit-rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="overlay" id="dlg" hidden>
+          <div class="dialog">
+            <h3 id="dlg-title"></h3>
+            <div class="m-actions"><span class="m-btn">Cancel</span><span class="m-btn primary" id="dlg-confirm">Confirm</span></div>
+          </div>
+        </div>
+
+        <div class="overlay" id="summary" hidden>
+          <div class="summary">
+            <div>
+              <h3>Sechurplets CRM</h3>
+              <p class="sub">Built, tested and ready to run.</p>
+            </div>
+            <ul class="facts">
+              <li><b>Careful sign-in</b><span>Server-side sessions, CSRF protection and a limit of five wrong tries per 15 minutes.</span></li>
+              <li><b>Bulk changes, all or nothing</b><span>Up to 1,000 matching leads change in one transaction, after the server re-counts them.</span></li>
+              <li><b>Audit trail without personal data</b><span>Action, lead number and status change are recorded. Names and contact details are not.</span></li>
+              <li><b>CSV in and out</b><span>Imports are all or nothing. Exports defend against spreadsheet formula injection.</span></li>
+              <li><b>Consent tracking</b><span>The server stamps the consent date. Old audit entries can be purged on a retention schedule.</span></li>
+              <li><b>Ready to run</b><span>Flask and SQLite behind Waitress, verified backups, and 378 automated tests.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="cursor" id="cursor" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 2 L3 17 L7 13.2 L9.8 19.2 L12.4 18 L9.6 12.2 L15 12 Z" fill="#ffffff" stroke="#0a1320" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="bar">
+      <div class="caption" aria-live="polite">
+        <p class="cap-step" id="cap-step"></p>
+        <p class="cap-title" id="cap-title"></p>
+        <p class="cap-text" id="cap-text"></p>
+      </div>
+      <div class="controls">
+        <button class="ctl" id="btn-pause" type="button">Pause</button>
+        <button class="ctl primary" id="btn-replay" type="button">Replay</button>
+      </div>
+    </div>
+    <p class="foot">Names, emails and numbers are made up. Statuses and sources here are examples.</p>
+  </section>
+</main>
+
+<script>
+"use strict";
+
+const $ = (s) => document.querySelector(s);
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const stage = $("#stage");
+const cursor = $("#cursor");
+
+/* ---------- sample data ---------- */
+const FIRST = ["Rafael", "Isabel", "Marco", "Lourdes", "Paolo", "Carmela", "Joaquin", "Beatriz", "Andres", "Corazon", "Mateo", "Luz"];
+const LAST = ["Reyes", "Domingo", "Villanueva", "Aquino", "Navarro"];
+const STATUS = ["New", "Contacted", "Qualified", "Lost"];
+const SOURCE = ["Manual", "Web", "Referral"];
+
+function makeData() {
+  return Array.from({ length: 60 }, (_, i) => {
+    const first = FIRST[i % 12];
+    const last = LAST[Math.floor(i / 12)];
+    return {
+      id: i + 1,
+      name: `${first} ${last}`,
+      email: `${first}.${last}`.toLowerCase() + "@example.com",
+      phone: `0900 000 ${String(1000 + i * 3).slice(-4)}`,
+      source: SOURCE[(i * 2 + 1) % 3],
+      status: STATUS[(i * 5 + (i % 3)) % 4],
+      consent: i % 3 === 0,
+      created: `Oct ${1 + (i % 28)}, 2026`,
+    };
+  });
+}
+const CHANGED_AT_START = makeData().filter((lead) => lead.status !== "Qualified");
+
+let DATA = makeData();
+let state = { search: "", status: "", ticked: new Set(), lock: false };
+const PAGE = 5;
+
+/* ---------- small DOM helpers (textContent only) ---------- */
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function matches() {
+  const q = state.search.toLowerCase();
+  return DATA.filter((lead) =>
+    (!state.status || lead.status === state.status)
+    && (!q || `${lead.name} ${lead.email} ${lead.phone}`.toLowerCase().includes(q)));
+}
+
+function statusPill(status) {
+  return el("span", `pill s-${status.toLowerCase()}`, status);
+}
+
+function renderRows(animate) {
+  const all = matches();
+  const rows = all.slice(0, PAGE);
+  const body = $("#rows");
+  body.replaceChildren();
+  if (rows.length === 0) {
+    const tr = el("tr");
+    const td = el("td", "empty", "No leads match.");
+    td.colSpan = 7;
+    td.style.height = "auto";
+    tr.append(td);
+    body.append(tr);
+  }
+  rows.forEach((lead, index) => {
+    const tr = el("tr", animate ? "row-in" : "");
+    if (animate) tr.style.animationDelay = `${index * 45}ms`;
+    tr.dataset.id = String(lead.id);
+    const nameCell = el("td", "c-name");
+    const wrap = el("div", "name-wrap");
+    wrap.append(el("i", "cb"), el("span", "", lead.name));
+    nameCell.append(wrap);
+    const statusCell = el("td", "c-status");
+    statusCell.append(statusPill(lead.status));
+    const consentCell = el("td", "c-consent");
+    consentCell.append(el("span", `consent ${lead.consent ? "yes" : "no"}`, lead.consent ? "Yes" : "No"));
+    tr.append(
+      nameCell,
+      el("td", "c-email", lead.email),
+      el("td", "c-phone", lead.phone),
+      el("td", "c-source", lead.source),
+      statusCell,
+      consentCell,
+      el("td", "c-created", lead.created),
+    );
+    body.append(tr);
+  });
+  $("#next-btn").classList.toggle("off", all.length <= PAGE);
+  renderSelection();
+}
+
+function renderSelection() {
+  const all = matches();
+  const rows = Array.from($("#rows").querySelectorAll("tr[data-id]"));
+  for (const tr of rows) {
+    const on = state.lock || state.ticked.has(Number(tr.dataset.id));
+    tr.querySelector(".cb").className = `cb${on ? " on" : ""}${state.lock ? " locked" : ""}`;
+    tr.classList.toggle("sel", on);
+  }
+  const wholePage = rows.length > 0 && rows.every((tr) => state.lock || state.ticked.has(Number(tr.dataset.id)));
+  $("#cb-all").className = `cb${wholePage ? " on" : ""}${state.lock ? " locked" : ""}`;
+
+  const count = state.lock ? all.length : state.ticked.size;
+  $("#bulk").hidden = count === 0;
+  $("#bulk-count").textContent = `${count} selected`;
+
+  const banner = $("#banner");
+  const btn = $("#banner-btn");
+  if (state.lock) {
+    $("#banner-msg").textContent = `All ${all.length} leads matching this filter are selected.`;
+    btn.hidden = true;
+    banner.hidden = false;
+  } else if (wholePage && all.length > rows.length) {
+    $("#banner-msg").textContent = `All ${rows.length} leads on this page are selected.`;
+    btn.textContent = `Select all ${all.length} leads matching this filter`;
+    btn.hidden = false;
+    banner.hidden = false;
+  } else {
+    banner.hidden = true;
+  }
+}
+
+function show(view) {
+  for (const name of ["login", "dash", "audit"]) $(`#v-${name}`).hidden = name !== view;
+  $("#m-top").hidden = view === "login";
+}
+
+function resetFields() {
+  for (const sel of ["#f-user", "#f-pass", "#f-search"]) {
+    $(sel).classList.remove("focus");
+    $(`${sel} .fv`).textContent = "";
+  }
+  $("#f-status span").textContent = "All statuses";
+  $("#f-status").classList.remove("focus");
+  $("#bulk-select span").textContent = "Choose status";
+  $("#bulk-select").classList.remove("focus");
+  $("#bulk-apply").classList.add("off");
+  $("#bulk-apply").classList.remove("hot");
+  $("#banner-btn").classList.remove("hot");
+  $("#dlg-confirm").classList.remove("hot");
+  $("#login-msg").textContent = "";
+  $("#m-msg").textContent = "";
+  $("#m-msg").classList.remove("ok");
+  $("#dlg").hidden = true;
+  $("#summary").hidden = true;
+  cursor.classList.remove("on");
+}
+
+function resetState(opts) {
+  DATA = makeData();
+  if (opts && opts.bulked) DATA.forEach((lead) => { lead.status = "Qualified"; });
+  state = { search: "", status: "", ticked: new Set(), lock: false };
+  resetFields();
+}
+
+/* ---------- timing, cancel, pause ---------- */
+let token = 0;
+let paused = false;
+class Cancelled extends Error {}
+
+function gap(ms) { return new Promise((resolve) => setTimeout(resolve, ms)); }
+
+async function wait(ms, t) {
+  let left = reduce ? 0 : ms;
+  while (left > 0) {
+    if (t !== token) throw new Cancelled();
+    await gap(40);
+    if (!paused) left -= 40;
+  }
+  while (paused && !reduce) {
+    if (t !== token) throw new Cancelled();
+    await gap(80);
+  }
+  if (t !== token) throw new Cancelled();
+}
+
+async function typeInto(selector, text, t, perChar) {
+  const field = $(selector);
+  const target = field.querySelector(".fv");
+  field.classList.add("focus");
+  for (const ch of text) {
+    target.textContent += ch;
+    await wait(perChar || 85, t);
+  }
+}
+
+async function erase(selector, t) {
+  const target = $(selector).querySelector(".fv");
+  while (target.textContent.length > 0) {
+    target.textContent = target.textContent.slice(0, -1);
+    await wait(55, t);
+  }
+}
+
+async function glide(node, t, fx, fy) {
+  if (reduce) return;
+  const s = stage.getBoundingClientRect();
+  const r = node.getBoundingClientRect();
+  const x = r.left - s.left + r.width * (fx === undefined ? 0.55 : fx);
+  const y = r.top - s.top + r.height * (fy === undefined ? 0.55 : fy);
+  cursor.style.transform = `translate(${x}px, ${y}px)`;
+  cursor.classList.add("on");
+  await wait(700, t);
+}
+
+async function click(t) {
+  if (reduce) return;
+  cursor.classList.add("press");
+  await wait(150, t);
+  cursor.classList.remove("press");
+  await wait(150, t);
+}
+
+function caption(step, title, text) {
+  $("#cap-step").textContent = `Step ${step + 1} of ${STEPS.length}`;
+  $("#cap-title").textContent = title;
+  $("#cap-text").textContent = text;
+}
+
+/* ---------- steps ---------- */
+async function stepSignIn(t) {
+  resetState();
+  show("login");
+  caption(0, "Sign in", "One admin account. Five wrong tries lock the form for 15 minutes.");
+  await wait(900, t);
+  await glide($("#f-user"), t); await click(t);
+  await typeInto("#f-user", "admin", t, 110);
+  $("#f-user").classList.remove("focus");
+  await wait(250, t);
+  await glide($("#f-pass"), t); await click(t);
+  await typeInto("#f-pass", "••••••••••••", t, 60);
+  $("#f-pass").classList.remove("focus");
+  await wait(250, t);
+  await glide($("#btn-signin"), t); await click(t);
+  show("dash");
+  $("#rows").replaceChildren();
+  $("#m-msg").textContent = "Loading leads";
+  await wait(650, t);
+  $("#m-msg").textContent = "";
+  renderRows(true);
+  await wait(1200, t);
+}
+
+async function stepFind(t) {
+  resetState();
+  show("dash");
+  renderRows(false);
+  caption(1, "Find a lead", "Search by name, email or phone, or filter by status. The list updates as you type.");
+  await wait(700, t);
+  await glide($("#f-search"), t); await click(t);
+  await typeInto("#f-search", "reyes", t, 140);
+  await wait(350, t);
+  state.search = "reyes";
+  renderRows(true);
+  $("#m-msg").textContent = `${matches().length} leads found`;
+  await wait(1600, t);
+  await erase("#f-search", t);
+  $("#f-search").classList.remove("focus");
+  state.search = "";
+  $("#m-msg").textContent = "";
+  renderRows(true);
+  await wait(500, t);
+  await glide($("#f-status"), t); await click(t);
+  $("#f-status").classList.add("focus");
+  await wait(250, t);
+  $("#f-status span").textContent = "New";
+  $("#f-status").classList.remove("focus");
+  state.status = "New";
+  renderRows(true);
+  $("#m-msg").textContent = `${matches().length} leads found`;
+  await wait(1700, t);
+  $("#f-status span").textContent = "All statuses";
+  state.status = "";
+  $("#m-msg").textContent = "";
+  renderRows(true);
+  await wait(500, t);
+}
+
+async function stepBulk(t) {
+  resetState();
+  show("dash");
+  renderRows(false);
+  caption(2, "Select every matching lead", "Tick the page, then extend the selection to all leads that match, up to 1,000. The server counts them again before it changes anything.");
+  await wait(700, t);
+  await glide($("#cb-all"), t, 0.5, 0.5); await click(t);
+  const rows = Array.from($("#rows").querySelectorAll("tr[data-id]"));
+  for (const tr of rows) {
+    state.ticked.add(Number(tr.dataset.id));
+    renderSelection();
+    await wait(110, t);
+  }
+  await wait(900, t);
+  const total = matches().length;
+  await glide($("#banner-btn"), t);
+  $("#banner-btn").classList.add("hot");
+  await click(t);
+  state.lock = true;
+  renderSelection();
+  $("#banner-btn").classList.remove("hot");
+  await wait(1100, t);
+
+  caption(2, "Choose a status and confirm", "A confirmation shows how many leads are about to change.");
+  await glide($("#bulk-select"), t); await click(t);
+  $("#bulk-select").classList.add("focus");
+  await wait(300, t);
+  $("#bulk-select span").textContent = "Qualified";
+  $("#bulk-select").classList.remove("focus");
+  $("#bulk-apply").classList.remove("off");
+  await wait(500, t);
+  await glide($("#bulk-apply"), t); await click(t);
+  $("#dlg-title").textContent = `Change ${total} leads to Qualified?`;
+  $("#dlg").hidden = false;
+  await wait(1200, t);
+  await glide($("#dlg-confirm"), t); await click(t);
+  $("#dlg").hidden = true;
+
+  const updated = DATA.filter((lead) => lead.status !== "Qualified").length;
+  const unchanged = DATA.length - updated;
+  DATA.forEach((lead) => { lead.status = "Qualified"; });
+  state.lock = false;
+  state.ticked = new Set();
+  $("#bulk-select span").textContent = "Choose status";
+  $("#bulk-apply").classList.add("off");
+  renderRows(false);
+  $("#m-msg").textContent = `${updated} updated, ${unchanged} already had that status`;
+  $("#m-msg").classList.add("ok");
+  caption(2, "One transaction", "All leads change or none do. The selection clears and the list shows the new status.");
+  await wait(2400, t);
+}
+
+async function stepAudit(t) {
+  resetState({ bulked: true });
+  show("dash");
+  renderRows(false);
+  caption(3, "Check the audit log", "Each change is recorded with its action, lead number and old and new status. Names, emails and phone numbers never appear.");
+  await wait(800, t);
+  await glide($("#btn-audit"), t); await click(t);
+  show("audit");
+  const body = $("#audit-rows");
+  body.replaceChildren();
+  const events = CHANGED_AT_START.slice(0, 5).map((lead) => ({
+    when: "Oct 11, 7:42 AM", action: "Status Changed", lead: String(lead.id), change: `${lead.status} → Qualified`,
+  }));
+  events.push(
+    { when: "Oct 10, 4:15 PM", action: "Lead Created", lead: "60", change: "—" },
+    { when: "Oct 10, 9:02 AM", action: "Leads Exported", lead: "All leads", change: "—" },
+  );
+  for (const event of events) {
+    const tr = el("tr", "row-in");
+    tr.append(
+      el("td", "a-when", event.when),
+      el("td", "a-action", event.action),
+      el("td", "a-lead", event.lead),
+      el("td", "a-change", event.change),
+      el("td", "a-by", "admin"),
+    );
+    body.append(tr);
+    await wait(240, t);
+  }
+  await wait(2800, t);
+}
+
+async function stepSummary(t) {
+  caption(4, "What you get", "A small, careful CRM that one person can run and trust.");
+  $("#summary").hidden = false;
+  cursor.classList.remove("on");
+  await wait(600, t);
+  $("#btn-pause").disabled = true;
+}
+
+const STEPS = [stepSignIn, stepFind, stepBulk, stepAudit, stepSummary];
+const NAMES = ["Sign in", "Find", "Select all", "Audit log", "Summary"];
+
+/* ---------- chips and controls ---------- */
+const chipsBox = $("#chips");
+const chipButtons = NAMES.map((name, index) => {
+  const b = el("button", "chip");
+  b.type = "button";
+  b.append(el("span", "n", String(index + 1).padStart(2, "0")), document.createTextNode(name));
+  b.addEventListener("click", () => run(index));
+  chipsBox.append(b);
+  return b;
+});
+
+function markChip(index) {
+  chipButtons.forEach((b, i) => {
+    if (i === index) b.setAttribute("aria-current", "step");
+    else b.removeAttribute("aria-current");
+  });
+}
+
+function setPauseLabel() {
+  $("#btn-pause").textContent = paused ? "Play" : "Pause";
+}
+
+async function run(from) {
+  const t = ++token;
+  paused = false;
+  $("#btn-pause").disabled = false;
+  setPauseLabel();
+  try {
+    for (let i = from; i < STEPS.length; i += 1) {
+      markChip(i);
+      await STEPS[i](t);
+      if (reduce) break;
+    }
+  } catch (error) {
+    if (!(error instanceof Cancelled)) throw error;
+  }
+}
+
+$("#btn-replay").addEventListener("click", () => run(0));
+$("#btn-pause").addEventListener("click", () => {
+  paused = !paused;
+  setPauseLabel();
+});
+
+/* ---------- start ---------- */
+if (reduce) {
+  // No autoplay with reduced motion: show the loaded list and let the person step through.
+  resetState();
+  show("dash");
+  renderRows(false);
+  markChip(1);
+  caption(1, "Find a lead", "Use the step buttons above to see each part of the CRM.");
+  $("#btn-pause").hidden = true;
+} else {
+  run(0);
+}
+</script>
+</body>
+</html>
