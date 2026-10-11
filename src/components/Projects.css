@@ -62,6 +62,67 @@
 	outline-offset: 3px;
 }
 
+#projects .project-preview-button {
+	box-sizing: border-box;
+	padding: 0;
+	border: 0;
+	cursor: pointer;
+}
+
+#projects .project-preview-button:focus-visible {
+	outline: 3px solid var(--accent-border);
+	outline-offset: 3px;
+}
+
+#projects .project-preview-button iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1280px;
+	height: 720px;
+	border: 0;
+	pointer-events: none;
+	transform-origin: top left;
+}
+
+.project-demo-overlay {
+	position: fixed;
+	z-index: 1000;
+	inset: 0;
+	display: flex;
+	align-items: stretch;
+	justify-content: stretch;
+	background: rgba(10, 12, 24, 0.96);
+}
+
+.project-demo-overlay iframe {
+	width: 100%;
+	height: 100%;
+	border: 0;
+	background: var(--surface);
+}
+
+.project-demo-close {
+	position: absolute;
+	z-index: 1;
+	top: 1rem;
+	right: 1rem;
+	min-height: 44px;
+	padding: 0.65rem 1rem;
+	color: var(--white);
+	font: inherit;
+	font-weight: 700;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.project-demo-close:focus-visible {
+	outline: 3px solid var(--accent-border);
+	outline-offset: 3px;
+}
+
 @media (max-width: 600px) {
 	#projects {
 		margin: 1rem auto;
@@ -71,6 +132,11 @@
 	.project-item {
 		min-height: 190px;
 		padding: 1.25rem;
+	}
+
+	.project-demo-close {
+		top: 0.75rem;
+		right: 0.75rem;
 	}
 }
 

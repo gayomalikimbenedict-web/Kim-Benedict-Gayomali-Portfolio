@@ -22,6 +22,15 @@ export type PortfolioTool = {
   icon: PortfolioToolIcon;
 };
 
+export type PortfolioProject = {
+  id: number;
+  title: string;
+  description: string;
+  link?: string;
+  linkLabel?: string;
+  demoUrl?: string;
+};
+
 const tools: PortfolioTool[] = [
   {
     name: "Google Calendar",
@@ -57,6 +66,16 @@ const tools: PortfolioTool[] = [
   },
 ];
 
+const projects: PortfolioProject[] = [
+  {
+    id: 1,
+    title: "Sechurplets CRM walkthrough",
+    description:
+      "Animated walkthrough of a lead manager for a single admin: sign in, search leads, change statuses in bulk, and review the audit log. Runs on sample data.",
+    demoUrl: "/projects/sechurplets-crm.html",
+  },
+];
+
 export const portfolioData = {
   profile: {
     name: "Kim Benedict Gayomali",
@@ -72,32 +91,7 @@ export const portfolioData = {
   ],
   about:
     "I'm a Real-Time Analyst in the e-commerce BPO industry, with two years of tracking attendance, schedule adherence and shrinkage, and reporting hourly to operations leads. I build Excel templates and Google Sheets tools that turn raw exports from in-house systems into report-ready output in one click. Outside work, I'm learning GoHighLevel (CRM, scheduling automation, Google Sheets and Calendar integrations) and building websites with AI assistance.",
-  projects: [
-    {
-      id: 1,
-      title: "Aging Cases Dashboard",
-      description:
-        "For an e-commerce BPO client: shows updated cases per agent so team leads can spot the most aged cases, push follow-up, and stay within the 24-hour SLA.",
-      link: "",
-      linkLabel: "",
-    },
-    {
-      id: 2,
-      title: "Raw-File-to-Report Excel Template",
-      description:
-        "Formulas that convert in-house tool extracts into ready-to-send reports.",
-      link: "",
-      linkLabel: "",
-    },
-    {
-      id: 3,
-      title: "Sechurplets Studio Templates",
-      description:
-        "Seven Apps Script-powered Google Sheets tools: Order Data Cleaner, Shopify Reconciler, Agent Performance Tracker, Multi-Sheet Merge & Dedupe, Auto Report Builder, Global Time Zone Sync Engine, and Full Toolkit Bundle. $24 to $299 on Gumroad.",
-      link: "GUMROAD_URL_TODO",
-      linkLabel: "Visit Gumroad store",
-    },
-  ],
+  projects,
   services: [
     "Excel and Sheets automation",
     "Reporting dashboards",
