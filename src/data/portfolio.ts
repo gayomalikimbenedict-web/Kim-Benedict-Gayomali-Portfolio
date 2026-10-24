@@ -134,7 +134,7 @@ export const portfolioData = {
   ],
   contact: {
     email: "EMAIL_TODO",
-    linkedin: "LINKEDIN_TODO",
-    facebook: "FACEBOOK_TODO",
+    linkedin: "https://www.linkedin.com/in/kimgayomali/",
+    github: "https://github.com/gayomalikimbenedict-web",
   },
 };
