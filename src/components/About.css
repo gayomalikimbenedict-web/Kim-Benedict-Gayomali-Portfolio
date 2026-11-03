@@ -55,7 +55,9 @@
 
 .how-step {
   display: grid;
-  gap: 0.7rem;
+  align-content: start;
+  min-width: 0;
+  gap: 0.65rem;
   padding: 1rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
@@ -68,7 +70,7 @@
 
 .how-step p {
   color: var(--text-soft);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 @media (max-width: 760px) {
