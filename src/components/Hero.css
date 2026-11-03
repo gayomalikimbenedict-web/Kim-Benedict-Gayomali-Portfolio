@@ -209,8 +209,18 @@
   object-fit: cover;
   object-position: center top;
   transform: translateY(-24px);
+  animation: heroPortraitFloat 6s ease-in-out infinite;
   -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 42%, #000 82%, transparent 100%);
   mask-image: radial-gradient(ellipse 100% 100% at 50% 42%, #000 82%, transparent 100%);
+}
+
+@keyframes heroPortraitFloat {
+  0%, 100% {
+    transform: translateY(-24px);
+  }
+  50% {
+    transform: translateY(-33px);
+  }
 }
 
 .hero-expertise {

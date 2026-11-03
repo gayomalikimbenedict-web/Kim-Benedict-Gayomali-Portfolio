@@ -43,12 +43,14 @@ a:hover {
 .page-background {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
+  --background-shift-x: 0px;
+  --background-shift-y: 0px;
   background: var(--navy);
   background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.4px, transparent 1.4px);
   background-size: 28px 28px;
-  background-position: center;
+  background-position: calc(50% + var(--background-shift-x)) calc(50% + var(--background-shift-y));
   overflow: hidden;
 }
 
@@ -58,10 +60,60 @@ a:hover {
   left: 50%;
   width: min(72vw, 780px);
   height: min(72vw, 780px);
-  transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(111, 211, 224, 0.14) 0%, rgba(111, 211, 224, 0.08) 18%, rgba(111, 211, 224, 0) 64%);
+  transform: translate(
+    calc(-50% + var(--background-shift-x)),
+    var(--background-shift-y)
+  );
+  background: radial-gradient(circle, rgba(72, 207, 219, 0.2) 0%, rgba(111, 211, 224, 0.08) 35%, transparent 70%);
   filter: blur(52px);
-  opacity: 0.9;
+  opacity: 0.75;
+  animation: backgroundGlow 8s ease-in-out infinite;
+}
+
+.page-orbit {
+  position: absolute;
+  top: calc(50% + var(--background-shift-y));
+  left: calc(74% + var(--background-shift-x));
+  width: min(440px, 52vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(88, 210, 225, 0.18);
+  border-radius: 50%;
+  animation: orbit 40s linear infinite;
+}
+
+.page-orbit::before {
+  position: absolute;
+  inset: 12%;
+  border: 1px dashed rgba(88, 210, 225, 0.1);
+  border-radius: inherit;
+  content: "";
+}
+
+.page-particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(111, 211, 224, 0.8);
+  animation: particleFloat 7s ease-in-out infinite;
+}
+
+.page-particle--one {
+  top: calc(24% + var(--background-shift-y));
+  left: calc(78% + var(--background-shift-x));
+}
+
+.page-particle--two {
+  top: calc(62% + var(--background-shift-y));
+  left: calc(91% + var(--background-shift-x));
+  animation-delay: -2.3s;
+}
+
+.page-particle--three {
+  top: calc(78% + var(--background-shift-y));
+  left: calc(67% + var(--background-shift-x));
+  animation-delay: -4.6s;
 }
 
 .page-grid {
@@ -70,6 +122,7 @@ a:hover {
   width: 100%;
   height: 100%;
   opacity: 0.92;
+  transform: translate3d(var(--background-shift-x), var(--background-shift-y), 0);
 }
 
 .grid-lines path,
@@ -104,11 +157,12 @@ a:hover {
 
 .portfolio-shell {
   position: relative;
+  z-index: 1;
   display: grid;
   min-height: 100vh;
   grid-template-columns: 248px minmax(0, 1fr);
   overflow: clip;
-  background: var(--navy);
+  background: transparent;
   transition: grid-template-columns 0.25s ease;
 }
 
@@ -327,11 +381,44 @@ a:hover {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .pulse-dot {
-    animation: none;
+@keyframes backgroundGlow {
+  0%, 100% {
+    transform: translate(
+      calc(-50% + var(--background-shift-x)),
+      var(--background-shift-y)
+    ) scale(0.9);
+    opacity: 0.55;
   }
+  50% {
+    transform: translate(
+      calc(-50% + var(--background-shift-x)),
+      var(--background-shift-y)
+    ) scale(1.12);
+    opacity: 1;
+  }
+}
 
+@keyframes orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate(12px, -20px);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {

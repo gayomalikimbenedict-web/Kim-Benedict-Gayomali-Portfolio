@@ -88,10 +88,72 @@ const App: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const pageBackground = document.querySelector<HTMLElement>('.page-background');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let animationFrame = 0;
+    let targetScroll = window.scrollY;
+    let currentScroll = targetScroll;
+
+    const resetBackground = () => {
+      pageBackground?.style.removeProperty('--background-shift-x');
+      pageBackground?.style.removeProperty('--background-shift-y');
+    };
+
+    const animateBackground = () => {
+      animationFrame = 0;
+      currentScroll += (targetScroll - currentScroll) * 0.12;
+
+      const phase = currentScroll * 0.0015;
+      pageBackground?.style.setProperty('--background-shift-x', `${(Math.sin(phase) * 14).toFixed(2)}px`);
+      pageBackground?.style.setProperty('--background-shift-y', `${(Math.cos(phase) * 22).toFixed(2)}px`);
+
+      if (Math.abs(targetScroll - currentScroll) > 0.1) {
+        animationFrame = window.requestAnimationFrame(animateBackground);
+      }
+    };
+
+    const scheduleBackgroundUpdate = () => {
+      targetScroll = window.scrollY;
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(animateBackground);
+      }
+    };
+
+    const updateMotion = () => {
+      window.removeEventListener('scroll', scheduleBackgroundUpdate);
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+
+      if (reducedMotion.matches) {
+        resetBackground();
+        return;
+      }
+
+      currentScroll = targetScroll = window.scrollY;
+      scheduleBackgroundUpdate();
+      window.addEventListener('scroll', scheduleBackgroundUpdate, { passive: true });
+    };
+
+    updateMotion();
+    reducedMotion.addEventListener('change', updateMotion);
+
+    return () => {
+      reducedMotion.removeEventListener('change', updateMotion);
+      window.removeEventListener('scroll', scheduleBackgroundUpdate);
+      window.cancelAnimationFrame(animationFrame);
+      resetBackground();
+    };
+  }, []);
+
   return (
     <Router>
       <div className="page-background" aria-hidden="true">
         <div className="page-glow" />
+        <div className="page-orbit" />
+        <span className="page-particle page-particle--one" />
+        <span className="page-particle page-particle--two" />
+        <span className="page-particle page-particle--three" />
         <svg className="page-grid" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <g className="grid-lines">
             <path d="M1170 75H1285V170H1385" />
