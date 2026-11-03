@@ -15,7 +15,12 @@ const mainNavItems = [
 
 const navItems = mainNavItems;
 
-const Navigation: React.FC = () => {
+type NavigationProps = {
+  collapsed: boolean;
+  onToggle: () => void;
+};
+
+const Navigation: React.FC<NavigationProps> = ({ collapsed, onToggle }) => {
   const [activeItem, setActiveItem] = useState('Home');
 
   const profilePhoto = '/images/Designer (8).png';
@@ -74,7 +79,7 @@ const Navigation: React.FC = () => {
   }, []);
 
   return (
-    <aside className="navigation" aria-label="Portfolio sidebar">
+    <aside className={`navigation${collapsed ? ' is-collapsed' : ''}`} aria-label="Portfolio sidebar">
       <div className="sidebar-profile">
         <div className="profile-avatar" role="img" aria-label="Portrait of Kim Benedict Gayomali">
           <img src={profilePhoto} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />
@@ -102,15 +107,30 @@ const Navigation: React.FC = () => {
               href={item.href}
               key={item.label}
               aria-current={activeItem === item.label ? 'page' : undefined}
+              title={collapsed ? item.label : undefined}
               onClick={() => setActiveItem(item.label)}
             >
-              <Icon name={item.icon} size={18} />
+              <Icon name={item.icon} size={collapsed ? 22 : 18} />
               <span>{item.label}</span>
             </a>
           ))}
         </nav>
-        <footer className="sidebar-copyright">
-          © {new Date().getFullYear()} {portfolioData.profile.name}
+        <footer className="sidebar-footer">
+          <span className="sidebar-copyright">
+            © {new Date().getFullYear()} {portfolioData.profile.name}
+          </span>
+          <button
+            className="sidebar-toggle"
+            type="button"
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-expanded={!collapsed}
+            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            onClick={onToggle}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d={collapsed ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6'} />
+            </svg>
+          </button>
         </footer>
       </div>
     </aside>

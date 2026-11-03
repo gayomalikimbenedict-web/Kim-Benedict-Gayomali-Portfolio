@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -12,6 +12,8 @@ import './styles/global.css';
 import './App.css';
 
 const App: React.FC = () => {
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
   useEffect(() => {
     const cards = Array.from(
       document.querySelectorAll<HTMLElement>(
@@ -125,8 +127,11 @@ const App: React.FC = () => {
         </svg>
       </div>
 
-      <div className="portfolio-shell">
-        <Navigation />
+      <div className={`portfolio-shell${sidebarCollapsed ? ' sidebar-collapsed' : ''}`}>
+        <Navigation
+          collapsed={sidebarCollapsed}
+          onToggle={() => setSidebarCollapsed((collapsed) => !collapsed)}
+        />
         <main className="portfolio-main">
           <section className="page-section home-section" id="home" aria-labelledby="home-title">
             <Hero />
