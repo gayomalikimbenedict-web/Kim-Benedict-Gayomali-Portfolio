@@ -189,6 +189,18 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
+.page-section:not(.home-section) .panel,
+.page-section:not(.home-section) .project-card,
+.page-section:not(.home-section) .approach-step,
+.page-section:not(.home-section) .how-step,
+.page-section:not(.home-section) .photo-frame,
+.page-section:not(.home-section) .credential-item,
+.page-section:not(.home-section) .testimonial-placeholder,
+.page-section:not(.home-section) .role-list li {
+  translate: 0 var(--scroll-parallax-y, 0px);
+  will-change: translate;
+}
+
 .panel-title {
   display: flex;
   align-items: center;

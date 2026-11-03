@@ -197,9 +197,7 @@
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center top;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 0 0 8px var(--surface), var(--shadow);
+  transform: translateY(-24px);
 }
 
 .hero-expertise {
@@ -330,6 +328,7 @@
     height: auto;
     aspect-ratio: 1;
     border-radius: var(--radius-lg);
+    transform: translateY(-12px);
   }
 
   .hero-expertise {

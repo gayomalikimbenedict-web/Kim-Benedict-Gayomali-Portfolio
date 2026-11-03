@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -12,6 +12,80 @@ import './styles/global.css';
 import './App.css';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    const cards = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        [
+          '.page-section:not(.home-section) .panel',
+          '.page-section:not(.home-section) .project-card',
+          '.page-section:not(.home-section) .approach-step',
+          '.page-section:not(.home-section) .how-step',
+          '.page-section:not(.home-section) .photo-frame',
+          '.page-section:not(.home-section) .credential-item',
+          '.page-section:not(.home-section) .testimonial-placeholder',
+          '.page-section:not(.home-section) .role-list li',
+        ].join(', ')
+      )
+    );
+    const staticLayout = window.matchMedia(
+      '(max-width: 760px), (pointer: coarse), (prefers-reduced-motion: reduce)'
+    );
+    let animationFrame = 0;
+
+    const resetCards = () => {
+      cards.forEach((card) => card.style.removeProperty('--scroll-parallax-y'));
+    };
+
+    const updateCards = () => {
+      animationFrame = 0;
+      const viewportCenter = window.innerHeight / 2;
+      const offsets = cards.map((card, index) => {
+        const bounds = card.getBoundingClientRect();
+        const cardCenter = bounds.top + bounds.height / 2;
+        const depth = 0.025 + (index % 3) * 0.01;
+        const offset = Math.max(-18, Math.min(18, (viewportCenter - cardCenter) * depth));
+        return { card, offset };
+      });
+
+      offsets.forEach(({ card, offset }) => {
+        card.style.setProperty('--scroll-parallax-y', `${offset.toFixed(2)}px`);
+      });
+    };
+
+    const scheduleUpdate = () => {
+      if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(updateCards);
+      }
+    };
+
+    const updateMotion = () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+
+      if (staticLayout.matches) {
+        resetCards();
+        return;
+      }
+
+      scheduleUpdate();
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate);
+    };
+
+    updateMotion();
+    staticLayout.addEventListener('change', updateMotion);
+
+    return () => {
+      staticLayout.removeEventListener('change', updateMotion);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      window.cancelAnimationFrame(animationFrame);
+      resetCards();
+    };
+  }, []);
+
   return (
     <Router>
       <div className="page-background" aria-hidden="true">
