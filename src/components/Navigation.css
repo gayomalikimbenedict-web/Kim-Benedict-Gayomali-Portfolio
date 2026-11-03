@@ -10,6 +10,7 @@
   flex-direction: column;
   padding: 22px 18px 20px;
   overflow-y: auto;
+  overflow-x: hidden;
   overscroll-behavior: contain;
   background: rgba(11, 19, 43, 0.9);
   border-right: 1px solid var(--border);
@@ -67,7 +68,9 @@
 }
 
 .profile-name-row {
+  flex: 0 0 auto;
   margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .profile-name {
@@ -77,10 +80,17 @@
 }
 
 .profile-handle {
+  flex: 0 0 auto;
   color: var(--text-soft);
   font-size: var(--type-caption);
   font-weight: 500;
   line-height: 1.4;
+}
+
+.profile-name-row,
+.profile-handle,
+.social-links {
+  transition: opacity 0.16s ease 0.1s, visibility 0s linear 0.1s;
 }
 
 .social-links {
@@ -144,6 +154,7 @@
 }
 
 .sidebar-footer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -236,6 +247,7 @@
 
 .navigation.is-collapsed .sidebar-profile {
   width: 100%;
+  overflow: hidden;
 }
 
 .navigation.is-collapsed .profile-avatar {
@@ -245,17 +257,40 @@
 .navigation.is-collapsed .profile-name-row,
 .navigation.is-collapsed .profile-handle,
 .navigation.is-collapsed .social-links {
+  opacity: 0;
   visibility: hidden;
+  transition: opacity 0.1s ease, visibility 0s linear 0.1s;
 }
 
 .navigation.is-collapsed .profile-name-row,
 .navigation.is-collapsed .profile-handle {
+  flex: 0 0 auto;
   width: 208px;
 }
 
-.navigation.is-collapsed .navigation-link span,
 .navigation.is-collapsed .sidebar-copyright {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease, visibility 0s linear 0.1s;
+}
+
+.navigation.is-collapsed .sidebar-copyright {
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+
+.navigation-link span {
+  transition: opacity 0.16s ease 0.1s, visibility 0s linear 0.1s;
+}
+
+.navigation.is-collapsed .navigation-link span {
+  position: absolute;
+  left: 48px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease, visibility 0s linear 0.1s;
 }
 
 .navigation.is-collapsed .sidebar-nav-wrap {
@@ -309,11 +344,13 @@
   .navigation.is-collapsed .social-links,
   .navigation.is-collapsed .navigation-link span {
     display: block;
+    opacity: 1;
     visibility: visible;
   }
 
   .navigation.is-collapsed .profile-name-row,
   .navigation.is-collapsed .profile-handle {
+    flex: 0 0 auto;
     width: auto;
   }
 
@@ -328,6 +365,21 @@
 
   .navigation.is-collapsed .sidebar-copyright {
     display: block;
+    position: static;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navigation.is-collapsed .profile-name-row,
+  .navigation.is-collapsed .profile-handle,
+  .navigation.is-collapsed .social-links {
+    transition: none;
+  }
+
+  .navigation.is-collapsed .navigation-link span {
+    position: static;
+    white-space: normal;
+    transition: none;
   }
 
   .navigation.is-collapsed .profile-avatar {
