@@ -24,20 +24,11 @@ const Contact: React.FC = () => {
     );
   };
 
-  const emailValue = portfolioData.contact.email || 'Coming soon';
   const linkedinLink = portfolioData.contact.linkedin || '#contact';
   const facebookLink = portfolioData.contact.facebook || '';
 
   return (
-    <section className="page-section contact-section" id="contact" aria-labelledby="contact-title">
-      <header className="section-head">
-        <span className="section-kicker">CONTACT</span>
-        <h2 id="contact-title">
-          Let&apos;s make the <span className="accent">work work better.</span>
-        </h2>
-        <p className="section-lede">{portfolioData.contact.intro}</p>
-      </header>
-
+    <section className="page-section contact-section" id="contact" aria-label="Contact">
       <div className="contact-grid">
         <div className="panel contact-panel">
           <h3 className="panel-title">Get in touch</h3>
@@ -85,29 +76,53 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="panel form-panel">
-          <h3 className="panel-title">Send a message</h3>
+          <div className="form-heading">
+            <span className="form-heading-icon"><Icon name="send" size={27} /></span>
+            <div>
+              <h3>Send a <span className="accent">message</span></h3>
+              <p>Have a project in mind? Let&apos;s talk.</p>
+            </div>
+          </div>
 
           <form className="message-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Your name</label>
-            <input id="name" name="name" type="text" required />
+            <div className="form-field">
+              <Icon name="user" size={20} />
+              <input id="name" name="name" type="text" placeholder="Enter your name..." required />
+            </div>
 
             <label htmlFor="email">Email address</label>
-            <input id="email" name="email" type="email" required />
+            <div className="form-field">
+              <Icon name="mail" size={20} />
+              <input id="email" name="email" type="email" placeholder="Enter your email..." required />
+            </div>
 
             <label htmlFor="projectType">Project type</label>
-            <select id="projectType" name="projectType" defaultValue="">
-              <option value="" disabled>Select a type</option>
-              {portfolioData.contact.projectTypes.map((option) => (
-                <option key={option} value={option}>{option}</option>
-              ))}
-            </select>
+            <div className="form-field">
+              <Icon name="sheet" size={20} />
+              <select id="projectType" name="projectType" defaultValue="">
+                <option value="" disabled>Select a type</option>
+                {portfolioData.contact.projectTypes.map((option) => (
+                  <option key={option} value={option}>{option}</option>
+                ))}
+              </select>
+            </div>
 
             <label htmlFor="message">What would you like to build?</label>
-            <textarea id="message" name="message" required />
+            <div className="form-field form-field--textarea">
+              <Icon name="message" size={20} />
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Describe your project, goals, and requirements..."
+                required
+              />
+            </div>
 
             <button type="submit" className="btn btn-primary">
+              <Icon name="send" size={18} />
               Start a conversation
-              <Icon name="send" size={16} />
+              <Icon name="arrow-right" size={18} />
             </button>
 
             {statusMessage ? (

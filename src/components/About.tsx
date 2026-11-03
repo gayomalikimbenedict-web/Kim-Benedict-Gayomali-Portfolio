@@ -1,21 +1,12 @@
 import React from 'react';
-import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
 import './About.css';
 
 const About: React.FC = () => {
   const howIWork = portfolioData.about.howIWork;
-  const learningItems = portfolioData.about.learning;
 
   return (
-    <section id="about" className="page-section about-section" aria-labelledby="about-title">
-      <header className="section-head">
-        <span className="section-kicker">ABOUT ME</span>
-        <h2 id="about-title">
-          {portfolioData.about.heading} <span className="accent">{portfolioData.about.headingAccent}</span>
-        </h2>
-      </header>
-
+    <section id="about" className="page-section about-section" aria-label="About me">
       <div className="about-grid">
         <div className="about-copy">
           <p>{portfolioData.about.text}</p>
@@ -39,20 +30,6 @@ const About: React.FC = () => {
         </div>
       </div>
 
-      <div className="learning-panel panel">
-        <h3>Currently learning</h3>
-        <div className="learning-list">
-          {learningItems.map((item, index) => {
-            const icons = ['code', 'gear', 'globe'] as const;
-            return (
-              <span key={item} className="chip learning-item">
-                <Icon name={icons[index % icons.length]} size={16} />
-                {item}
-              </span>
-            );
-          })}
-        </div>
-      </div>
     </section>
   );
 };

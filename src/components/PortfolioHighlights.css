@@ -108,7 +108,7 @@
     top: 0.15rem;
     right: 0.8rem;
     color: var(--accent);
-    font-family: Georgia, serif;
+    font-family: 'Manrope', sans-serif;
     font-size: 4rem;
     line-height: 1;
 }
@@ -124,8 +124,9 @@
 
 .placeholder-caption {
     color: var(--text);
-    font-size: 0.78rem;
-    font-weight: 600;
+    font-size: var(--type-caption);
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 @media (max-width: 640px) {

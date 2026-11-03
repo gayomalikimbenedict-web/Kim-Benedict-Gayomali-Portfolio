@@ -196,25 +196,13 @@ const approach: ApproachItem[] = [
 
 const experience = {
   intro:
-    "Real-time workforce analysis, adherence, and shrinkage, with hourly reporting and spreadsheet workflow improvements.",
+    "I currently work as a Real-Time Analyst at Inspiro, monitoring schedule adherence and intraday performance, coordinating staffing adjustments with operations, and supporting SLA targets.",
   timeline: [
     {
-      period: "2022 – Present",
-      title: "Real-Time Analyst",
-      text: "Monitor operations, track adherence, and generate insights for better decisions.",
+      period: "July 2024 – Present",
+      title: "Real-Time Analyst (Workforce Management)",
+      text: "At Inspiro, monitor schedule adherence and intraday performance, coordinate staffing adjustments with operations, and support SLA targets.",
       icon: "briefcase",
-    },
-    {
-      period: "",
-      title: "Excel and Apps Script Automation",
-      text: "Build tools and workflows using Excel, Google Sheets, and Apps Script.",
-      icon: "gear",
-    },
-    {
-      period: "",
-      title: "Web Builder",
-      text: "Develop internal tools and landing pages to support business operations.",
-      icon: "code",
     },
   ],
   bring: [
@@ -240,10 +228,9 @@ const experience = {
     },
   ],
   focusAreas: [
-    "Workforce Analytics",
-    "Automation & Reporting",
-    "Excel & Google Sheets",
-    "Web Development",
+    "OpenCV",
+    "Full-Stack Development",
+    "SQLite",
   ],
   performance: {
     days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -256,7 +243,7 @@ const about = {
   heading: "I like making messy work",
   headingAccent: "simpler.",
   text:
-    "I'm a Real-Time Analyst in the e-commerce BPO industry, with experience tracking attendance, schedule adherence, and shrinkage. I build Excel and Google Sheets reporting tools, learn Apps Script, and develop web tools to automate and improve everyday work.",
+    "I'm an AI-Assisted Full-Stack Developer with a background in Workforce Management, business operations, and process optimization. I build web applications, business dashboards, internal tools, CRM systems, and workflow automation solutions using modern development practices and AI-assisted coding tools. My experience as a Real-Time Analyst at Inspiro gives me practical insight into real business operations and the challenges organizations face. I use AI development assistants such as Claude and GitHub Copilot for software planning, coding, debugging, and development workflows, alongside critical thinking and proper testing. I also develop independent projects exploring technology, automation, and artificial intelligence, and I'm open to selected freelance, part-time, and project-based collaborations.",
   photo: "/images/avatar.png",
   howIWork: [
     {
@@ -293,11 +280,11 @@ const contact = {
 export const portfolioData = {
   profile: {
     name: "Kim Benedict Gayomali",
-    studioLine: "Founder, Sechurplets Studio",
-    headline: "I turn operational data into",
-    headlineAccent: "tools people can actually use.",
+    studioLine: "AI-Assisted Full-Stack Developer",
+    headline: "Web applications, business dashboards &",
+    headlineAccent: "workflow automation.",
     subtext:
-      "Real-Time Analyst and Automation Builder, specializing in workforce analytics, reporting dashboards, and web solutions.",
+      "I build web applications, business dashboards, internal tools, and workflow automation solutions using modern development practices and AI-assisted coding tools. Open to selected freelance and part-time projects.",
     portrait: "/images/avatar.png",
   },
   whatIDo,

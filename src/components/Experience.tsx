@@ -40,15 +40,7 @@ const Experience: React.FC = () => {
     points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`).join(' ');
 
   return (
-    <section id="experience" className="page-section experience-section" aria-labelledby="experience-title">
-      <header className="section-head">
-        <span className="section-kicker">EXPERIENCE</span>
-        <h2 id="experience-title">
-          Operations experience. <span className="accent">Practical automation.</span>
-        </h2>
-        <p className="section-lede">{data.intro}</p>
-      </header>
-
+    <section id="experience" className="page-section experience-section" aria-label="Experience">
       <div className="experience-grid">
         <div className="experience-stack">
           <article className="panel timeline-panel">
@@ -192,7 +184,7 @@ const Experience: React.FC = () => {
           </article>
 
           <article className="panel focus-panel">
-            <h3 className="panel-title">Key Focus Areas</h3>
+            <h3 className="panel-title">Top Skills</h3>
             <div className="focus-list">
               {data.focusAreas.map((area) => (
                 <span key={area} className="chip">{area}</span>

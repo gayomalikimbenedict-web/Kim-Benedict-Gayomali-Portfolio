@@ -12,9 +12,10 @@ body {
   margin: 0;
   color: var(--text);
   background: var(--navy);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1.55;
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--type-body);
+  font-weight: 400;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -116,6 +117,7 @@ a:hover {
 }
 
 .portfolio-main {
+  grid-column: 2;
   width: min(100%, var(--max-shell-width));
   min-width: 0;
   margin: 0 auto;
@@ -123,8 +125,14 @@ a:hover {
 }
 
 .page-section {
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
+  min-height: calc(100vh - 88px);
+  min-height: calc(100svh - 88px);
+  height: auto;
+  margin-bottom: 24px;
+  padding: 24px;
+  overflow: visible;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
 }
 
 .section-head {
@@ -136,21 +144,27 @@ a:hover {
 .section-kicker {
   display: inline-flex;
   width: fit-content;
+  min-height: 34px;
+  align-items: center;
+  justify-self: start;
+  white-space: nowrap;
   padding: 0.38rem 0.7rem;
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   color: var(--accent);
   background: rgba(111, 211, 224, 0.08);
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: var(--type-caption);
+  font-weight: 500;
+  line-height: 1.4;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .section-title,
 .section-head h2 {
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1.1;
+  font-size: var(--type-h2);
+  font-weight: 600;
+  line-height: 1.3;
   letter-spacing: -0.04em;
 }
 
@@ -162,7 +176,9 @@ a:hover {
 .section-lede {
   max-width: 640px;
   color: var(--text-soft);
-  font-size: 1.02rem;
+  font-size: var(--type-body-large);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .panel {
@@ -181,7 +197,7 @@ a:hover {
   margin-bottom: 1rem;
   padding-left: 0.9rem;
   color: var(--white);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .panel-title::before {
@@ -236,7 +252,7 @@ a:hover {
   border-radius: 999px;
   background: transparent;
   color: var(--white);
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -287,12 +303,6 @@ a:hover {
   box-shadow: 0 0 0 4px rgba(111, 211, 224, 0.12);
 }
 
-.site-footer {
-  padding: 2rem 0 0;
-  color: var(--text-soft);
-  text-align: center;
-}
-
 @keyframes pulseMove {
   0% {
     opacity: 0.2;
@@ -332,6 +342,7 @@ a:hover {
   }
 
   .portfolio-main {
+    grid-column: 1;
     padding-top: 16px;
   }
 }

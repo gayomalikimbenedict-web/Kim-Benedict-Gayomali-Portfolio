@@ -36,8 +36,9 @@
 
 .service-copy h3 {
   color: var(--white);
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  line-height: 1.2;
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .service-copy p {
@@ -56,7 +57,9 @@
 
 .approach-panel h3 {
   color: var(--white);
-  font-size: 1.2rem;
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: 1.4;
   margin-bottom: 1rem;
 }
 
@@ -127,4 +130,3 @@
     display: none;
   }
 }
-

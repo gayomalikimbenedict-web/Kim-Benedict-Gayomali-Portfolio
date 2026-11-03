@@ -8,17 +8,12 @@ const mainNavItems = [
   { label: 'Projects', href: '#projects', icon: 'folder' },
   { label: 'Services', href: '#services', icon: 'briefcase' },
   { label: 'Experience', href: '#experience', icon: 'trending' },
+  { label: 'Testimonials', href: '#testimonials', icon: 'message' },
   { label: 'About', href: '#about', icon: 'user' },
   { label: 'Contact', href: '#contact', icon: 'mail' },
 ] as const;
 
-const moreNavItems = [
-  { label: 'Tools', href: '#tools', icon: 'wrench' },
-  { label: 'Results', href: '#results', icon: 'chart' },
-  { label: 'Testimonials', href: '#testimonials', icon: 'message' },
-] as const;
-
-const navItems = [...mainNavItems, ...moreNavItems];
+const navItems = mainNavItems;
 
 const Navigation: React.FC = () => {
   const [activeItem, setActiveItem] = useState('Home');
@@ -121,24 +116,9 @@ const Navigation: React.FC = () => {
             </a>
           ))}
         </nav>
-
-        <div className="sidebar-more-wrap">
-          <span className="sidebar-more">More</span>
-          <nav className="sidebar-nav sidebar-nav--secondary" aria-label="More sections">
-            {moreNavItems.map((item) => (
-              <a
-                className={`navigation-link${activeItem === item.label ? ' active' : ''}`}
-                href={item.href}
-                key={item.label}
-                aria-current={activeItem === item.label ? 'page' : undefined}
-                onClick={() => setActiveItem(item.label)}
-              >
-                <Icon name={item.icon} size={18} />
-                <span>{item.label}</span>
-              </a>
-            ))}
-          </nav>
-        </div>
+        <footer className="sidebar-copyright">
+          © {new Date().getFullYear()} {portfolioData.profile.name}
+        </footer>
       </div>
     </aside>
   );

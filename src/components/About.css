@@ -12,8 +12,9 @@
 
 .about-copy p {
   color: var(--text-soft);
-  font-size: 1.04rem;
-  line-height: 1.8;
+  font-size: var(--type-body-large);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .photo-frame {
@@ -34,16 +35,16 @@
   border-radius: 18px;
 }
 
-.how-i-work,
-.learning-panel {
+.how-i-work {
   display: grid;
   gap: 0.9rem;
 }
 
-.how-i-work h3,
-.learning-panel h3 {
+.how-i-work h3 {
   color: var(--white);
-  font-size: 1.15rem;
+  font-size: var(--type-h3);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .how-grid {
@@ -68,23 +69,6 @@
 .how-step p {
   color: var(--text-soft);
   line-height: 1.7;
-}
-
-.learning-panel {
-  padding: 1rem 1.1rem;
-}
-
-.learning-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-}
-
-.learning-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.45rem 0.8rem;
 }
 
 @media (max-width: 760px) {

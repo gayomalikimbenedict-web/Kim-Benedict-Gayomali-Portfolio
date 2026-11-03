@@ -1,12 +1,16 @@
-.navigation {
-  position: sticky;
+.portfolio-shell > .navigation {
+  position: fixed;
+  left: 0;
   top: 0;
   z-index: 10;
   display: flex;
   width: 248px;
   height: 100vh;
+  height: 100dvh;
   flex-direction: column;
   padding: 22px 18px 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: rgba(11, 19, 43, 0.9);
   border-right: 1px solid var(--border);
   backdrop-filter: blur(16px);
@@ -66,7 +70,9 @@
 
 .profile-handle {
   color: var(--text-soft);
-  font-size: 0.8rem;
+  font-size: var(--type-caption);
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .social-links {
@@ -120,6 +126,14 @@
   gap: 0.35rem;
 }
 
+.sidebar-copyright {
+  margin: 0.8rem 0.8rem 0;
+  white-space: nowrap;
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
 .sidebar-nav--secondary {
   margin-top: 0.25rem;
 }
@@ -166,11 +180,13 @@
 }
 
 @media (max-width: 960px) {
-  .navigation {
+  .portfolio-shell > .navigation {
     position: sticky;
     top: 0;
+    left: auto;
     width: 100%;
     height: auto;
+    overflow-y: visible;
     padding: 18px 16px 12px;
     border-right: 0;
     border-bottom: 1px solid var(--border);

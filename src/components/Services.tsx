@@ -5,17 +5,7 @@ import './Services.css';
 
 const Services: React.FC = () => {
   return (
-    <section id="services" className="page-section services-section" aria-labelledby="services-title">
-      <header className="section-head">
-        <span className="section-kicker">SERVICES</span>
-        <h2 id="services-title">
-          Practical systems <span className="accent">for everyday work.</span>
-        </h2>
-        <p className="section-lede">
-          I help businesses and teams turn data, workflows, and ideas into reliable tools, from real-time reports to custom web systems.
-        </p>
-      </header>
-
+    <section id="services" className="page-section services-section" aria-label="Services">
       <div className="service-rows">
         {portfolioData.services.map((service) => (
           <article key={service.title} className="service-row panel">

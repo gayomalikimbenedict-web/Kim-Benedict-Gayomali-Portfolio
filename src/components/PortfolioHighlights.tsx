@@ -35,12 +35,7 @@ export const Results: React.FC = () => (
 );
 
 export const Testimonials: React.FC = () => (
-    <section className="page-section testimonials-card" id="testimonials" aria-labelledby="testimonials-title">
-        <header className="section-header">
-            <span className="section-kicker">TESTIMONIALS</span>
-            <h2 id="testimonials-title">Testimonials</h2>
-            <p>Feedback from the work.</p>
-        </header>
+    <section className="page-section testimonials-card" id="testimonials" aria-label="Testimonials">
         <div className="testimonial-list">
             {portfolioData.testimonials.map((testimonial) => (
                 <blockquote className="testimonial-placeholder" key={testimonial.quote}>

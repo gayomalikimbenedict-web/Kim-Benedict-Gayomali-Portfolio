@@ -100,15 +100,7 @@ const Projects: React.FC = () => {
   }, [isOpen]);
 
   return (
-    <section id="projects" className="page-section projects-section" aria-labelledby="projects-title">
-      <header className="section-head">
-        <span className="section-kicker">PROJECTS</span>
-        <h2 id="projects-title">
-          Selected Work
-        </h2>
-        <p className="section-lede">Systems, workflows, and tools built around real operational needs.</p>
-      </header>
-
+    <section id="projects" className="page-section projects-section" aria-label="Projects">
       <div className="projects-list">
         {portfolioData.projects.map((project) => (
           <article key={project.id} className="project-card">
@@ -161,15 +153,6 @@ const Projects: React.FC = () => {
             </div>
           </article>
         ))}
-      </div>
-
-      <div className="more-work-row" aria-label="More work in progress">
-        <span className="more-work-label">More work in progress</span>
-        <div className="more-work-list">
-          {portfolioData.moreWork.map((item) => (
-            <span key={item} className="chip">{item}</span>
-          ))}
-        </div>
       </div>
 
       {activeDemo?.demoUrl && (
