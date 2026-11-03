@@ -88,80 +88,15 @@
 }
 
 .chart-panel {
-  background: rgba(16, 26, 53, 0.95);
-}
-
-.chart-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 0.8rem;
-  color: var(--text-soft);
-  font-size: 0.8rem;
-}
-
-.chart-legend span {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.chart-legend i {
-  display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 50%;
-}
-
-.chart-shell {
+  padding: 0;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  background: #101a35;
+  background: #fff;
 }
 
-.performance-chart {
+.experience-project-image {
+  display: block;
   width: 100%;
   height: auto;
-  display: block;
-  background: #101a35;
-}
-
-.chart-note {
-  margin-top: 0.75rem;
-  color: var(--text-soft);
-  font-size: var(--type-caption);
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.chart-table-details {
-  margin-top: 0.9rem;
-}
-
-.chart-table-details summary {
-  cursor: pointer;
-  color: var(--accent);
-  font-weight: 700;
-}
-
-.chart-table-details table {
-  width: 100%;
-  margin-top: 0.75rem;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.chart-table-details th,
-.chart-table-details td {
-  padding: 0.6rem 0.75rem;
-  border-bottom: 1px solid var(--border);
-  text-align: left;
-}
-
-.chart-table-details th {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.02);
 }
 
 .bring-list,

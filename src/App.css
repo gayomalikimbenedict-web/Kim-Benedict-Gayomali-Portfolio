@@ -190,24 +190,12 @@ a:hover {
 }
 
 .panel-title {
-  position: relative;
   display: flex;
   align-items: center;
   gap: 0.7rem;
   margin-bottom: 1rem;
-  padding-left: 0.9rem;
   color: var(--white);
   font-weight: 600;
-}
-
-.panel-title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  border-radius: 999px;
-  background: var(--accent);
 }
 
 .chip,

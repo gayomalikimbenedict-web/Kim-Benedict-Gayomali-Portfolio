@@ -37,24 +37,9 @@
   gap: 1rem;
 }
 
-.form-heading-icon {
-  display: grid;
-  width: 3.5rem;
-  height: 3.5rem;
-  flex: 0 0 auto;
-  place-items: center;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--accent);
-  box-shadow: 0 0 18px var(--border-strong);
-}
-
 .form-heading > div {
   display: grid;
   gap: 0.25rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--accent);
 }
 
 .form-heading h3 {
@@ -280,11 +265,6 @@
   .contact-panel,
   .form-panel {
     padding: 1rem;
-  }
-
-  .form-heading-icon {
-    width: 3rem;
-    height: 3rem;
   }
 
   .form-heading h3 {

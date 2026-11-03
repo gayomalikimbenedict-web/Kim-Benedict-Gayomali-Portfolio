@@ -77,7 +77,6 @@ const Contact: React.FC = () => {
 
         <div className="panel form-panel">
           <div className="form-heading">
-            <span className="form-heading-icon"><Icon name="send" size={27} /></span>
             <div>
               <h3>Send a <span className="accent">message</span></h3>
               <p>Have a project in mind? Let&apos;s talk.</p>
@@ -95,17 +94,6 @@ const Contact: React.FC = () => {
             <div className="form-field">
               <Icon name="mail" size={20} />
               <input id="email" name="email" type="email" placeholder="Enter your email..." required />
-            </div>
-
-            <label htmlFor="projectType">Project type</label>
-            <div className="form-field">
-              <Icon name="sheet" size={20} />
-              <select id="projectType" name="projectType" defaultValue="">
-                <option value="" disabled>Select a type</option>
-                {portfolioData.contact.projectTypes.map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
             </div>
 
             <label htmlFor="message">What would you like to build?</label>
