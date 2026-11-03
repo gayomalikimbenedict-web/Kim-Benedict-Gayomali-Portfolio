@@ -67,11 +67,14 @@ const Contact: React.FC = () => {
 
           <div className="work-together">
             <h4>How we can work together</h4>
-            <div className="work-steps">
-              <div className="work-step"><span>01</span><p>Share the goal or workflow.</p></div>
-              <div className="work-step"><span>02</span><p>Define the practical solution.</p></div>
-              <div className="work-step"><span>03</span><p>Refine and improve after launch.</p></div>
-            </div>
+            <ul className="work-bullets">
+              <li>Share your goals, workflow, and challenges.</li>
+              <li>Define clear requirements and project priorities.</li>
+              <li>Develop practical solutions tailored to your needs.</li>
+              <li>Maintain clear communication throughout the project.</li>
+              <li>Review progress, gather feedback, and make improvements.</li>
+              <li>Test and refine the final solution before delivery.</li>
+            </ul>
           </div>
         </div>
 
@@ -86,19 +89,16 @@ const Contact: React.FC = () => {
           <form className="message-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Your name</label>
             <div className="form-field">
-              <Icon name="user" size={20} />
               <input id="name" name="name" type="text" placeholder="Enter your name..." required />
             </div>
 
             <label htmlFor="email">Email address</label>
             <div className="form-field">
-              <Icon name="mail" size={20} />
               <input id="email" name="email" type="email" placeholder="Enter your email..." required />
             </div>
 
             <label htmlFor="message">What would you like to build?</label>
             <div className="form-field form-field--textarea">
-              <Icon name="message" size={20} />
               <textarea
                 id="message"
                 name="message"

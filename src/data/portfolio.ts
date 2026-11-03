@@ -52,6 +52,7 @@ export type ServiceItem = {
 export type ApproachItem = {
   title: string;
   description: string;
+  icon: IconName;
 };
 
 export type TimelineItem = {
@@ -182,15 +183,23 @@ const services: ServiceItem[] = [
 const approach: ApproachItem[] = [
   {
     title: "Understand the workflow",
-    description: "Learn your goals, processes, and challenges.",
+    description: "I learn your goals, existing processes, and operational challenges.",
+    icon: "expand",
   },
   {
-    title: "Build the useful version",
-    description: "Develop a solution that fits your needs.",
+    title: "Plan the right solution",
+    description: "I define requirements, set priorities, and plan the best approach.",
+    icon: "check",
   },
   {
-    title: "Refine with feedback",
-    description: "Improve and optimize for better results.",
+    title: "Build and validate",
+    description: "I develop the solution incrementally, test its functionality, and verify results.",
+    icon: "code",
+  },
+  {
+    title: "Refine and improve",
+    description: "I review feedback, make improvements, and ensure long-term value.",
+    icon: "trending",
   },
 ];
 
