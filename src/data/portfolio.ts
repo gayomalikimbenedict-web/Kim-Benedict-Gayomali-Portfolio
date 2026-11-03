@@ -268,7 +268,7 @@ const about = {
   headingAccent: "simpler.",
   text:
     "I'm an AI-Assisted Full-Stack Developer with a background in Workforce Management, business operations, and process optimization. I build web applications, business dashboards, internal tools, CRM systems, and workflow automation solutions using modern development practices and AI-assisted coding tools. My experience as a Real-Time Analyst at Inspiro gives me practical insight into real business operations and the challenges organizations face. I use AI development assistants such as Claude and GitHub Copilot for software planning, coding, debugging, and development workflows, alongside critical thinking and proper testing. I also develop independent projects exploring technology, automation, and artificial intelligence, and I'm open to selected freelance, part-time, and project-based collaborations.",
-  photo: "/images/avatar.png",
+  photo: "/images/784db55f-efa8-403c-89a9-f09ff212016f.jfif",
   howIWork: [
     {
       title: "Understand the real need",
@@ -287,8 +287,9 @@ const about = {
 };
 
 const contact = {
-  email: "",
+  email: "sechurplets.studio@outlook.com",
   facebook: "",
+  github: "https://github.com/gayomalikimbenedict-web",
   linkedin: "https://www.linkedin.com/in/kimgayomali/",
   intro:
     "I work with teams that want cleaner reporting, faster workflows, and tools that are easy to keep using.",

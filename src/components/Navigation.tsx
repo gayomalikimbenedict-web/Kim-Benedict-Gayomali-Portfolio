@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
 import './Navigation.css';
@@ -18,8 +18,7 @@ const navItems = mainNavItems;
 const Navigation: React.FC = () => {
   const [activeItem, setActiveItem] = useState('Home');
 
-  const profilePhoto = useMemo(() => portfolioData.profile.portrait || '/images/avatar.png', []);
-  const linkedinUrl = portfolioData.contact.linkedin || '#contact';
+  const profilePhoto = '/images/Designer (8).png';
   const facebookUrl = portfolioData.contact.facebook || '';
 
   useEffect(() => {
@@ -86,19 +85,13 @@ const Navigation: React.FC = () => {
         </div>
         <span className="profile-handle">{portfolioData.profile.studioLine}</span>
 
-        <div className="social-links" aria-label="Social links">
-          {facebookUrl ? (
+        {facebookUrl ? (
+          <div className="social-links" aria-label="Social links">
             <a className="social-link" href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">
               <span className="social-letter" aria-hidden="true">f</span>
             </a>
-          ) : null}
-          <a className="social-link" href={linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-            <span className="social-letter social-letter--in" aria-hidden="true">in</span>
-          </a>
-          <a className="social-link" href="#contact" aria-label="Contact Kim">
-            <Icon name="mail" size={18} />
-          </a>
-        </div>
+          </div>
+        ) : null}
       </div>
 
       <div className="sidebar-nav-wrap">

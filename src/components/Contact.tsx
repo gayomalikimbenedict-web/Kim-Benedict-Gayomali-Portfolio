@@ -26,6 +26,7 @@ const Contact: React.FC = () => {
 
   const linkedinLink = portfolioData.contact.linkedin || '#contact';
   const facebookLink = portfolioData.contact.facebook || '';
+  const githubLink = portfolioData.contact.github;
 
   return (
     <section className="page-section contact-section" id="contact" aria-label="Contact">
@@ -50,7 +51,15 @@ const Contact: React.FC = () => {
               <span className="icon-tile"><Icon name="user" size={17} /></span>
               <div>
                 <strong>LinkedIn</strong>
-                <a href={linkedinLink} target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
+                <a href={linkedinLink} target="_blank" rel="noopener noreferrer">{linkedinLink}</a>
+              </div>
+            </div>
+
+            <div className="contact-item">
+              <span className="icon-tile"><Icon name="github" size={17} /></span>
+              <div>
+                <strong>GitHub</strong>
+                <a href={githubLink} target="_blank" rel="noopener noreferrer">{githubLink}</a>
               </div>
             </div>
 
