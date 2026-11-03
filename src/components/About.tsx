@@ -1,24 +1,60 @@
 import React from 'react';
+import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
 import './About.css';
 
 const About: React.FC = () => {
-    return (
-        <section id="about" className="page-section about-section" aria-labelledby="about-title">
-            <header className="section-header">
-                <span className="section-kicker">ABOUT</span>
-                <h2 id="about-title">About</h2>
-                <p>{portfolioData.profile.studioLine}</p>
-            </header>
-            <div className="about-body">
-                <p>{portfolioData.about}</p>
-                <div className="about-portrait-row">
-                <img className="about-avatar" src="/images/avatar.png" alt={portfolioData.profile.name} />
-                <span>{portfolioData.roles.join(' · ')}</span>
-                </div>
+  const howIWork = portfolioData.about.howIWork;
+  const learningItems = portfolioData.about.learning;
+
+  return (
+    <section id="about" className="page-section about-section" aria-labelledby="about-title">
+      <header className="section-head">
+        <span className="section-kicker">ABOUT ME</span>
+        <h2 id="about-title">
+          {portfolioData.about.heading} <span className="accent">{portfolioData.about.headingAccent}</span>
+        </h2>
+      </header>
+
+      <div className="about-grid">
+        <div className="about-copy">
+          <p>{portfolioData.about.text}</p>
+        </div>
+
+        <div className="photo-frame">
+          <img src={portfolioData.about.photo} alt={portfolioData.profile.name} />
+        </div>
+      </div>
+
+      <div className="how-i-work">
+        <h3>How I work</h3>
+        <div className="how-grid">
+          {howIWork.map((item, index) => (
+            <div key={item.title} className="how-step">
+              <span className="step-number">0{index + 1}</span>
+              <strong>{item.title}</strong>
+              <p>{item.description}</p>
             </div>
-        </section>
-    );
+          ))}
+        </div>
+      </div>
+
+      <div className="learning-panel panel">
+        <h3>Currently learning</h3>
+        <div className="learning-list">
+          {learningItems.map((item, index) => {
+            const icons = ['code', 'gear', 'globe'] as const;
+            return (
+              <span key={item} className="chip learning-item">
+                <Icon name={icons[index % icons.length]} size={16} />
+                {item}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default About;

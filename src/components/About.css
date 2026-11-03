@@ -1,36 +1,100 @@
 .about-section {
-	max-width: 980px;
-	margin: 2rem auto;
-	padding: clamp(1.5rem, 4vw, 3rem);
-	color: var(--text);
-	background: var(--surface);
-	border: 1px solid var(--border);
-	border-radius: 20px;
-	box-shadow: var(--surface-shadow);
+  display: grid;
+  gap: 1.2rem;
 }
 
-.about-section h2 {
-	margin: 0 0 1rem;
-	color: var(--white);
-	font-size: clamp(1.75rem, 3vw, 2.35rem);
-	line-height: 1.2;
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  gap: 1.2rem;
+  align-items: center;
 }
 
-.about-section p {
-	max-width: 70ch;
-	margin: 0 0 1rem;
-	font-size: 1.05rem;
-	line-height: 1.8;
+.about-copy p {
+  color: var(--text-soft);
+  font-size: 1.04rem;
+  line-height: 1.8;
 }
 
-.about-section p:last-child {
-	margin-bottom: 0;
+.photo-frame {
+  width: min(100%, 420px);
+  justify-self: end;
+  padding: 0.75rem;
+  border: 1px solid rgba(111, 211, 224, 0.35);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: var(--shadow);
 }
 
-@media (max-width: 600px) {
-	.about-section {
-		margin: 1.25rem 1rem;
-		padding: 1.4rem;
-		border-radius: 14px;
-	}
+.photo-frame img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 18px;
+}
+
+.how-i-work,
+.learning-panel {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.how-i-work h3,
+.learning-panel h3 {
+  color: var(--white);
+  font-size: 1.15rem;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.how-step {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.how-step strong {
+  color: var(--white);
+}
+
+.how-step p {
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.learning-panel {
+  padding: 1rem 1.1rem;
+}
+
+.learning-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.learning-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.8rem;
+}
+
+@media (max-width: 760px) {
+  .about-grid,
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-frame {
+    justify-self: stretch;
+    width: 100%;
+  }
 }

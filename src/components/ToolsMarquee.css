@@ -1,112 +1,152 @@
 .tools-marquee {
-	position: relative;
-	display: flex;
-	align-items: center;
-	margin: 1.5rem auto;
-	padding: 0.9rem 0;
-	overflow: hidden;
-	background: var(--surface);
-	border: 1px solid var(--border);
-	border-radius: 14px;
-	box-shadow: var(--surface-shadow);
-	white-space: nowrap;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(120px, 170px) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.3rem;
+  padding: 0.9rem 1rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
 }
 
-.tools-marquee::before,
-.tools-marquee::after {
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	bottom: 0;
-	width: 48px;
-	content: '';
-	pointer-events: none;
+.tools-heading {
+  display: grid;
+  gap: 0.25rem;
+  padding-right: 0.5rem;
+  border-right: 1px solid var(--border);
 }
 
-.tools-marquee::before {
-	left: 0;
-	background: linear-gradient(90deg, var(--navy), transparent);
+.tools-heading span {
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.tools-marquee::after {
-	right: 0;
-	background: linear-gradient(270deg, var(--navy), transparent);
+.tools-heading strong {
+  color: var(--white);
+  font-size: 1rem;
+  letter-spacing: -0.04em;
 }
 
-.marquee {
-	display: flex;
-	width: max-content;
-	align-items: center;
-	animation: tools-scroll 30s linear infinite;
+.marquee-window {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-window::before,
+.marquee-window::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 36px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.marquee-window::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(11, 19, 43, 1), rgba(11, 19, 43, 0));
+}
+
+.marquee-window::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(11, 19, 43, 1), rgba(11, 19, 43, 0));
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: tools-scroll 26s linear infinite;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  padding-right: 0.5rem;
 }
 
 .tool {
-	display: inline-flex;
-	min-width: 150px;
-	min-height: 54px;
-	align-items: center;
-	justify-content: center;
-	gap: 0.7rem;
-	padding: 0 1.25rem;
-	color: var(--text);
-	border-right: 1px solid var(--border);
-	font-size: 0.95rem;
-	font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 150px;
+  min-height: 52px;
+  padding: 0.4rem 0.9rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.tool + .tool {
+  border-left: 1px solid var(--border);
 }
 
 .tool-logo-box {
-	display: grid;
-	width: 32px;
-	height: 32px;
-	flex: 0 0 32px;
-	place-items: center;
-	padding: 4px;
-	background: var(--white);
-	border-radius: 8px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  background: var(--white);
+  border-radius: 10px;
 }
 
 .tool-logo {
-	display: block;
-	width: 24px;
-	height: 24px;
-	object-fit: contain;
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .tool-brand-icon,
 .tool-generic-icon {
-	width: 24px;
-	height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 .tool-generic-icon {
-	color: var(--accent);
+  color: var(--navy);
 }
 
-.tools-marquee:hover .marquee,
-.tools-marquee:focus-within .marquee {
-	animation-play-state: paused;
+.tools-marquee:hover .marquee-track,
+.tools-marquee:focus-within .marquee-track {
+  animation-play-state: paused;
 }
 
 @keyframes tools-scroll {
-	from { transform: translateX(0); }
-	to { transform: translateX(-50%); }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-@media (max-width: 600px) {
-	.tools-marquee {
-		margin: 1rem 1rem;
-		border-radius: 12px;
-	}
+@media (max-width: 640px) {
+  .tools-marquee {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0.8rem 0.9rem;
+  }
 
-	.tool {
-		min-width: 132px;
-		min-height: 48px;
-		padding: 0 0.9rem;
-		font-size: 0.9rem;
-	}
+  .tools-heading {
+    padding-right: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.6rem;
+  }
 
+  .tool {
+    min-width: 128px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.84rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.marquee { animation: none; }
+  .marquee-track {
+    animation: none;
+  }
 }

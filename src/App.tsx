@@ -2,12 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
+import HomeOverview from './components/HomeOverview';
 import Projects from './components/Projects';
 import Services from './components/Services';
+import Experience from './components/Experience';
 import About from './components/About';
 import Contact from './components/Contact';
 import ToolsMarquee from './components/ToolsMarquee';
-import { Credentials, Results, Roles, Testimonials } from './components/PortfolioHighlights';
+import { Results, Testimonials } from './components/PortfolioHighlights';
 import { portfolioData } from './data/portfolio';
 import './styles/global.css';
 import './App.css';
@@ -51,31 +53,36 @@ const App: React.FC = () => {
           <circle className="pulse-dot" cx="1170" cy="75" r="4" />
         </svg>
       </div>
+
       <div className="portfolio-shell">
         <Navigation />
         <main className="portfolio-main">
           <section className="page-section home-section" id="home" aria-labelledby="home-title">
             <Hero />
             <ToolsMarquee />
+            <HomeOverview />
           </section>
+
           <Projects />
           <Services />
+          <Experience />
+          <About />
+
           <section className="page-section tools-section" id="tools" aria-labelledby="tools-title">
-            <header className="section-header">
+            <header className="section-head">
               <span className="section-kicker">TOOLS</span>
               <h2 id="tools-title">Tools I work with</h2>
-              <p>Everyday tools for reporting, automation, and connected workflows.</p>
+              <p className="section-lede">Everyday tools for reporting, automation, and connected workflows.</p>
             </header>
             <ul className="tools-list">
               {portfolioData.tools.map((tool) => <li key={tool.name}>{tool.name}</li>)}
             </ul>
           </section>
-          <Credentials />
+
           <Results />
           <Testimonials />
-          <About />
-          <Roles />
           <Contact />
+
           <footer className="site-footer">© {new Date().getFullYear()} {portfolioData.profile.name}</footer>
         </main>
       </div>

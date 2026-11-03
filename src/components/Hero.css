@@ -1,94 +1,122 @@
 .hero {
-	position: relative;
-	display: flex;
-	min-height: min(590px, 72vh);
-	align-items: center;
-	overflow: hidden;
-	padding: clamp(2rem, 7vw, 6rem);
-	color: var(--text);
-	background: var(--surface);
-	border-radius: 24px;
-	isolation: isolate;
-}
-
-.hero::before,
-.hero::after {
-	position: absolute;
-	z-index: -1;
-	content: '';
-	pointer-events: none;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
+  align-items: center;
+  gap: clamp(1.5rem, 2.2vw, 3rem);
+  min-height: 420px;
+  padding: clamp(1.5rem, 3vw, 3.2rem);
+  overflow: hidden;
+  background: rgba(16, 26, 53, 0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
 }
 
 .hero::before {
-	inset: 0;
-	background: radial-gradient(circle at 50% 45%, rgba(111, 211, 224, 0.14), rgba(111, 211, 224, 0.06) 16%, rgba(111, 211, 224, 0) 56%);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 18% 18%, rgba(111, 211, 224, 0.16), rgba(111, 211, 224, 0.04) 28%, rgba(111, 211, 224, 0) 58%);
+  pointer-events: none;
 }
 
-.hero::after {
-	display: none;
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
-.hero-content {
-	width: min(100%, 760px);
-	animation: hero-enter 650ms ease-out both;
+.hero-copy {
+  display: grid;
+  gap: 1rem;
 }
 
-.hero-content h1 {
-	max-width: 15ch;
-	margin: 0 0 1.25rem;
-	color: var(--white);
-	font-size: clamp(2.5rem, 6vw, 4.6rem);
-	line-height: 1.08;
+.hero-copy h1 {
+  color: var(--white);
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
 }
 
-.hero-content p {
-	max-width: 62ch;
-	margin: 0 0 2rem;
-	color: var(--text);
-	font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-	line-height: 1.75;
+.hero-headline {
+  max-width: 16ch;
+  color: var(--white);
+  font-size: clamp(1.25rem, 2vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
 }
 
-.cta-button {
-	display: inline-flex;
-	min-height: 50px;
-	align-items: center;
-	justify-content: center;
-	padding: 0.7rem 1.35rem;
-	color: var(--navy);
-	background: var(--accent);
-	border: 2px solid var(--border);
-	border-radius: 10px;
-	font-weight: 700;
-	transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+.hero-subtext {
+  max-width: 620px;
+  color: var(--text-soft);
+  font-size: 1.06rem;
+  line-height: 1.7;
 }
 
-.cta-button:hover {
-	color: var(--navy);
-	background: transparent;
-	text-decoration: none;
-	transform: translateY(-2px);
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.4rem;
 }
 
-.cta-button:focus-visible {
-	outline: 3px solid var(--accent-border);
-	outline-offset: 4px;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 50px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-weight: 700;
 }
 
-@keyframes hero-enter {
-	from { opacity: 0; transform: translateY(16px); }
-	to { opacity: 1; transform: translateY(0); }
+.btn-primary {
+  background: linear-gradient(180deg, rgba(111, 211, 224, 0.24), rgba(111, 211, 224, 0.08));
+  border-color: rgba(111, 211, 224, 0.5);
+  color: var(--white);
 }
 
-@media (max-width: 600px) {
-	.hero {
-		min-height: 460px;
-		padding: 2rem 1.4rem;
-		border-radius: 16px;
-	}
+.btn-secondary {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.03);
 }
 
-@media (prefers-reduced-motion: reduce) {
-	.hero-content { animation: none; }
-	.cta-button { transition: none; }
+.hero-portrait-wrap {
+  display: flex;
+  justify-content: center;
 }
+
+.hero-portrait {
+  width: min(100%, 460px);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid rgba(111, 211, 224, 0.45);
+  border-radius: 24px;
+  box-shadow: 0 0 0 8px rgba(111, 211, 224, 0.06), 0 25px 70px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 1.35rem 1.1rem;
+  }
+
+  .hero-portrait-wrap {
+    order: -1;
+  }
+
+  .hero-portrait {
+    width: min(100%, 320px);
+    aspect-ratio: 1;
+    border-radius: 24px;
+  }
+
+  .hero-headline {
+    max-width: none;
+  }
+}
+

@@ -1,48 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --navy: #0B132B;
-    --white: #FFFFFF;
-    --text: #C9D1E6;
-    --accent: #6FD3E0;
-    --surface: rgba(255, 255, 255, 0.06);
-    --surface-raised: rgba(255, 255, 255, 0.09);
-    --surface-hover: rgba(255, 255, 255, 0.12);
-    --border: rgba(255, 255, 255, 0.12);
-    --border-strong: rgba(255, 255, 255, 0.2);
-    --white-muted: rgba(255, 255, 255, 0.72);
-    --accent-soft: rgba(111, 211, 224, 0.12);
-    --accent-border: rgba(111, 211, 224, 0.34);
-    --accent-glow: rgba(111, 211, 224, 0.2);
-    --surface-shadow: 0 10px 28px rgba(255, 255, 255, 0.035);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    color: var(--text);
-    background: var(--navy);
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
+  --navy: #0B132B;
+  --navy-2: #101A35;
+  --navy-3: #17223E;
+  --white: #FFFFFF;
+  --text: #D9E3F4;
+  --text-soft: rgba(217, 227, 244, 0.72);
+  --accent: #6FD3E0;
+  --accent-strong: #48C7D8;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-raised: rgba(255, 255, 255, 0.08);
+  --surface-hover: rgba(255, 255, 255, 0.11);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(111, 211, 224, 0.35);
+  --shadow: 0 18px 50px rgba(3, 8, 18, 0.42);
+  --max-shell-width: 1540px;
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: var(--text);
+  background: var(--navy);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    min-width: 320px;
-    scroll-behavior: smooth;
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 28px;
 }
 
 body {
-    min-width: 320px;
-    min-height: 100vh;
-    margin: 0;
-    color: var(--text);
-    background: var(--navy);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+  background: var(--navy);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+svg {
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 h1,
@@ -51,30 +79,49 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--white);
+  margin: 0;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 a {
-    color: var(--accent);
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 button,
+a,
 input,
-textarea {
-    font: inherit;
+textarea,
+select {
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-nav {
-    padding: 0;
-    background: transparent;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 ::selection {
-    color: var(--navy);
-    background: var(--accent);
+  color: var(--navy);
+  background: var(--accent);
+}
+
+#root {
+  min-height: 100vh;
 }
