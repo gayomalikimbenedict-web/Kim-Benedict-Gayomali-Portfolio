@@ -1,3 +1,7 @@
 node_modules
 dist
 .env
+
+# Local AI tooling (kept on disk, not published)
+.copilot/
+graphify-out/
