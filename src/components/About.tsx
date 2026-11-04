@@ -3,33 +3,31 @@ import { portfolioData } from '../data/portfolio';
 import './About.css';
 
 const About: React.FC = () => {
-  const howIWork = portfolioData.about.howIWork;
-
   return (
     <section id="about" className="page-section about-section" aria-label="About me">
       <div className="about-grid">
         <div className="about-copy">
-          <p>{portfolioData.about.text}</p>
+          <span className="about-kicker">About</span>
+          <h2>{portfolioData.about.intro}</h2>
+          <div className="about-description">
+            <p>{portfolioData.about.paragraphs[0]}</p>
+            <div className="about-philosophy">
+              <span>Working philosophy</span>
+              <p>{portfolioData.about.workingPhilosophy}</p>
+            </div>
+            <p>{portfolioData.about.paragraphs[1]}</p>
+          </div>
+          <div className="about-skills" aria-label="Areas of expertise">
+            {portfolioData.about.skills.map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
         </div>
 
         <div className="photo-frame">
           <img src={portfolioData.about.photo} alt={portfolioData.profile.name} />
         </div>
       </div>
-
-      <div className="how-i-work">
-        <h3>How I work</h3>
-        <div className="how-grid">
-          {howIWork.map((item, index) => (
-            <div key={item.title} className="how-step">
-              <span className="step-number">0{index + 1}</span>
-              <strong>{item.title}</strong>
-              <p>{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
     </section>
   );
 };

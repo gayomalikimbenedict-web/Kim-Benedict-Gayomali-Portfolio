@@ -387,7 +387,48 @@
     height: 104px;
     margin-bottom: 14px;
   }
+}
 
+@media (min-width: 961px) and (max-width: 1366px) and (max-height: 800px) {
+  .portfolio-shell > .navigation {
+    width: 220px;
+    padding: 16px 14px;
+  }
+
+  .portfolio-shell > .navigation.is-collapsed {
+    width: 112px;
+  }
+
+  .profile-avatar {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 10px;
+  }
+
+  .navigation.is-collapsed .profile-avatar {
+    flex-basis: 84px;
+  }
+
+  .sidebar-profile {
+    padding-bottom: 12px;
+  }
+
+  .social-links {
+    margin-top: 12px;
+  }
+
+  .sidebar-nav-wrap {
+    gap: 0.7rem;
+    padding-top: 0.7rem;
+  }
+
+  .navigation-link {
+    min-height: 38px;
+    padding: 0.5rem 0.65rem;
+  }
+}
+
+@media (max-width: 960px) {
   .navigation.is-collapsed .sidebar-nav-wrap {
     align-items: stretch;
   }

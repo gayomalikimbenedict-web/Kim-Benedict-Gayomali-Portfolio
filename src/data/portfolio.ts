@@ -263,26 +263,29 @@ const experience = {
   },
 };
 
+const aboutIntro =
+  "I'm an AI-Assisted Full-Stack Developer with a background in Workforce Management, business operations, and process optimization.";
+const aboutParagraphs = [
+  "I build web applications, business dashboards, internal tools, CRM systems, and workflow automation solutions using modern development practices and AI-assisted coding tools. My experience as a Real-Time Analyst at Inspiro gives me practical insight into real business operations and the challenges organizations face.",
+  "I use AI development assistants such as Claude and GitHub Copilot for software planning, coding, debugging, and development workflows, alongside critical thinking and proper testing. I also develop independent projects exploring technology, automation, and artificial intelligence, and I'm open to selected freelance, part-time, and project-based collaborations.",
+];
+
 const about = {
   heading: "I like making messy work",
   headingAccent: "simpler.",
-  text:
-    "I'm an AI-Assisted Full-Stack Developer with a background in Workforce Management, business operations, and process optimization. I build web applications, business dashboards, internal tools, CRM systems, and workflow automation solutions using modern development practices and AI-assisted coding tools. My experience as a Real-Time Analyst at Inspiro gives me practical insight into real business operations and the challenges organizations face. I use AI development assistants such as Claude and GitHub Copilot for software planning, coding, debugging, and development workflows, alongside critical thinking and proper testing. I also develop independent projects exploring technology, automation, and artificial intelligence, and I'm open to selected freelance, part-time, and project-based collaborations.",
-  photo: "/images/784db55f-efa8-403c-89a9-f09ff212016f.jfif",
-  howIWork: [
-    {
-      title: "Understand the real need",
-      description: "I study the workflow, find root causes, and define requirements before making changes.",
-    },
-    {
-      title: "Build with purpose",
-      description: "I make focused, practical improvements that simplify work and stay clear, accessible, and reliable.",
-    },
-    {
-      title: "Validate and improve",
-      description: "I test each change, review the result, and refine incrementally with security and data integrity in mind.",
-    },
+  intro: aboutIntro,
+  paragraphs: aboutParagraphs,
+  workingPhilosophy:
+    "Understand the problem, develop a practical solution, execute with structure, validate the results, and continuously improve.",
+  text: [aboutIntro, ...aboutParagraphs].join(" "),
+  skills: [
+    "Workforce management",
+    "Dashboards",
+    "CRM systems",
+    "Workflow automation",
+    "AI-assisted development",
   ],
+  photo: "/images/784db55f-efa8-403c-89a9-f09ff212016f.jfif",
   learning: ["Apps Script", "CRM Workflows", "Responsive Web Design"],
 };
 
