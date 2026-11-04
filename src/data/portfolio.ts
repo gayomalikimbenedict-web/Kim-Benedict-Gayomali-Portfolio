@@ -1,29 +1,5 @@
 import type { IconName } from '../components/Icons';
 
-export type GenericToolIconName =
-  | "calendar"
-  | "code"
-  | "message"
-  | "sparkles"
-  | "table"
-  | "workflow";
-
-export type BrandToolIconName =
-  | "google-calendar"
-  | "apps-script"
-  | "gemini"
-  | "microsoft-teams";
-
-export type PortfolioToolIcon =
-  | { type: "asset"; src: string; fallback: GenericToolIconName }
-  | { type: "brand"; name: BrandToolIconName; color: string }
-  | { type: "generic"; name: GenericToolIconName };
-
-export type PortfolioTool = {
-  name: string;
-  icon: PortfolioToolIcon;
-};
-
 export type WhatIDoItem = {
   title: string;
   description: string;
@@ -76,41 +52,6 @@ export type ProfileData = {
   subtext: string;
   portrait: string;
 };
-
-const tools: PortfolioTool[] = [
-  {
-    name: "Google Calendar",
-    icon: { type: "brand", name: "google-calendar", color: "#4285F4" },
-  },
-  {
-    name: "Apps Script",
-    icon: { type: "brand", name: "apps-script", color: "#34A853" },
-  },
-  {
-    name: "Gemini",
-    icon: { type: "brand", name: "gemini", color: "#8E75B2" },
-  },
-  {
-    name: "MS Teams",
-    icon: { type: "brand", name: "microsoft-teams", color: "#6264A7" },
-  },
-  {
-    name: "SeaTalk",
-    icon: { type: "generic", name: "message" },
-  },
-  {
-    name: "Excel",
-    icon: { type: "asset", src: "/logos/excel.svg", fallback: "table" },
-  },
-  {
-    name: "Google Sheets",
-    icon: { type: "asset", src: "/logos/sheets.svg", fallback: "table" },
-  },
-  {
-    name: "GoHighLevel",
-    icon: { type: "asset", src: "/logos/ghl.svg", fallback: "workflow" },
-  },
-];
 
 const projects: PortfolioProject[] = [
   {
@@ -323,17 +264,11 @@ export const portfolioData = {
   experience,
   about,
   contact,
-  tools,
   testimonials: [
     {
       quote: "Thanks for alignment yesterday, this is good start, team!",
       attribution: "Operations stakeholder, e-commerce BPO client",
       tag: "Reporting template",
     },
-  ],
-  results: [
-    "Hourly reporting for operations leads",
-    "SLA-focused aging case tracking",
-    "One-click data cleanup",
   ],
 };
