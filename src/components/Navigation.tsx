@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
+import { useActiveSection } from '../hooks/useActiveSection';
 import './Navigation.css';
 
-const mainNavItems = [
+const NAV_ITEMS = [
   { label: 'Home', href: '#home', icon: 'home' },
   { label: 'Projects', href: '#projects', icon: 'folder' },
   { label: 'Services', href: '#services', icon: 'briefcase' },
@@ -13,7 +14,7 @@ const mainNavItems = [
   { label: 'Contact', href: '#contact', icon: 'mail' },
 ] as const;
 
-const navItems = mainNavItems;
+const PROFILE_PHOTO = '/images/Designer (8).png';
 
 type NavigationProps = {
   collapsed: boolean;
@@ -21,112 +22,50 @@ type NavigationProps = {
 };
 
 const Navigation: React.FC<NavigationProps> = ({ collapsed, onToggle }) => {
-  const [activeItem, setActiveItem] = useState('Home');
-
-  const profilePhoto = '/images/Designer (8).png';
-  const facebookUrl = portfolioData.contact.facebook || '';
-
-  useEffect(() => {
-    let ticking = false;
-    const updateActive = () => {
-      const sections = navItems
-        .map((item) => document.getElementById(item.href.replace('#', '')))
-        .filter((item): item is HTMLElement => Boolean(item));
-
-      const viewportThreshold = window.innerHeight * 0.3;
-      let match = 'Home';
-      let lastTop = Number.NEGATIVE_INFINITY;
-
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= viewportThreshold) {
-          if (rect.top > lastTop) {
-            lastTop = rect.top;
-            const item = navItems.find((navItem) => navItem.href === `#${section.id}`);
-            if (item) {
-              match = item.label;
-            }
-          }
-        }
-      });
-
-      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-      if (isAtBottom) {
-        match = 'Contact';
-      }
-
-      setActiveItem(match);
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActive();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    updateActive();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
+  const [activeItem, setActiveItem] = useActiveSection(NAV_ITEMS);
+  const { profile, contact } = portfolioData;
+  const toggleLabel = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
 
   return (
     <aside className={`navigation${collapsed ? ' is-collapsed' : ''}`} aria-label="Portfolio sidebar">
       <div className="sidebar-profile">
-        <div className="profile-avatar" role="img" aria-label="Portrait of Kim Benedict Gayomali">
-          <img src={profilePhoto} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />
+        <div className="profile-avatar" role="img" aria-label={`Portrait of ${profile.name}`}>
+          <img src={PROFILE_PHOTO} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />
           <span className="avatar-fallback" aria-hidden="true">KB</span>
         </div>
         <div className="profile-name-row">
-          <span className="profile-name">{portfolioData.profile.name}</span>
+          <span className="profile-name">{profile.name}</span>
         </div>
-        <span className="profile-handle">{portfolioData.profile.studioLine}</span>
+        <span className="profile-handle">{profile.studioLine}</span>
 
-        {facebookUrl ? (
+        {contact.facebook && (
           <div className="social-links" aria-label="Social links">
-            <a className="social-link" href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">
+            <a className="social-link" href={contact.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook profile">
               <span className="social-letter" aria-hidden="true">f</span>
             </a>
           </div>
-        ) : null}
+        )}
       </div>
 
       <div className="sidebar-nav-wrap">
         <nav className="sidebar-nav" aria-label="Main navigation">
-          {mainNavItems.map((item) => (
+          {NAV_ITEMS.map(({ label, href, icon }) => (
             <a
-              className={`navigation-link${activeItem === item.label ? ' active' : ''}`}
-              href={item.href}
-              key={item.label}
-              aria-current={activeItem === item.label ? 'page' : undefined}
-              title={collapsed ? item.label : undefined}
-              onClick={() => setActiveItem(item.label)}
+              className={`navigation-link${activeItem === label ? ' active' : ''}`}
+              href={href}
+              key={label}
+              aria-current={activeItem === label ? 'page' : undefined}
+              title={collapsed ? label : undefined}
+              onClick={() => setActiveItem(label)}
             >
-              <Icon name={item.icon} size={collapsed ? 22 : 18} />
-              <span>{item.label}</span>
+              <Icon name={icon} size={collapsed ? 22 : 18} />
+              <span>{label}</span>
             </a>
           ))}
         </nav>
         <footer className="sidebar-footer">
-          <span className="sidebar-copyright">
-            © {new Date().getFullYear()} {portfolioData.profile.name}
-          </span>
-          <button
-            className="sidebar-toggle"
-            type="button"
-            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            aria-expanded={!collapsed}
-            title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-            onClick={onToggle}
-          >
+          <span className="sidebar-copyright">© {new Date().getFullYear()} {profile.name}</span>
+          <button className="sidebar-toggle" type="button" aria-label={toggleLabel} aria-expanded={!collapsed} title={toggleLabel} onClick={onToggle}>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d={collapsed ? 'm9 18 6-6-6-6' : 'm15 18-6-6 6-6'} />
             </svg>
