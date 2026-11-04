@@ -1,0 +1,98 @@
+.settings-section {
+  display: grid;
+  align-content: start;
+  gap: var(--space-card-gap);
+}
+
+.settings-heading {
+  display: grid;
+  gap: var(--space-heading-gap);
+  max-width: 760px;
+}
+
+.settings-heading h2 {
+  color: var(--white);
+  font-size: var(--type-h2);
+}
+
+.settings-heading p,
+.settings-notice,
+.settings-message {
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.settings-login {
+  display: grid;
+  max-width: 460px;
+  gap: var(--space-heading-gap);
+  padding: var(--space-card-pad);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.settings-login label {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.settings-login input {
+  width: 100%;
+  min-width: 0;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--navy);
+  color: var(--text);
+}
+
+.settings-login .btn,
+.settings-actions .btn {
+  justify-self: start;
+}
+
+.settings-editor {
+  display: grid;
+  gap: var(--space-card-gap);
+}
+
+.portfolio-main [data-portfolio-editable] {
+  cursor: text;
+}
+
+.portfolio-main [data-portfolio-editable]:hover {
+  outline: 1px dashed var(--accent);
+  outline-offset: 3px;
+}
+
+.portfolio-main [data-portfolio-editable]:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-card-gap);
+}
+
+.settings-editor-instructions {
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+.settings-notice {
+  padding: var(--space-card-pad);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.settings-message {
+  margin: 0;
+}
+
+.settings-section button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}

@@ -7,6 +7,12 @@ export default defineConfig({
   server: {
     open: true, // Automatically open the app in the browser
     port: 3000, // Specify the port for the development server
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
+    },
   },
   build: {
     outDir: 'dist', // Output directory for the build

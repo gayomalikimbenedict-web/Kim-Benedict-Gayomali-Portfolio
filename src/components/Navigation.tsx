@@ -11,6 +11,7 @@ const mainNavItems = [
   { label: 'Testimonials', href: '#testimonials', icon: 'message' },
   { label: 'About', href: '#about', icon: 'user' },
   { label: 'Contact', href: '#contact', icon: 'mail' },
+  { label: 'Settings', href: '#settings', icon: 'gear' },
 ] as const;
 
 const navItems = mainNavItems;

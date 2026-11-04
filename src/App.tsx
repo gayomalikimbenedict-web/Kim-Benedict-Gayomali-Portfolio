@@ -7,12 +7,51 @@ import Services from './components/Services';
 import Experience from './components/Experience';
 import About from './components/About';
 import Contact from './components/Contact';
+import Settings from './components/Settings';
 import { Testimonials } from './components/PortfolioHighlights';
+import { applyContentOverrides, isContentOverrides } from './contentOverrides';
+import type { ContentOverrides } from './contentOverrides';
 import './styles/global.css';
 import './App.css';
 
 const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [contentOverrides, setContentOverrides] = useState<ContentOverrides>({});
+  const [settingsApiError, setSettingsApiError] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    fetch('/api/content')
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error('The local settings server returned an error.');
+        }
+        return response.json();
+      })
+      .then((payload: { overrides?: unknown }) => {
+        if (!active) return;
+        if (!isContentOverrides(payload.overrides)) {
+          throw new Error('The local settings server returned invalid saved text.');
+        }
+        setContentOverrides(payload.overrides);
+        setSettingsApiError('');
+      })
+      .catch(() => {
+        if (active) {
+          setSettingsApiError(
+            'Local settings database unavailable. Start the Python settings server to unlock and save edits.'
+          );
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    applyContentOverrides(contentOverrides);
+  }, [contentOverrides]);
 
   useEffect(() => {
     const cards = Array.from(
@@ -206,6 +245,11 @@ const App: React.FC = () => {
           <About />
 
           <Contact />
+          <Settings
+            apiError={settingsApiError}
+            contentOverrides={contentOverrides}
+            onSaved={setContentOverrides}
+          />
         </main>
       </div>
     </Router>

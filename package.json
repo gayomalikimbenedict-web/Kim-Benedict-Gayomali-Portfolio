@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "settings:server": "python backend/server.py"
   },
   "dependencies": {
     "lucide-react": "^1.49.0",
