@@ -182,54 +182,24 @@ const services: ServiceItem[] = [
 
 const approach: ApproachItem[] = [
   {
-    title: "Identify the problem",
-    description: "I look at how people do their work and spot repetitive tasks and unnecessary steps.",
+    title: "Understand the workflow",
+    description: "I learn your goals, existing processes, and operational challenges.",
     icon: "expand",
   },
   {
-    title: "Define the requirements",
-    description: "I understand the real need first, so the tool solves an actual problem.",
+    title: "Plan the right solution",
+    description: "I define requirements, set priorities, and plan the best approach.",
     icon: "check",
   },
   {
-    title: "Set acceptance criteria",
-    description: "I define what done looks like before building anything.",
+    title: "Build and validate",
+    description: "I develop the solution incrementally, test its functionality, and verify results.",
     icon: "code",
   },
   {
-    title: "Plan the smallest solution",
-    description: "I make focused changes with a clear purpose, not extra features.",
+    title: "Refine and improve",
+    description: "I review feedback, make improvements, and ensure long-term value.",
     icon: "trending",
-  },
-  {
-    title: "Build one change at a time",
-    description: "Small, manageable improvements, not large simultaneous changes.",
-    icon: "code",
-  },
-  {
-    title: "Run relevant tests",
-    description: "I test functionality and consider security and data integrity.",
-    icon: "check",
-  },
-  {
-    title: "Inspect the real result",
-    description: "I check the actual application, including spacing, alignment, and usability.",
-    icon: "expand",
-  },
-  {
-    title: "Review the changes",
-    description: "I review every change against the agreed scope before moving on.",
-    icon: "trending",
-  },
-  {
-    title: "Approve and integrate",
-    description: "I decide what ships. AI assists, and I keep the final say.",
-    icon: "check",
-  },
-  {
-    title: "Move to the next step",
-    description: "I'd rather finish one improvement correctly than change several unchecked.",
-    icon: "code",
   },
 ];
 

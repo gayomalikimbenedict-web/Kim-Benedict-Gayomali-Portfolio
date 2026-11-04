@@ -1,26 +1,22 @@
 .experience-section {
   display: grid;
-  gap: var(--space-card-gap);
+  gap: 1.2rem;
 }
 
 .experience-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
-  gap: var(--space-card-gap);
+  gap: 1rem;
 }
 
 .experience-stack {
   display: grid;
-  gap: var(--space-card-gap);
-}
-
-.experience-section .panel-title {
-  margin-bottom: var(--space-heading-gap);
+  gap: 1rem;
 }
 
 .timeline {
   display: grid;
-  gap: var(--space-card-gap);
+  gap: 1rem;
   position: relative;
   padding-left: 1rem;
 }
@@ -39,7 +35,7 @@
   position: relative;
   display: grid;
   grid-template-columns: 26px minmax(0, 1fr);
-  gap: var(--space-card-gap);
+  gap: 0.8rem;
   align-items: start;
 }
 
@@ -69,7 +65,7 @@
 
 .timeline-body {
   display: grid;
-  gap: var(--space-heading-gap);
+  gap: 0.25rem;
 }
 
 .timeline-period {
@@ -106,23 +102,19 @@
 .bring-list,
 .focus-list {
   display: grid;
-  gap: var(--space-card-gap);
+  gap: 0.8rem;
 }
 
 .bring-row {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-card-gap);
-}
-
-.bring-row > div {
-  display: grid;
-  gap: var(--space-heading-gap);
+  gap: 0.8rem;
 }
 
 .bring-row strong {
   color: var(--white);
   display: block;
+  margin-bottom: 0.2rem;
 }
 
 .bring-row p {
@@ -134,7 +126,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: var(--space-card-gap);
+  gap: 0.5rem;
 }
 
 .focus-list .chip {
