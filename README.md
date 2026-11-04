@@ -64,10 +64,12 @@ npm run settings:server
 In a second terminal, start the portfolio with `npm run dev`. Open the Settings
 item in the sidebar and enter the passcode. Unlocking keeps the original
 portfolio visible and lets you edit its text in place. Use Save changes in the
-Settings section to save; Lock settings discards unsaved edits. Saved text is
-stored in `backend/data/portfolio-settings.sqlite3` and remains on this
-computer. The server binds to `127.0.0.1`; do not expose it to the public
-internet.
+Settings section to save; Lock settings discards unsaved text edits. The
+Settings Canvas also supports text boxes and JPG, PNG, or WebP pictures up to
+4 MB, with drag, resize, and rotation controls. Use Save canvas to persist its
+layout separately. Text and canvas data are stored in
+`backend/data/portfolio-settings.sqlite3` and remain on this computer. The
+server binds to `127.0.0.1`; do not expose it to the public internet.
 
 For a built local site, run `npm run build`, then start the Python server with
 the passcode set. It serves the built portfolio at `http://127.0.0.1:8000`.

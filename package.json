@@ -10,6 +10,7 @@
     "settings:server": "python backend/server.py"
   },
   "dependencies": {
+    "fabric": "^7.4.0",
     "lucide-react": "^1.49.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

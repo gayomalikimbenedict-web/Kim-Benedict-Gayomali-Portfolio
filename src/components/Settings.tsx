@@ -5,6 +5,7 @@ import {
   setPortfolioTextEditable,
 } from '../contentOverrides';
 import type { ContentOverrides } from '../contentOverrides';
+import SettingsCanvas from './SettingsCanvas';
 import './Settings.css';
 
 type SettingsProps = {
@@ -152,6 +153,7 @@ const Settings: React.FC<SettingsProps> = ({ apiError, contentOverrides, onSaved
               Lock settings
             </button>
           </div>
+          <SettingsCanvas />
         </div>
       )}
 
