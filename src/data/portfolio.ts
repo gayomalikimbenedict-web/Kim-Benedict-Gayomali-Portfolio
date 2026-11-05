@@ -226,7 +226,7 @@ const about = {
     "Workflow automation",
     "AI-assisted development",
   ],
-  photo: "/images/784db55f-efa8-403c-89a9-f09ff212016f.jfif",
+  photo: "/images/about-photo.webp",
   learning: ["Apps Script", "CRM Workflows", "Responsive Web Design"],
 };
 
@@ -254,7 +254,7 @@ export const portfolioData = {
     headlineAccent: "workflow automation.",
     subtext:
       "I build web applications, business dashboards, internal tools, and workflow automation solutions using modern development practices and AI-assisted coding tools. Open to selected freelance and part-time projects.",
-    portrait: "/images/avatar.png",
+    portrait: "/images/hero-portrait.webp",
   },
   whatIDo,
   projects,

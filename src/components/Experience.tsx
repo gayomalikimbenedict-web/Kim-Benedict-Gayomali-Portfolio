@@ -29,7 +29,7 @@ const Experience: React.FC = () => {
           <article className="panel chart-panel" aria-label="Break Schedule Tracker project">
             <img
               className="experience-project-image"
-              src="/images/break-schedule-tracker.png"
+              src="/images/break-schedule-tracker.webp"
               alt="Break Schedule Tracker dashboard for workforce management, showing live clock, team schedule, breaks, lunches, and adherence."
             />
           </article>

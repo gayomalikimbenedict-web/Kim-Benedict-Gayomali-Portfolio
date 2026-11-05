@@ -14,7 +14,7 @@ const NAV_ITEMS = [
   { label: 'Contact', href: '#contact', icon: 'mail' },
 ] as const;
 
-const PROFILE_PHOTO = '/images/Designer (8).png';
+const PROFILE_PHOTO = '/images/profile-photo.webp';
 
 type NavigationProps = {
   collapsed: boolean;
