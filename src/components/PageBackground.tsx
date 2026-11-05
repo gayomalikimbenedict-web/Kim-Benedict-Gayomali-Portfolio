@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { useWorkflowTrail } from '../hooks/useWorkflowTrail';
+import FrameBackground from './FrameBackground';
 
 // The four workflow steps (Understand, Plan, Build, Refine) drawn as circuit routes.
 // Each route runs: start -> across to midX -> down/up to end Y -> across to end.
@@ -24,6 +25,7 @@ const PageBackground: React.FC = () => {
 
   return (
     <div className="page-background" aria-hidden="true">
+      <FrameBackground />
       <div className="page-glow" />
       <svg ref={svgRef} className="page-grid" viewBox="0 0 1600 1200" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g className="flow-routes">
