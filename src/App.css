@@ -1,4 +1,4 @@
-﻿* {
+* {
   box-sizing: border-box;
 }
 
@@ -15,7 +15,7 @@ body {
   font-family: 'Manrope', sans-serif;
   font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -24,6 +24,7 @@ input,
 textarea,
 select {
   font: inherit;
+  font-size: var(--type-button);
 }
 
 button,
@@ -45,12 +46,10 @@ a:hover {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  --background-shift-x: 0px;
-  --background-shift-y: 0px;
   background: var(--navy);
   background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1.4px, transparent 1.4px);
   background-size: 28px 28px;
-  background-position: calc(50% + var(--background-shift-x)) calc(50% + var(--background-shift-y));
+  background-position: 50% 50%;
   overflow: hidden;
 }
 
@@ -60,60 +59,11 @@ a:hover {
   left: 50%;
   width: min(72vw, 780px);
   height: min(72vw, 780px);
-  transform: translate(
-    calc(-50% + var(--background-shift-x)),
-    var(--background-shift-y)
-  );
+  transform: translateX(-50%);
   background: radial-gradient(circle, rgba(72, 207, 219, 0.2) 0%, rgba(111, 211, 224, 0.08) 35%, transparent 70%);
   filter: blur(52px);
   opacity: 0.75;
   animation: backgroundGlow 8s ease-in-out infinite;
-}
-
-.page-orbit {
-  position: absolute;
-  top: calc(50% + var(--background-shift-y));
-  left: calc(74% + var(--background-shift-x));
-  width: min(440px, 52vw);
-  aspect-ratio: 1;
-  border: 1px solid rgba(88, 210, 225, 0.18);
-  border-radius: 50%;
-  animation: orbit 40s linear infinite;
-}
-
-.page-orbit::before {
-  position: absolute;
-  inset: 12%;
-  border: 1px dashed rgba(88, 210, 225, 0.1);
-  border-radius: inherit;
-  content: "";
-}
-
-.page-particle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 12px rgba(111, 211, 224, 0.8);
-  animation: particleFloat 7s ease-in-out infinite;
-}
-
-.page-particle--one {
-  top: calc(24% + var(--background-shift-y));
-  left: calc(78% + var(--background-shift-x));
-}
-
-.page-particle--two {
-  top: calc(62% + var(--background-shift-y));
-  left: calc(91% + var(--background-shift-x));
-  animation-delay: -2.3s;
-}
-
-.page-particle--three {
-  top: calc(78% + var(--background-shift-y));
-  left: calc(67% + var(--background-shift-x));
-  animation-delay: -4.6s;
 }
 
 .page-grid {
@@ -122,35 +72,42 @@ a:hover {
   width: 100%;
   height: 100%;
   opacity: 0.92;
-  transform: translate3d(var(--background-shift-x), var(--background-shift-y), 0);
 }
 
-.grid-lines path,
-.grid-dots circle {
+.flow-routes path {
+  fill: none;
+  stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
 }
 
-.grid-lines path {
-  fill: none;
+.flow-base {
   stroke: rgba(255, 255, 255, 0.08);
   stroke-width: 1;
 }
 
-.grid-dots circle {
-  fill: rgba(255, 255, 255, 0.06);
-}
-
-.pulse-line {
-  fill: none;
-  stroke: rgba(111, 211, 224, 0.42);
-  stroke-width: 1.2;
+.flow-lit {
+  stroke: rgba(111, 211, 224, 0.55);
+  stroke-width: 1.4;
   stroke-linecap: round;
-  stroke-dasharray: 10 12;
 }
 
-.pulse-dot {
+.flow-node {
+  fill: var(--navy);
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 1.2;
+  transition: fill 0.4s ease, stroke 0.4s ease, filter 0.4s ease;
+}
+
+.flow-node.is-lit {
+  fill: var(--accent);
+  stroke: rgba(111, 211, 224, 0.7);
+  filter: drop-shadow(0 0 8px rgba(111, 211, 224, 0.7));
+}
+
+.flow-dot {
   fill: var(--accent);
   filter: drop-shadow(0 0 10px rgba(111, 211, 224, 0.8));
+  transform-box: fill-box;
   transform-origin: center;
   animation: pulseMove 4.8s ease-in-out infinite;
 }
@@ -187,8 +144,8 @@ a:hover {
   min-height: calc(100vh - 88px);
   min-height: calc(100svh - 88px);
   height: auto;
-  margin-bottom: 24px;
-  padding: 24px;
+  margin-bottom: var(--gap);
+  padding: var(--gap);
   overflow: visible;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -214,7 +171,7 @@ a:hover {
   background: rgba(111, 211, 224, 0.08);
   font-size: var(--type-caption);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -222,8 +179,8 @@ a:hover {
 .section-title,
 .section-head h2 {
   font-size: var(--type-h2);
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: var(--weight-h2);
+  line-height: var(--lh-h2);
   letter-spacing: -0.04em;
 }
 
@@ -235,9 +192,9 @@ a:hover {
 .section-lede {
   max-width: 640px;
   color: var(--text-soft);
-  font-size: var(--type-body-large);
+  font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: var(--lh-body);
 }
 
 .panel {
@@ -248,25 +205,13 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
-.page-section:not(.home-section) .panel,
-.page-section:not(.home-section) .project-card,
-.page-section:not(.home-section) .approach-step,
-.page-section:not(.home-section) .how-step,
-.page-section:not(.home-section) .photo-frame,
-.page-section:not(.home-section) .credential-item,
-.page-section:not(.home-section) .testimonial-placeholder,
-.page-section:not(.home-section) .role-list li {
-  translate: 0 var(--scroll-parallax-y, 0px);
-  will-change: translate;
-}
-
 .panel-title {
   display: flex;
   align-items: center;
   gap: 0.7rem;
   margin-bottom: 1rem;
   color: var(--white);
-  font-weight: 600;
+  font-weight: var(--weight-h3);
 }
 
 .chip,
@@ -285,7 +230,7 @@ a:hover {
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.03);
   color: var(--white);
-  font-size: 0.8rem;
+  font-size: var(--type-caption);
   font-weight: 600;
 }
 
@@ -383,37 +328,11 @@ a:hover {
 
 @keyframes backgroundGlow {
   0%, 100% {
-    transform: translate(
-      calc(-50% + var(--background-shift-x)),
-      var(--background-shift-y)
-    ) scale(0.9);
+    transform: translateX(-50%) scale(0.9);
     opacity: 0.55;
   }
   50% {
-    transform: translate(
-      calc(-50% + var(--background-shift-x)),
-      var(--background-shift-y)
-    ) scale(1.12);
-    opacity: 1;
-  }
-}
-
-@keyframes orbit {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-@keyframes particleFloat {
-  0%, 100% {
-    transform: translate(0, 0);
-    opacity: 0.35;
-  }
-  50% {
-    transform: translate(12px, -20px);
+    transform: translateX(-50%) scale(1.12);
     opacity: 1;
   }
 }
@@ -458,7 +377,7 @@ a:hover {
 
   .page-section {
     min-height: calc(100svh - 72px);
-    padding: 20px;
-    margin-bottom: 18px;
+    padding: var(--gap);
+    margin-bottom: var(--gap);
   }
 }

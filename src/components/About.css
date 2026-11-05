@@ -24,7 +24,7 @@
 
 .about-kicker {
   color: var(--accent);
-  font-size: 1rem;
+  font-size: var(--type-caption);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -32,9 +32,9 @@
 
 .about-copy h2 {
   color: var(--white);
-  font-size: clamp(1.5rem, 2vw, 1.9rem);
-  font-weight: 700;
-  line-height: 1.4;
+  font-size: var(--type-h2);
+  font-weight: var(--weight-h2);
+  line-height: var(--lh-h2);
   letter-spacing: -0.025em;
 }
 
@@ -46,9 +46,9 @@
 
 .about-description p {
   color: var(--text-soft);
-  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: var(--lh-body);
 }
 
 .about-philosophy {
@@ -69,8 +69,8 @@
 
 .about-philosophy p {
   color: var(--text);
-  font-size: clamp(1.1rem, 1.3vw, 1.25rem);
-  line-height: 1.6;
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
 }
 
 .about-skills {
@@ -87,9 +87,9 @@
   border: 1px solid var(--border-strong);
   border-radius: 999px;
   color: var(--accent);
-  font-size: 0.85rem;
+  font-size: var(--type-caption);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
 }
 
 .photo-frame {
@@ -121,8 +121,8 @@
 .how-i-work h3 {
   color: var(--white);
   font-size: var(--type-h3);
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: var(--weight-h3);
+  line-height: var(--lh-h3);
 }
 
 .how-grid {
@@ -148,7 +148,7 @@
 
 .how-step p {
   color: var(--text-soft);
-  line-height: 1.6;
+  line-height: var(--lh-body);
 }
 
 @media (max-width: 900px) {

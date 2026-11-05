@@ -74,19 +74,19 @@
 .project-details h3 {
   color: var(--white);
   font-size: var(--type-h3);
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: var(--weight-h3);
+  line-height: var(--lh-h3);
   letter-spacing: -0.05em;
 }
 
 .project-details p {
   color: var(--text-soft);
-  line-height: 1.7;
+  line-height: var(--lh-body);
 }
 
 .project-checks {
   gap: 0.5rem;
-  font-size: 0.96rem;
+  font-size: var(--type-body);
 }
 
 .project-actions {

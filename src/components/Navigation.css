@@ -70,7 +70,7 @@
 
 .profile-name {
   color: var(--white);
-  font-size: 1.1rem;
+  font-size: var(--type-body);
   font-weight: 700;
 }
 
@@ -79,7 +79,7 @@
   color: var(--text-soft);
   font-size: var(--type-caption);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
 }
 
 .profile-name-row,
@@ -116,9 +116,9 @@
 
 .social-letter {
   display: inline-block;
-  font-size: 0.98rem;
+  font-size: var(--type-body);
   font-weight: 800;
-  line-height: 1;
+  line-height: var(--lh-body);
 }
 
 /* ---------- Links ---------- */
@@ -146,7 +146,7 @@
   border: 1px solid transparent;
   border-radius: 12px;
   color: var(--text);
-  font-size: 0.96rem;
+  font-size: var(--type-body);
   font-weight: 600;
 }
 
@@ -171,8 +171,8 @@
   margin: 0.8rem 0.8rem 0;
   white-space: nowrap;
   color: var(--text-soft);
-  font-size: 0.72rem;
-  line-height: 1.4;
+  font-size: var(--type-caption);
+  line-height: var(--lh-caption);
 }
 
 .sidebar-footer {
@@ -370,12 +370,12 @@
   }
 
   .profile-name {
-    font-size: 1rem;
+    font-size: var(--type-body);
   }
 
   .navigation-link {
     padding-left: 0.7rem;
     padding-right: 0.7rem;
-    font-size: 0.88rem;
+    font-size: var(--type-body);
   }
 }

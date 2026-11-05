@@ -16,17 +16,26 @@
   --border-strong: rgba(111, 211, 224, 0.35);
   --shadow: 0 18px 50px rgba(3, 8, 18, 0.42);
   --max-shell-width: 1540px;
+  --gap: 0.9rem;
+  --pad: 1.2rem;
   --radius-xl: 28px;
   --radius-lg: 20px;
   --radius-md: 14px;
   --radius-sm: 10px;
-  --type-h1: 48px;
-  --type-h2: 36px;
-  --type-h3: 24px;
-  --type-body-large: 18px;
-  --type-body: 16px;
-  --type-caption: 14px;
-  --type-button: 16px;
+  --type-h1: 1.875rem;
+  --type-h2: 1.5rem;
+  --type-h3: 1.25rem;
+  --type-body: 1rem;
+  --type-caption: 0.875rem;
+  --type-button: 1rem;
+  --lh-h1: 1.2;
+  --lh-h2: 1.25;
+  --lh-h3: 1.3;
+  --lh-body: 1.5;
+  --lh-caption: 1.4;
+  --weight-h1: 800;
+  --weight-h2: 700;
+  --weight-h3: 700;
   font-family: 'Manrope', sans-serif;
   color: var(--text);
   background: var(--navy);
@@ -55,7 +64,7 @@ body {
   font-family: 'Manrope', sans-serif;
   font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -95,50 +104,47 @@ h6 {
 h1,
 .type-h1 {
   font-size: var(--type-h1);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: var(--weight-h1);
+  line-height: var(--lh-h1);
 }
 
 h2,
 .type-h2 {
   font-size: var(--type-h2);
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: var(--weight-h2);
+  line-height: var(--lh-h2);
 }
 
 h3,
 .type-h3 {
   font-size: var(--type-h3);
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.type-body-large {
-  font-size: var(--type-body-large);
-  font-weight: 400;
-  line-height: 1.6;
+  font-weight: var(--weight-h3);
+  line-height: var(--lh-h3);
 }
 
 .type-body {
   font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--lh-body);
 }
 
 .type-caption {
   font-size: var(--type-caption);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
 }
 
+button,
+input,
+textarea,
+select,
+.btn,
 .type-button {
   font-size: var(--type-button);
-  font-weight: 600;
-  line-height: 1;
 }
 
-.btn {
-  font-size: var(--type-button);
+.btn,
+.type-button {
   font-weight: 600;
   line-height: 1;
 }
@@ -185,12 +191,15 @@ select {
   min-height: 100vh;
 }
 
-@media (max-width: 760px) {
+@media (min-width: 768px) {
   :root {
-    --type-h1: 32px;
-    --type-h2: 26px;
-    --type-h3: 20px;
-    --type-body-large: 16px;
-    --type-caption: 13px;
+    --type-h1: clamp(2.5rem, 1.75rem + 1.5625vw, 3rem);
+    --type-h2: 2rem;
+    --type-h3: 1.5rem;
+    --type-body: 1.125rem;
+    --lh-h1: 1.15;
+    --lh-h2: 1.2;
+    --lh-h3: 1.25;
+    --lh-body: 1.6;
   }
 }

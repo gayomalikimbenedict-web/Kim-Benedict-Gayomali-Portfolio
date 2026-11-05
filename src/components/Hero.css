@@ -23,7 +23,7 @@
   }
 
   .hero-headline {
-    font-size: clamp(2.35rem, 3.3vw, 2.8rem);
+    font-size: var(--type-h1);
   }
 
   .hero-portrait {
@@ -153,7 +153,7 @@
   color: var(--accent);
   font-size: var(--type-caption);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
 }
 
 .hero-eyebrow-dot {
@@ -169,17 +169,17 @@
   max-width: 17ch;
   color: var(--white);
   font-size: var(--type-h1);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: var(--weight-h1);
+  line-height: var(--lh-h1);
   letter-spacing: -0.05em;
 }
 
 .hero-subtext {
   max-width: 620px;
   color: var(--text-soft);
-  font-size: var(--type-body-large);
+  font-size: var(--type-body);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: var(--lh-body);
 }
 
 .hero-actions {
@@ -265,7 +265,7 @@
   color: var(--accent);
   font-size: var(--type-caption);
   font-weight: 700;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -274,7 +274,7 @@
   color: var(--white);
   font-size: var(--type-body);
   font-weight: 600;
-  line-height: 1.5;
+  line-height: var(--lh-body);
 }
 
 .hero-expertise-item {
@@ -298,14 +298,14 @@
   color: var(--white);
   font-size: var(--type-caption);
   font-weight: 600;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
 }
 
 .hero-expertise-item span {
   color: var(--text-soft);
   font-size: var(--type-caption);
   font-weight: 400;
-  line-height: 1.4;
+  line-height: var(--lh-caption);
 }
 
 @media (max-width: 1100px) and (min-width: 761px) {

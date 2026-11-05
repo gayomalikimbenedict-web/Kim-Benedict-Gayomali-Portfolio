@@ -9,15 +9,11 @@ import Experience from './components/Experience';
 import About from './components/About';
 import Contact from './components/Contact';
 import Testimonials from './components/Testimonials';
-import { useScrollParallax } from './hooks/useScrollParallax';
-import { useBackgroundDrift } from './hooks/useBackgroundDrift';
 import './styles/global.css';
 import './App.css';
 
 const App: React.FC = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  useScrollParallax();
-  useBackgroundDrift();
 
   return (
     <Router>
