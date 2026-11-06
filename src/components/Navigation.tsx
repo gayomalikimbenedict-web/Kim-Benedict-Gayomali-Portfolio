@@ -2,6 +2,7 @@ import React from 'react';
 import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
 import { useActiveSection } from '../hooks/useActiveSection';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Navigation.css';
 
 const NAV_ITEMS = [
@@ -23,6 +24,7 @@ type NavigationProps = {
 
 const Navigation: React.FC<NavigationProps> = ({ collapsed, onToggle }) => {
   const [activeItem, setActiveItem] = useActiveSection(NAV_ITEMS);
+  useDocumentTitle(activeItem);
   const { profile, contact } = portfolioData;
   const toggleLabel = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
 

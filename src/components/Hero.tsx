@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
+import { useLayerParallax } from '../hooks/useLayerParallax';
 import './Hero.css';
 
 const Hero: React.FC = () => {
@@ -9,97 +10,15 @@ const Hero: React.FC = () => {
   const vectorLayerRef = useRef<HTMLDivElement>(null);
   const contentLayerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const hero = heroRef.current;
-    const layers = [
-      { element: backgroundLayerRef.current, speed: 0.06 },
-      { element: vectorLayerRef.current, speed: 0.14 },
-      { element: contentLayerRef.current, speed: 0.22 },
-    ];
-
-    if (!hero || layers.some((layer) => !layer.element)) {
-      return;
-    }
-
-    const staticLayout = window.matchMedia(
-      '(max-width: 760px), (pointer: coarse), (prefers-reduced-motion: reduce)'
-    );
-    let heroTop = hero.getBoundingClientRect().top + window.scrollY;
-    let targetScroll = 0;
-    let currentScroll = 0;
-    let animationFrame = 0;
-
-    const resetLayers = () => {
-      layers.forEach(({ element }) => {
-        if (element) {
-          element.style.transform = 'translate3d(0, 0, 0)';
-        }
-      });
-    };
-
-    const animate = () => {
-      currentScroll += (targetScroll - currentScroll) * 0.12;
-
-      layers.forEach(({ element, speed }) => {
-        if (element) {
-          element.style.transform = `translate3d(0, ${-currentScroll * speed}px, 0)`;
-        }
-      });
-
-      if (Math.abs(targetScroll - currentScroll) > 0.1) {
-        animationFrame = window.requestAnimationFrame(animate);
-      } else {
-        currentScroll = targetScroll;
-        layers.forEach(({ element, speed }) => {
-          if (element) {
-            element.style.transform = `translate3d(0, ${-currentScroll * speed}px, 0)`;
-          }
-        });
-        animationFrame = 0;
-      }
-    };
-
-    const updateTarget = () => {
-      targetScroll = Math.max(0, window.scrollY - heroTop);
-      if (!animationFrame) {
-        animationFrame = window.requestAnimationFrame(animate);
-      }
-    };
-
-    const updateMotion = () => {
-      if (staticLayout.matches) {
-        window.removeEventListener('scroll', updateTarget);
-        window.removeEventListener('resize', updateHeroTop);
-        window.cancelAnimationFrame(animationFrame);
-        animationFrame = 0;
-        targetScroll = 0;
-        currentScroll = 0;
-        resetLayers();
-        return;
-      }
-
-      heroTop = hero.getBoundingClientRect().top + window.scrollY;
-      window.addEventListener('scroll', updateTarget, { passive: true });
-      window.addEventListener('resize', updateHeroTop);
-      updateTarget();
-    };
-
-    function updateHeroTop() {
-      heroTop = hero.getBoundingClientRect().top + window.scrollY;
-      updateTarget();
-    }
-
-    updateMotion();
-    staticLayout.addEventListener('change', updateMotion);
-
-    return () => {
-      staticLayout.removeEventListener('change', updateMotion);
-      window.removeEventListener('scroll', updateTarget);
-      window.removeEventListener('resize', updateHeroTop);
-      window.cancelAnimationFrame(animationFrame);
-      resetLayers();
-    };
-  }, []);
+  const layers = useMemo(
+    () => [
+      { ref: backgroundLayerRef, speed: 0.06 },
+      { ref: vectorLayerRef, speed: 0.14 },
+      { ref: contentLayerRef, speed: 0.22 },
+    ],
+    []
+  );
+  useLayerParallax(heroRef, layers);
 
   return (
     <section className="hero" ref={heroRef} aria-labelledby="home-title">
@@ -143,6 +62,10 @@ const Hero: React.FC = () => {
               <a href="#contact" className="btn btn-secondary">
                 <Icon name="mail" size={18} />
                 Get in Touch
+              </a>
+              <a href="/Kim_Benedict_Gayomali_Resume.pdf" className="btn btn-secondary" download>
+                <Icon name="download" size={18} />
+                Download CV
               </a>
             </div>
           </div>

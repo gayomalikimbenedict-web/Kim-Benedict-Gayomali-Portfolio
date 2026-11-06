@@ -229,8 +229,25 @@
   line-height: var(--lh-body);
 }
 
-.form-status a {
+.form-status--success {
   color: var(--accent);
+}
+
+.form-status--error {
+  color: #ff9b9b;
+}
+
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.message-form .btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
 
 @media (max-width: 900px) {

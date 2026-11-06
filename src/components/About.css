@@ -1,12 +1,13 @@
-.about-section {
+.page-section.about-section {
   display: grid;
-  gap: 1.5rem;
+  align-content: start;
+  min-height: 0;
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.9fr);
-  gap: 1rem;
+  gap: var(--gap);
   align-items: stretch;
 }
 
@@ -16,7 +17,7 @@
   align-content: stretch;
   gap: clamp(0.85rem, 1.7vh, 1.25rem);
   min-width: 0;
-  padding: clamp(1.4rem, 2.6vw, 2rem);
+  padding: var(--pad);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   background: rgba(16, 26, 53, 0.82);
@@ -32,9 +33,6 @@
 
 .about-copy h2 {
   color: var(--white);
-  font-size: var(--type-h2);
-  font-weight: var(--weight-h2);
-  line-height: var(--lh-h2);
   letter-spacing: -0.025em;
 }
 
@@ -46,9 +44,6 @@
 
 .about-description p {
   color: var(--text-soft);
-  font-size: var(--type-body);
-  font-weight: 400;
-  line-height: var(--lh-body);
 }
 
 .about-philosophy {
@@ -69,8 +64,6 @@
 
 .about-philosophy p {
   color: var(--text);
-  font-size: var(--type-body);
-  line-height: var(--lh-body);
 }
 
 .about-skills {
@@ -96,7 +89,7 @@
   width: 100%;
   min-height: 100%;
   justify-self: stretch;
-  padding: 0.6rem;
+  padding: var(--gap);
   border: 1px solid rgba(111, 211, 224, 0.35);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.02);
@@ -113,47 +106,8 @@
   border-radius: 14px;
 }
 
-.how-i-work {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.how-i-work h3 {
-  color: var(--white);
-  font-size: var(--type-h3);
-  font-weight: var(--weight-h3);
-  line-height: var(--lh-h3);
-}
-
-.how-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.how-step {
-  display: grid;
-  align-content: start;
-  min-width: 0;
-  gap: 0.65rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-}
-
-.how-step strong {
-  color: var(--white);
-}
-
-.how-step p {
-  color: var(--text-soft);
-  line-height: var(--lh-body);
-}
-
 @media (max-width: 900px) {
-  .about-grid,
-  .how-grid {
+  .about-grid {
     grid-template-columns: 1fr;
   }
 

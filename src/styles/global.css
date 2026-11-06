@@ -101,50 +101,33 @@ h6 {
   line-height: 1.1;
 }
 
-h1,
-.type-h1 {
+h1 {
   font-size: var(--type-h1);
   font-weight: var(--weight-h1);
   line-height: var(--lh-h1);
 }
 
-h2,
-.type-h2 {
+h2 {
   font-size: var(--type-h2);
   font-weight: var(--weight-h2);
   line-height: var(--lh-h2);
 }
 
-h3,
-.type-h3 {
+h3 {
   font-size: var(--type-h3);
   font-weight: var(--weight-h3);
   line-height: var(--lh-h3);
-}
-
-.type-body {
-  font-size: var(--type-body);
-  font-weight: 400;
-  line-height: var(--lh-body);
-}
-
-.type-caption {
-  font-size: var(--type-caption);
-  font-weight: 500;
-  line-height: var(--lh-caption);
 }
 
 button,
 input,
 textarea,
 select,
-.btn,
-.type-button {
+.btn {
   font-size: var(--type-button);
 }
 
-.btn,
-.type-button {
+.btn {
   font-weight: 600;
   line-height: 1;
 }

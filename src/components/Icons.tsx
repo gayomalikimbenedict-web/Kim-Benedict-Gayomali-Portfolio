@@ -23,6 +23,7 @@ export type IconName =
   | 'wrench'
   | 'message'
   | 'expand'
+  | 'download'
   | 'github';
 
 export type IconProps = {
@@ -129,6 +130,14 @@ const Icon: React.FC<IconProps> = ({ name, size = 20, className }) => {
           <>
             <path d="M3 11.5 20 4l-4.5 16-4.5-6.5L3 11.5Z" />
             <path d="M20 4 11 13" />
+          </>
+        );
+      case 'download':
+        return (
+          <>
+            <path d="M12 4v11" />
+            <path d="m7 11 5 5 5-5" />
+            <path d="M5 20h14" />
           </>
         );
       case 'bolt':

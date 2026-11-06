@@ -270,5 +270,17 @@ export const portfolioData = {
       attribution: "Operations stakeholder, e-commerce BPO client",
       tag: "Reporting template",
     },
+    {
+      quote:
+        "We use these templates to handle our core weekly reports now. Tasks that forced our operations team to waste half a day are fully resolved in under three minutes.",
+      attribution: "Operations Lead, E-commerce Logistics Team",
+      tag: "Weekly reports",
+    },
+    {
+      quote:
+        "Our managers review store performance metrics directly from the automated output dashboard. We no longer waste time hunting down broken formatting cells before meetings.",
+      attribution: "Operations Director, Multi-Store Shopify Brand",
+      tag: "Dashboard output",
+    },
   ],
 };

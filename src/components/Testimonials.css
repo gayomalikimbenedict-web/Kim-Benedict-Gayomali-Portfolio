@@ -1,20 +1,25 @@
 .testimonials-card {
-    min-width: 0;
     display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 1rem;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+}
+
+.testimonial-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap);
 }
 
 .testimonial-placeholder {
     position: relative;
     display: flex;
-    min-height: 150px;
     flex-direction: column;
-    justify-content: center;
-    padding: 1.25rem 1.4rem;
+    margin: 0;
+    padding: var(--pad);
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 13px;
+    border-radius: var(--radius-lg);
 }
 
 .quote-mark {
@@ -28,12 +33,15 @@
 }
 
 .testimonial-placeholder p {
-    max-width: 28ch;
-    margin: 0.6rem 0 0.9rem;
+    display: grid;
+    flex: 1;
+    align-content: center;
+    margin: 0 0 var(--pad);
+    padding-top: 2.5rem;
     color: var(--white);
-    font-size: var(--type-body);
-    font-weight: 700;
-    line-height: var(--lh-body);
+    font-size: var(--type-h3);
+    font-weight: var(--weight-h3);
+    line-height: var(--lh-h3);
 }
 
 .testimonial-placeholder footer {
@@ -41,6 +49,8 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem 0.75rem;
+    padding-top: var(--pad);
+    border-top: 1px solid var(--border);
 }
 
 .testimonial-tag {
@@ -61,8 +71,16 @@
     line-height: var(--lh-caption);
 }
 
-@media (max-width: 640px) {
-    .testimonials-card {
+@media (max-width: 1100px) {
+    .testimonial-list {
         grid-template-columns: 1fr;
+    }
+
+    .testimonials-card {
+        grid-template-rows: auto;
+    }
+
+    .testimonial-placeholder p {
+        flex: none;
     }
 }

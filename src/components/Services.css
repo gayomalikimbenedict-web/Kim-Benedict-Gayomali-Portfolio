@@ -41,14 +41,10 @@
 
 .service-copy h3 {
   color: var(--white);
-  font-size: var(--type-h3);
-  font-weight: var(--weight-h3);
-  line-height: var(--lh-h3);
 }
 
 .service-copy p {
   color: var(--text-soft);
-  line-height: var(--lh-body);
 }
 
 .service-link {
@@ -63,9 +59,6 @@
 
 .approach-panel h3 {
   color: var(--white);
-  font-size: var(--type-h3);
-  font-weight: var(--weight-h3);
-  line-height: var(--lh-h3);
   margin-bottom: var(--gap);
 }
 
@@ -143,9 +136,7 @@
 
 .approach-step p {
   color: var(--text-soft);
-  line-height: var(--lh-body);
   margin: 0;
-  font-size: var(--type-body);
 }
 
 .approach-arrow {

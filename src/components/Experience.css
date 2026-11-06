@@ -1,17 +1,23 @@
-.experience-section {
+.page-section.experience-section {
   display: grid;
-  gap: 1.2rem;
+  align-content: start;
+  min-height: 0;
 }
 
 .experience-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
-  gap: 1rem;
+  gap: var(--gap);
 }
 
 .experience-stack {
   display: grid;
-  gap: 1rem;
+  align-content: start;
+  gap: var(--gap);
+}
+
+.experience-section .panel {
+  padding: var(--pad);
 }
 
 .timeline {
@@ -84,13 +90,10 @@
 
 .timeline-body p {
   color: var(--text-soft);
-  line-height: var(--lh-body);
 }
 
 .chart-panel {
-  padding: 0;
   overflow: hidden;
-  background: #fff;
 }
 
 .experience-project-image {
@@ -119,7 +122,6 @@
 
 .bring-row p {
   color: var(--text-soft);
-  line-height: var(--lh-body);
 }
 
 .focus-list {

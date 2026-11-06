@@ -71,7 +71,7 @@ a:hover {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.92;
+  opacity: 0.45;
 }
 
 .flow-routes path {
@@ -151,50 +151,8 @@ a:hover {
   border-radius: var(--radius-xl);
 }
 
-.section-head {
-  display: grid;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-
-.section-kicker {
-  display: inline-flex;
-  width: fit-content;
-  min-height: 34px;
-  align-items: center;
-  justify-self: start;
-  white-space: nowrap;
-  padding: 0.38rem 0.7rem;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  color: var(--accent);
-  background: rgba(111, 211, 224, 0.08);
-  font-size: var(--type-caption);
-  font-weight: 500;
-  line-height: var(--lh-caption);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.section-title,
-.section-head h2 {
-  font-size: var(--type-h2);
-  font-weight: var(--weight-h2);
-  line-height: var(--lh-h2);
-  letter-spacing: -0.04em;
-}
-
-.section-title .accent,
 .accent {
   color: var(--accent);
-}
-
-.section-lede {
-  max-width: 640px;
-  color: var(--text-soft);
-  font-size: var(--type-body);
-  font-weight: 400;
-  line-height: var(--lh-body);
 }
 
 .panel {

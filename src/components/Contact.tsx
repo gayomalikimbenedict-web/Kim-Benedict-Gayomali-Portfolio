@@ -1,28 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from './Icons';
 import { portfolioData } from '../data/portfolio';
+import { useContactForm } from '../hooks/useContactForm';
 import './Contact.css';
 
 const Contact: React.FC = () => {
-  const [statusMessage, setStatusMessage] = useState('');
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-    const name = (formData.get('name') || '').toString().trim();
-    const email = (formData.get('email') || '').toString().trim();
-    const message = (formData.get('message') || '').toString().trim();
-
-    if (!name || !email || !message) {
-      setStatusMessage('Please fill in your name, email, and project details before sending.');
-      return;
-    }
-
-    setStatusMessage(
-      'This form is not connected yet, so nothing was sent. For now, please reach me on LinkedIn.'
-    );
-  };
+  const { status, handleSubmit } = useContactForm(portfolioData.contact.email);
 
   const linkedinLink = portfolioData.contact.linkedin || '#contact';
   const facebookLink = portfolioData.contact.facebook || '';
@@ -98,12 +81,12 @@ const Contact: React.FC = () => {
           <form className="message-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Your name</label>
             <div className="form-field">
-              <input id="name" name="name" type="text" placeholder="Enter your name..." required />
+              <input id="name" name="name" type="text" placeholder="Enter your name..." maxLength={100} autoComplete="name" required />
             </div>
 
             <label htmlFor="email">Email address</label>
             <div className="form-field">
-              <input id="email" name="email" type="email" placeholder="Enter your email..." required />
+              <input id="email" name="email" type="email" placeholder="Enter your email..." maxLength={254} autoComplete="email" required />
             </div>
 
             <label htmlFor="message">What would you like to build?</label>
@@ -112,22 +95,22 @@ const Contact: React.FC = () => {
                 id="message"
                 name="message"
                 placeholder="Describe your project, goals, and requirements..."
+                maxLength={2000}
                 required
               />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <input className="form-honeypot" name="_gotcha" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
+            <button type="submit" className="btn btn-primary" disabled={status.kind === 'sending'}>
               <Icon name="send" size={18} />
-              Start a conversation
+              {status.kind === 'sending' ? 'Sending…' : 'Start a conversation'}
               <Icon name="arrow-right" size={18} />
             </button>
 
-            {statusMessage ? (
-              <p className="form-status" role="status" aria-live="polite">
-                {statusMessage}{' '}
-                {portfolioData.contact.linkedin ? (
-                  <a href={linkedinLink} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                ) : null}
+            {status.message ? (
+              <p className={`form-status form-status--${status.kind}`} role="status" aria-live="polite">
+                {status.message}
               </p>
             ) : null}
           </form>
