@@ -4,19 +4,37 @@ import { portfolioData } from '../data/portfolio';
 import './Services.css';
 
 const Services: React.FC = () => {
+  const { services, approach } = portfolioData;
+
   return (
-    <section id="services" className="page-section services-section" aria-label="Services">
-      <div className="service-rows">
-        {portfolioData.services.map((service) => (
-          <article key={service.title} className="service-row panel">
-            <div className="service-number">{service.number}</div>
-            <span className="icon-tile"><Icon name={service.icon} size={20} /></span>
-            <div className="service-copy">
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
+    <section id="services" className="page-section services-section" aria-labelledby="services-title">
+      <header className="services-header">
+        <span className="chip">Services</span>
+        <h2 id="services-title">
+          What I can build for <span className="accent">your operations</span>
+        </h2>
+        <p>Automation, reporting, and web tools shaped by real operations experience.</p>
+      </header>
+
+      <div className="service-grid">
+        {services.map((service) => (
+          <article key={service.title} className="service-card panel">
+            <div className="service-card-top">
+              <span className="icon-tile"><Icon name={service.icon} size={22} /></span>
+              <span className="service-number" aria-hidden="true">{service.number}</span>
             </div>
-            <a href="#projects" className="text-link service-link">
-              Explore work
+
+            <h3>{service.title}</h3>
+            <p className="service-description">{service.description}</p>
+
+            <ul className="service-tags" aria-label={`${service.title} includes`}>
+              {service.tags.map((tag) => (
+                <li key={tag}>{tag}</li>
+              ))}
+            </ul>
+
+            <a href="#contact" className="text-link service-link">
+              Discuss this service
               <Icon name="arrow-right" size={16} />
             </a>
           </article>
@@ -25,57 +43,17 @@ const Services: React.FC = () => {
 
       <div className="approach-panel panel">
         <h3>How I approach a project</h3>
-        <div className="approach-flow">
-          <div className="approach-row">
-            <article className="approach-step">
-              <div className="step-header">
-                <span className="step-number">01</span>
-                <span className="step-icon"><Icon name={portfolioData.approach[0].icon} size={28} /></span>
+        <ol className="approach-steps">
+          {approach.map((step, index) => (
+            <li key={step.title} className="approach-step">
+              <div className="approach-marker">
+                <span className="step-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
               </div>
-              <div className="step-copy">
-                <strong>{portfolioData.approach[0].title}</strong>
-                <p>{portfolioData.approach[0].description}</p>
-              </div>
-            </article>
-            <span className="approach-arrow approach-arrow--right" aria-hidden="true">→</span>
-            <article className="approach-step">
-              <div className="step-header">
-                <span className="step-number">02</span>
-                <span className="step-icon"><Icon name={portfolioData.approach[1].icon} size={28} /></span>
-              </div>
-              <div className="step-copy">
-                <strong>{portfolioData.approach[1].title}</strong>
-                <p>{portfolioData.approach[1].description}</p>
-              </div>
-            </article>
-          </div>
-
-          <span className="approach-arrow approach-arrow--vertical" aria-hidden="true">↓</span>
-
-          <div className="approach-row approach-row--bottom">
-            <article className="approach-step">
-              <div className="step-header">
-                <span className="step-number">04</span>
-                <span className="step-icon"><Icon name={portfolioData.approach[3].icon} size={28} /></span>
-              </div>
-              <div className="step-copy">
-                <strong>{portfolioData.approach[3].title}</strong>
-                <p>{portfolioData.approach[3].description}</p>
-              </div>
-            </article>
-            <span className="approach-arrow approach-arrow--left" aria-hidden="true">←</span>
-            <article className="approach-step">
-              <div className="step-header">
-                <span className="step-number">03</span>
-                <span className="step-icon"><Icon name={portfolioData.approach[2].icon} size={28} /></span>
-              </div>
-              <div className="step-copy">
-                <strong>{portfolioData.approach[2].title}</strong>
-                <p>{portfolioData.approach[2].description}</p>
-              </div>
-            </article>
-          </div>
-        </div>
+              <strong>{step.title}</strong>
+              <p>{step.description}</p>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

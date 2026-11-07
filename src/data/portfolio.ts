@@ -20,8 +20,8 @@ export type PortfolioProject = {
 export type ServiceItem = {
   number: string;
   title: string;
-  summary: string;
   description: string;
+  tags: string[];
   icon: IconName;
 };
 
@@ -97,26 +97,34 @@ const moreWork = ["Automation tools", "Reporting dashboards", "Business web apps
 const services: ServiceItem[] = [
   {
     number: "01",
-    title: "Reporting & Workforce Analytics",
-    summary: "Track performance, monitor adherence, and turn data into clear insights.",
+    title: "Spreadsheet Automation Templates",
     description:
-      "Real-time monitoring, adherence tracking, shrinkage analysis, and operational reporting to keep your team on track.",
-    icon: "chart",
-  },
-  {
-    number: "02",
-    title: "Spreadsheet & Workflow Automation",
-    summary: "Streamline workflows with Excel, Google Sheets, and Apps Script.",
-    description:
-      "Excel, Google Sheets, and Apps Script solutions for automating repetitive tasks, cleaning data, and generating reports.",
+      "Plug-and-play Google Sheets templates that dedupe, standardize, and match messy CSV exports in one click. No formulas or coding needed.",
+    tags: ["Order Data Cleaner", "Shopify Reconciler", "Multi-Sheet Merge & Dedupe"],
     icon: "sheet",
   },
   {
-    number: "03",
-    title: "Web & Business Systems",
-    summary: "Build simple, responsive web tools for your business.",
+    number: "02",
+    title: "Reporting & Workforce Analytics",
     description:
-      "Landing pages, CRM setup, and scheduling workflows to support your business and operations.",
+      "Turn raw call, chat, and ticket logs into clean scorecards and share-ready reports, shaped by hands-on Real-Time Analyst experience.",
+    tags: ["Agent Performance Tracker", "Auto Report Builder", "SLA & adherence reporting"],
+    icon: "chart",
+  },
+  {
+    number: "03",
+    title: "Custom Automation & Setup Support",
+    description:
+      "Have an unusual export layout or a repetitive routine? I adapt the mapping or build a custom workflow your team can run without training.",
+    tags: ["Input mapping", "Custom Apps Script", "Setup guidance"],
+    icon: "bolt",
+  },
+  {
+    number: "04",
+    title: "Web & Business Systems",
+    description:
+      "Responsive landing pages, CRM setup, and scheduling workflows that support your business and operations.",
+    tags: ["Landing pages", "CRM setup", "Scheduling workflows"],
     icon: "code",
   },
 ];
@@ -266,9 +274,16 @@ export const portfolioData = {
   contact,
   testimonials: [
     {
-      quote: "Thanks for alignment yesterday, this is good start, team!",
-      attribution: "Operations stakeholder, e-commerce BPO client",
-      tag: "Reporting template",
+      quote:
+        "I'm on off and I didn't see the message. Thank God you managed the SLA, otherwise gone.",
+      attribution: "Subject Matter Expert, e-commerce client",
+      tag: "SLA protection",
+    },
+    {
+      quote:
+        "I've already huddled with the agents on what needs to be done. Today we successfully managed it. Thank you so much.",
+      attribution: "Subject Matter Expert, e-commerce client",
+      tag: "Real-time coordination",
     },
     {
       quote:

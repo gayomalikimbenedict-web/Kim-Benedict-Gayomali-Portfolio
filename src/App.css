@@ -66,52 +66,6 @@ a:hover {
   animation: backgroundGlow 8s ease-in-out infinite;
 }
 
-.page-grid {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.45;
-}
-
-.flow-routes path {
-  fill: none;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-
-.flow-base {
-  stroke: rgba(255, 255, 255, 0.08);
-  stroke-width: 1;
-}
-
-.flow-lit {
-  stroke: rgba(111, 211, 224, 0.55);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-}
-
-.flow-node {
-  fill: var(--navy);
-  stroke: rgba(255, 255, 255, 0.14);
-  stroke-width: 1.2;
-  transition: fill 0.4s ease, stroke 0.4s ease, filter 0.4s ease;
-}
-
-.flow-node.is-lit {
-  fill: var(--accent);
-  stroke: rgba(111, 211, 224, 0.7);
-  filter: drop-shadow(0 0 8px rgba(111, 211, 224, 0.7));
-}
-
-.flow-dot {
-  fill: var(--accent);
-  filter: drop-shadow(0 0 10px rgba(111, 211, 224, 0.8));
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pulseMove 4.8s ease-in-out infinite;
-}
-
 .portfolio-shell {
   position: relative;
   z-index: 1;
@@ -263,25 +217,6 @@ a:hover {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 0 4px rgba(111, 211, 224, 0.12);
-}
-
-@keyframes pulseMove {
-  0% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
-  22% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.05);
-  }
-  100% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
 }
 
 @keyframes backgroundGlow {
