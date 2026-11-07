@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,3 +13,52 @@
     <script type="module" src="src/main.tsx"></script>
 </body>
 </html>
+=======
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- data-static-meta: for crawlers that do not run JS. main.tsx removes them on boot so each route owns one title + description.
+         Keep this head in step with content/site.ts and the Home entry in src/app/routes.ts. -->
+    <title data-static-meta>Kim Benedict Gayomali | AI-Assisted Full-Stack Developer</title>
+    <meta data-static-meta name="description" content="AI-assisted full-stack developer building business dashboards, workflow automation and web tools. Open to selected freelance and part-time projects." />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" />
+    <!-- The phone bar's mark is the mobile LCP; dark is the default theme, so its mark loads first. -->
+    <link rel="preload" href="/images/brand/mark-light-96.webp" as="image" fetchpriority="high" />
+    <meta name="theme-color" content="#0B132B" />
+
+    <meta property="og:type" content="website" />
+    <!-- Link previews: absolute URLs on your domain. The preview image is public/og-image.jpg. -->
+    <meta property="og:site_name" content="Kim Benedict Gayomali - Sechurplets Studio" />
+    <meta property="og:url" content="https://kimbenedictgayomali-portfolio.vercel.app/" />
+    <meta property="og:title" content="Kim Benedict Gayomali | AI-Assisted Full-Stack Developer" />
+    <meta property="og:description" content="AI-assisted full-stack developer building business dashboards, workflow automation and web tools. Open to selected freelance and part-time projects." />
+    <meta property="og:image" content="https://kimbenedictgayomali-portfolio.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Kim Benedict Gayomali, AI-Assisted Full-Stack Developer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://kimbenedictgayomali-portfolio.vercel.app/og-image.jpg" />
+
+    <!-- Dark by default; a saved light pick is applied before first paint, so it never flashes dark first.
+         Mirrors src/lib/theme.ts. The deploy CSP allows this script by hash: after any edit run npm run csp:check. -->
+    <script>
+      try {
+        if (localStorage.getItem('pv2-theme') === 'light') {
+          document.documentElement.dataset.theme = 'light'
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#F2F8FB')
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+>>>>>>> portfolio-v2

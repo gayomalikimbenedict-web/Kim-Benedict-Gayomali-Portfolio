@@ -1,0 +1,273 @@
+{
+  "communities": {
+    "0": [
+      "src_components_icons_iconname",
+      "src_components_toolsmarquee",
+      "src_components_toolsmarquee_brandicons",
+      "src_components_toolsmarquee_genericicons",
+      "src_components_toolsmarquee_toollogo",
+      "src_components_toolsmarquee_toolsmarquee",
+      "src_data_portfolio",
+      "src_data_portfolio_about",
+      "src_data_portfolio_approach",
+      "src_data_portfolio_approachitem",
+      "src_data_portfolio_brandtooliconname",
+      "src_data_portfolio_bringitem",
+      "src_data_portfolio_contact",
+      "src_data_portfolio_experience",
+      "src_data_portfolio_generictooliconname",
+      "src_data_portfolio_morework",
+      "src_data_portfolio_portfoliotool",
+      "src_data_portfolio_portfoliotoolicon",
+      "src_data_portfolio_profiledata",
+      "src_data_portfolio_projects",
+      "src_data_portfolio_serviceitem",
+      "src_data_portfolio_services",
+      "src_data_portfolio_timelineitem",
+      "src_data_portfolio_tools",
+      "src_data_portfolio_whatido",
+      "src_data_portfolio_whatidoitem"
+    ],
+    "1": [
+      "tsconfig",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_allowjs",
+      "tsconfig_compileroptions_esmoduleinterop",
+      "tsconfig_compileroptions_forceconsistentcasinginfilenames",
+      "tsconfig_compileroptions_ignoredeprecations",
+      "tsconfig_compileroptions_isolatedmodules",
+      "tsconfig_compileroptions_jsx",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_resolvejsonmodule",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_strict",
+      "tsconfig_compileroptions_target",
+      "tsconfig_exclude",
+      "tsconfig_include"
+    ],
+    "2": [
+      "ref_react",
+      "src_app",
+      "src_app_app",
+      "src_components_about",
+      "src_components_about_about",
+      "src_components_contact",
+      "src_components_contact_contact",
+      "src_components_experience",
+      "src_components_experience_experience",
+      "src_components_services",
+      "src_components_services_services",
+      "src_data_portfolio_portfoliodata",
+      "src_main",
+      "src_styles_global"
+    ],
+    "3": [
+      "package_dependencies",
+      "package_dependencies_lucide_react",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_icons",
+      "package_dependencies_react_router_dom",
+      "ref_lucide_react",
+      "ref_react_dom",
+      "ref_react_icons",
+      "ref_react_router_dom"
+    ],
+    "4": [
+      "package_devdependencies",
+      "package_devdependencies_types_react",
+      "package_devdependencies_types_react_router_dom",
+      "package_devdependencies_vite",
+      "package_devdependencies_vitejs_plugin_react",
+      "ref_types_react",
+      "ref_types_react_router_dom",
+      "ref_vite",
+      "ref_vitejs_plugin_react",
+      "vite_config"
+    ],
+    "5": [
+      "package",
+      "package_author",
+      "package_description",
+      "package_keywords",
+      "package_license",
+      "package_main",
+      "package_name",
+      "package_version"
+    ],
+    "6": [
+      "src_components_hero",
+      "src_components_hero_hero",
+      "src_components_hero_hero_updateherotop",
+      "src_components_homeoverview",
+      "src_components_homeoverview_homeoverview",
+      "src_components_icons",
+      "src_components_icons_icon",
+      "src_components_icons_iconprops"
+    ],
+    "7": [
+      "src_components_portfoliohighlights",
+      "src_components_portfoliohighlights_credentials",
+      "src_components_portfoliohighlights_results",
+      "src_components_portfoliohighlights_roles",
+      "src_components_portfoliohighlights_testimonials"
+    ],
+    "8": [
+      "src_components_projects",
+      "src_components_projects_demopreview",
+      "src_components_projects_demopreviewprops",
+      "src_components_projects_projects",
+      "src_data_portfolio_portfolioproject"
+    ],
+    "9": [
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_dev",
+      "package_scripts_serve"
+    ],
+    "10": [
+      "src_components_navigation",
+      "src_components_navigation_mainnavitems",
+      "src_components_navigation_navigation"
+    ],
+    "11": [
+      "package_dependencies_typescript",
+      "ref_typescript"
+    ],
+    "12": [
+      "package_devdependencies_types_react_dom",
+      "ref_types_react_dom"
+    ]
+  },
+  "cohesion": {
+    "0": 0.08923076923076922,
+    "1": 0.1111111111111111,
+    "2": 0.32967032967032966,
+    "3": 0.2,
+    "4": 0.2222222222222222,
+    "5": 0.25,
+    "6": 0.39285714285714285,
+    "7": 0.4,
+    "8": 0.5,
+    "9": 0.5,
+    "10": 0.6666666666666666,
+    "11": 1.0,
+    "12": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_components_icons_icon",
+      "label": "Icon()",
+      "degree": 16
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 15
+    },
+    {
+      "id": "ref_react",
+      "label": "react",
+      "degree": 15
+    },
+    {
+      "id": "src_data_portfolio_portfoliodata",
+      "label": "portfolioData",
+      "degree": 11
+    },
+    {
+      "id": "src_app_app",
+      "label": "App()",
+      "degree": 10
+    },
+    {
+      "id": "src_components_hero_hero",
+      "label": "Hero()",
+      "degree": 5
+    },
+    {
+      "id": "src_components_projects_projects",
+      "label": "Projects()",
+      "degree": 5
+    },
+    {
+      "id": "src_components_navigation_navigation",
+      "label": "Navigation()",
+      "degree": 4
+    },
+    {
+      "id": "src_components_contact_contact",
+      "label": "Contact()",
+      "degree": 4
+    },
+    {
+      "id": "src_components_experience_experience",
+      "label": "Experience()",
+      "degree": 4
+    }
+  ],
+  "surprises": [
+    {
+      "source": "App()",
+      "target": "Navigation()",
+      "source_files": [
+        "src/App.tsx",
+        "src/components/Navigation.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "Navigation()",
+      "target": "Icon()",
+      "source_files": [
+        "src/components/Navigation.tsx",
+        "src/components/Icons.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "App()",
+      "target": "Hero()",
+      "source_files": [
+        "src/App.tsx",
+        "src/components/Hero.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "App()",
+      "target": "Testimonials()",
+      "source_files": [
+        "src/App.tsx",
+        "src/components/PortfolioHighlights.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "App()",
+      "target": "Projects()",
+      "source_files": [
+        "src/App.tsx",
+        "src/components/Projects.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    }
+  ],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

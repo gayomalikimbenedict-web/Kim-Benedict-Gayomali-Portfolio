@@ -1,3 +1,15 @@
 node_modules
 dist
+<<<<<<< HEAD
 .env
+=======
+*.local
+.env
+.env.*
+!.env.example
+scripts/out/
+
+
+# TypeScript incremental build state
+*.tsbuildinfo
+>>>>>>> portfolio-v2
