@@ -1,0 +1,104 @@
+{
+  "package.json": {
+    "mtime": 1791113183.9273558,
+    "seen": 1793712239.7670805,
+    "ast_hash": "3dac5e903f6ab748736494eca52cb83d",
+    "semantic_hash": "3dac5e903f6ab748736494eca52cb83d"
+  },
+  "src/App.tsx": {
+    "mtime": 1793704275.7380476,
+    "seen": 1793712239.7670805,
+    "ast_hash": "c8945adb927031b824eef477fee4ff40",
+    "semantic_hash": "c8945adb927031b824eef477fee4ff40"
+  },
+  "src/components/About.tsx": {
+    "mtime": 1793690701.1296017,
+    "seen": 1793712239.7670805,
+    "ast_hash": "2d38c4fa5d2164bbd0d7c5380f690f7b",
+    "semantic_hash": "2d38c4fa5d2164bbd0d7c5380f690f7b"
+  },
+  "src/components/Contact.tsx": {
+    "mtime": 1793701916.91238,
+    "seen": 1793712239.7670805,
+    "ast_hash": "a5aa2235ea6c09eeece4952868cc13cc",
+    "semantic_hash": "a5aa2235ea6c09eeece4952868cc13cc"
+  },
+  "src/components/Experience.tsx": {
+    "mtime": 1793692150.4386003,
+    "seen": 1793712239.7670805,
+    "ast_hash": "c4e521680fdc3b941ee9a59498f37b42",
+    "semantic_hash": "c4e521680fdc3b941ee9a59498f37b42"
+  },
+  "src/components/Hero.tsx": {
+    "mtime": 1793689357.8387244,
+    "seen": 1793712239.7670805,
+    "ast_hash": "d8718ada144d863cfe660f66c7738af1",
+    "semantic_hash": "d8718ada144d863cfe660f66c7738af1"
+  },
+  "src/components/HomeOverview.tsx": {
+    "mtime": 1793682560.4001126,
+    "seen": 1793712239.7670805,
+    "ast_hash": "b8546527c328b5bbbad4365ed1175d5a",
+    "semantic_hash": "b8546527c328b5bbbad4365ed1175d5a"
+  },
+  "src/components/Icons.tsx": {
+    "mtime": 1793701629.6869204,
+    "seen": 1793712239.7670805,
+    "ast_hash": "03710a52924315dc9c361f2ac56a4d38",
+    "semantic_hash": "03710a52924315dc9c361f2ac56a4d38"
+  },
+  "src/components/Navigation.tsx": {
+    "mtime": 1793703888.085662,
+    "seen": 1793712239.7670805,
+    "ast_hash": "6125b88a76828138fa6fd0656db24ec8",
+    "semantic_hash": "6125b88a76828138fa6fd0656db24ec8"
+  },
+  "src/components/PortfolioHighlights.tsx": {
+    "mtime": 1793690700.772337,
+    "seen": 1793712239.7670805,
+    "ast_hash": "d7eb7a009865ab8cc82a720d89829ea6",
+    "semantic_hash": "d7eb7a009865ab8cc82a720d89829ea6"
+  },
+  "src/components/Projects.tsx": {
+    "mtime": 1793691010.5304005,
+    "seen": 1793712239.7670805,
+    "ast_hash": "58c74e0951c3b9d66f0100e1d3cb9bf5",
+    "semantic_hash": "58c74e0951c3b9d66f0100e1d3cb9bf5"
+  },
+  "src/components/Services.tsx": {
+    "mtime": 1793697122.6180606,
+    "seen": 1793712239.7670805,
+    "ast_hash": "e49c3a5cda0c463f631a3010fa78aff5",
+    "semantic_hash": "e49c3a5cda0c463f631a3010fa78aff5"
+  },
+  "src/components/ToolsMarquee.tsx": {
+    "mtime": 1791113304.0597334,
+    "seen": 1793712239.7670805,
+    "ast_hash": "611f52c5aa7ec9ec0c68a4a1e499dc1a",
+    "semantic_hash": "611f52c5aa7ec9ec0c68a4a1e499dc1a"
+  },
+  "src/data/portfolio.ts": {
+    "mtime": 1793701851.4808533,
+    "seen": 1793712239.7670805,
+    "ast_hash": "b224e52fe0a427527c8b928be7175456",
+    "semantic_hash": "b224e52fe0a427527c8b928be7175456"
+  },
+  "src/main.tsx": {
+    "mtime": 1790866374.124698,
+    "seen": 1793712239.7670805,
+    "ast_hash": "d429577176f9d220c764bb7b3dd4b9f4",
+    "semantic_hash": "d429577176f9d220c764bb7b3dd4b9f4"
+  },
+  "tsconfig.json": {
+    "mtime": 1790942843.2514722,
+    "seen": 1793712239.7670805,
+    "ast_hash": "997fa8a75d61d145d145637d3685918b",
+    "semantic_hash": "997fa8a75d61d145d145637d3685918b"
+  },
+  "vite.config.ts": {
+    "mtime": 1790863025.6144679,
+    "seen": 1793712239.7670805,
+    "ast_hash": "94064549b59def73b59e20bd15d2d328",
+    "semantic_hash": "94064549b59def73b59e20bd15d2d328"
+  }
+}
