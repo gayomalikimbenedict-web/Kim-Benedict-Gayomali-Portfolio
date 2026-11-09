@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+*.zip
+
+# Local AI tooling output
+.copilot/
+graphify-out/

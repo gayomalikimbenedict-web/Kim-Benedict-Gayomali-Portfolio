@@ -1,0 +1,21 @@
+:root {
+  --bg: #070e20;
+  --bg-2: #0b1530;
+  --panel: #0e1832;
+  --panel-2: #13204a;
+  --line: rgba(130, 165, 225, 0.16);
+  --line-2: rgba(130, 165, 225, 0.28);
+  --ink: #e9eff9;
+  --ink-2: #a3b2cf;
+  --ink-3: #8696b8;
+  --cyan: #5fd6e4;
+  --cyan-2: #2fb7cc;
+  --blue: #6f8dff;
+  --ok: #4fe3a3;
+  --bad: #ff8a8a;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --side: 284px;
+  --gap: 20px;
+  --font: 'Manrope', 'Inter', 'Segoe UI', system-ui, -apple-system, 'Liberation Sans', Arial, sans-serif;
+}

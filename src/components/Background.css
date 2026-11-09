@@ -1,0 +1,70 @@
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(1200px 700px at 78% -10%, rgba(47, 183, 204, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 10% 90%, rgba(111, 141, 255, 0.13), transparent 60%), var(--bg);
+}
+.aurora::before,
+.aurora::after {
+  content: '';
+  position: absolute;
+  width: 55vmax;
+  height: 55vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.28;
+}
+.aurora::before {
+  top: -18vmax;
+  right: -10vmax;
+  background: radial-gradient(circle, #2fb7cc, transparent 65%);
+  animation: drift-a 26s ease-in-out infinite alternate;
+}
+.aurora::after {
+  bottom: -24vmax;
+  left: 8vmax;
+  background: radial-gradient(circle, #6f8dff, transparent 65%);
+  animation: drift-b 32s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
+  to {
+    transform: translate(-9vmax, 12vmax) scale(1.15);
+  }
+}
+@keyframes drift-b {
+  to {
+    transform: translate(12vmax, -10vmax) scale(0.9);
+  }
+}
+.network {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.progress {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: var(--side);
+  z-index: 30;
+  height: 3px;
+  pointer-events: none;
+}
+.progress i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan-2), var(--cyan), var(--blue));
+  box-shadow: 0 0 14px rgba(95, 214, 228, 0.6);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+}
+@media (max-width: 900px) {
+  .progress {
+    left: 0;
+  }
+}

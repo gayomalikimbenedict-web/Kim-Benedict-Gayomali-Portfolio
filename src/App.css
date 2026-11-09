@@ -1,0 +1,31 @@
+.shell {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--side) minmax(0, 1fr);
+  min-height: 100vh;
+}
+main {
+  min-width: 0;
+  padding: 0 clamp(24px, 4.4vw, 72px);
+}
+main > section {
+  padding-top: clamp(72px, 11vh, 120px);
+}
+main > section:first-child {
+  padding-top: 0;
+}
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 64px 0 36px;
+  color: var(--ink-3);
+  font-size: 13.5px;
+}
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,116 @@
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: var(--gap);
+  margin-top: 44px;
+}
+.photo {
+  overflow: hidden;
+}
+.photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+.photo figcaption {
+  padding: 16px 20px;
+  font-size: 13.5px;
+  color: var(--ink-3);
+}
+.txt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  padding: 30px;
+}
+.txt p {
+  margin: 0;
+  color: var(--ink-2);
+}
+.txt p.big {
+  font-size: 1.18rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.exp {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 22px;
+  margin-top: var(--gap);
+  padding: 26px 28px;
+}
+.exp .when {
+  grid-row: span 2;
+  padding-top: 3px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--cyan);
+}
+.exp b {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.exp span {
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.exp p {
+  grid-column: 2;
+  margin: 6px 0 0;
+  color: var(--ink-2);
+}
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--gap);
+}
+.skills li {
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(130, 165, 225, 0.05);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.creds {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: var(--gap);
+}
+.creds li {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(13, 22, 46, 0.6);
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.creds b {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+@media (max-width: 900px) {
+  .about,
+  .creds {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .exp {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .exp .when {
+    grid-row: auto;
+  }
+  .exp p {
+    grid-column: 1;
+  }
+}
